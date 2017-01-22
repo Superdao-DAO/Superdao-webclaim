@@ -1660,3 +1660,7 @@ claim-container {
     border-width: 1px 0;
     content: "";
 }
+
+.log_row {
+    border-bottom: 1px solid gainsboro;
+}

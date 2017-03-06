@@ -11,6 +11,7 @@
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
     <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
     <!--<link rel="stylesheet" type="text/css" href="stylesheets/ionicons.min.css">-->
@@ -20,6 +21,11 @@
     <script type="text/javascript" src="js/jQuery/jquery-3.1.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="js/jquery.marquee.min.js"></script>
+    <script src="js/Chart.min.js"></script>
+    <script src="js/progressbar.min.js"></script>
+
+    <script src="js/abi.js"></script>
+
 
     <script>
         //var bootstrapButton = $.fn.button.noConflict() // return $.fn.button to previously assigned value
@@ -31,7 +37,7 @@
 
 <body>
     <div class="container">
-        <p id="toptxt">Superdao : Efficient, tiered & reputation DAO Governance Framework<span id="toptxtspan">|</span></p>
+        <h2 id="toptxt">Superdao : Efficient, tiered & reputation DAO Governance Framework<span id="toptxtspan">|</span></h2>
 
         <div class="wrapper1">
 
@@ -80,594 +86,14 @@
                                 ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
                                 ERR_NO_ACCOUNTS = 'No accounts available. Please, create a new account and refresh the page.',
                                 ERR_PERSONAL_NOT_AVAILABLE = 'Error: The method personal_unlockAccount does not exist/is not available',
-                                ABI = [{
-                                    "constant": true,
-                                    "inputs": [],
-                                    "name": "lastPrice",
-                                    "outputs": [{
-                                        "name": "",
-                                        "type": "uint256"
-                                    }],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "constant": false,
-                                    "inputs": [{
-                                        "name": "_newFounderAddr",
-                                        "type": "address"
-                                    }, {
-                                        "name": "_oneTimesharedPhrase",
-                                        "type": "bytes32"
-                                    }],
-                                    "name": "cofounderApproveSwitchRequest",
-                                    "outputs": [{
-                                        "name": "success",
-                                        "type": "bool"
-                                    }],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "constant": true,
-                                    "inputs": [{
-                                        "name": "_withdrawalID",
-                                        "type": "uint256"
-                                    }],
-                                    "name": "getWithdrawalData",
-                                    "outputs": [{
-                                        "name": "",
-                                        "type": "uint256"
-                                    }, {
-                                        "name": "",
-                                        "type": "bool"
-                                    }, {
-                                        "name": "",
-                                        "type": "bytes"
-                                    }, {
-                                        "name": "",
-                                        "type": "address[]"
-                                    }, {
-                                        "name": "",
-                                        "type": "uint256"
-                                    }, {
-                                        "name": "",
-                                        "type": "address[]"
-                                    }],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "constant": true,
-                                    "inputs": [{
-                                        "name": "",
-                                        "type": "uint256"
-                                    }],
-                                    "name": "backersAddresses",
-                                    "outputs": [{
-                                        "name": "",
-                                        "type": "address"
-                                    }],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "constant": true,
-                                    "inputs": [],
-                                    "name": "numOfBackers",
-                                    "outputs": [{
-                                        "name": "",
-                                        "type": "uint256"
-                                    }],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "constant": false,
-                                    "inputs": [{
-                                        "name": "_totalAmount",
-                                        "type": "uint256"
-                                    }, {
-                                        "name": "_reason",
-                                        "type": "bytes"
-                                    }, {
-                                        "name": "_destination",
-                                        "type": "address[]"
-                                    }],
-                                    "name": "withdraw",
-                                    "outputs": [],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "constant": false,
-                                    "inputs": [{
-                                        "name": "_backer",
-                                        "type": "address"
-                                    }, {
-                                        "name": "_tokenPrice",
-                                        "type": "uint256"
-                                    }, {
-                                        "name": "_tokenAmount",
-                                        "type": "uint256"
-                                    }, {
-                                        "name": "_privatePhrase",
-                                        "type": "string"
-                                    }, {
-                                        "name": "_backerRank",
-                                        "type": "uint256"
-                                    }],
-                                    "name": "setPrepaid",
-                                    "outputs": [{
-                                        "name": "",
-                                        "type": "uint256"
-                                    }],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "constant": true,
-                                    "inputs": [{
-                                        "name": "_backerAddress",
-                                        "type": "address"
-                                    }, {
-                                        "name": "index",
-                                        "type": "uint256"
-                                    }],
-                                    "name": "checkBalance",
-                                    "outputs": [{
-                                        "name": "",
-                                        "type": "uint256"
-                                    }, {
-                                        "name": "",
-                                        "type": "uint256"
-                                    }, {
-                                        "name": "",
-                                        "type": "bytes32"
-                                    }, {
-                                        "name": "",
-                                        "type": "bool"
-                                    }, {
-                                        "name": "",
-                                        "type": "bool"
-                                    }],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "constant": false,
-                                    "inputs": [],
-                                    "name": "claim",
-                                    "outputs": [],
-                                    "payable": true,
-                                    "type": "function"
-                                }, {
-                                    "constant": false,
-                                    "inputs": [{
-                                        "name": "_founderHash",
-                                        "type": "bytes32"
-                                    }, {
-                                        "name": "_oneTimesharedPhrase",
-                                        "type": "bytes32"
-                                    }],
-                                    "name": "founderSwitchRequest",
-                                    "outputs": [{
-                                        "name": "success",
-                                        "type": "bool"
-                                    }],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "constant": true,
-                                    "inputs": [],
-                                    "name": "claimedPrepaidUnits",
-                                    "outputs": [{
-                                        "name": "",
-                                        "type": "uint256"
-                                    }],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "constant": true,
-                                    "inputs": [],
-                                    "name": "promissoryUnits",
-                                    "outputs": [{
-                                        "name": "",
-                                        "type": "uint256"
-                                    }],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "constant": true,
-                                    "inputs": [{
-                                        "name": "",
-                                        "type": "uint256"
-                                    }],
-                                    "name": "withdrawals",
-                                    "outputs": [{
-                                        "name": "Amount",
-                                        "type": "uint256"
-                                    }, {
-                                        "name": "approved",
-                                        "type": "bool"
-                                    }, {
-                                        "name": "spent",
-                                        "type": "bool"
-                                    }, {
-                                        "name": "reason",
-                                        "type": "bytes"
-                                    }, {
-                                        "name": "totalStake",
-                                        "type": "uint256"
-                                    }],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "constant": true,
-                                    "inputs": [{
-                                        "name": "",
-                                        "type": "address"
-                                    }, {
-                                        "name": "",
-                                        "type": "uint256"
-                                    }],
-                                    "name": "backers",
-                                    "outputs": [{
-                                        "name": "tokenPrice",
-                                        "type": "uint256"
-                                    }, {
-                                        "name": "tokenAmount",
-                                        "type": "uint256"
-                                    }, {
-                                        "name": "privateHash",
-                                        "type": "bytes32"
-                                    }, {
-                                        "name": "prepaid",
-                                        "type": "bool"
-                                    }, {
-                                        "name": "claimed",
-                                        "type": "bool"
-                                    }, {
-                                        "name": "backerRank",
-                                        "type": "uint256"
-                                    }],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "constant": true,
-                                    "inputs": [],
-                                    "name": "prepaidUnits",
-                                    "outputs": [{
-                                        "name": "",
-                                        "type": "uint256"
-                                    }],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "constant": false,
-                                    "inputs": [{
-                                        "name": "_amount",
-                                        "type": "uint256"
-                                    }, {
-                                        "name": "_backerAddr",
-                                        "type": "address"
-                                    }],
-                                    "name": "redeem",
-                                    "outputs": [{
-                                        "name": "",
-                                        "type": "bool"
-                                    }],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "constant": true,
-                                    "inputs": [{
-                                        "name": "",
-                                        "type": "address"
-                                    }],
-                                    "name": "backersRedeemed",
-                                    "outputs": [{
-                                        "name": "",
-                                        "type": "bool"
-                                    }],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "constant": false,
-                                    "inputs": [{
-                                        "name": "_newCofounderAddr",
-                                        "type": "address"
-                                    }],
-                                    "name": "cofounderSwitchAddress",
-                                    "outputs": [{
-                                        "name": "success",
-                                        "type": "bool"
-                                    }],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "constant": true,
-                                    "inputs": [{
-                                        "name": "",
-                                        "type": "uint256"
-                                    }],
-                                    "name": "previousFounders",
-                                    "outputs": [{
-                                        "name": "",
-                                        "type": "address"
-                                    }],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "constant": true,
-                                    "inputs": [{
-                                        "name": "",
-                                        "type": "address"
-                                    }, {
-                                        "name": "",
-                                        "type": "uint256"
-                                    }],
-                                    "name": "withdrawalsVotes",
-                                    "outputs": [{
-                                        "name": "",
-                                        "type": "bool"
-                                    }],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "constant": true,
-                                    "inputs": [],
-                                    "name": "claimedUnits",
-                                    "outputs": [{
-                                        "name": "",
-                                        "type": "uint256"
-                                    }],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "constant": true,
-                                    "inputs": [],
-                                    "name": "minimumPrepaidClaimedPercent",
-                                    "outputs": [{
-                                        "name": "",
-                                        "type": "uint256"
-                                    }],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "constant": true,
-                                    "inputs": [],
-                                    "name": "redeemedTokens",
-                                    "outputs": [{
-                                        "name": "",
-                                        "type": "uint256"
-                                    }],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "constant": false,
-                                    "inputs": [{
-                                        "name": "_withdrawalID",
-                                        "type": "uint256"
-                                    }],
-                                    "name": "approveWithdraw",
-                                    "outputs": [],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "constant": true,
-                                    "inputs": [{
-                                        "name": "",
-                                        "type": "uint256"
-                                    }],
-                                    "name": "earlyBackerList",
-                                    "outputs": [{
-                                        "name": "",
-                                        "type": "address"
-                                    }],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "constant": false,
-                                    "inputs": [{
-                                        "name": "_index",
-                                        "type": "uint256"
-                                    }, {
-                                        "name": "_boughtTokensPrice",
-                                        "type": "uint256"
-                                    }, {
-                                        "name": "_tokenAmount",
-                                        "type": "uint256"
-                                    }, {
-                                        "name": "_privatePhrase",
-                                        "type": "string"
-                                    }, {
-                                        "name": "_backerRank",
-                                        "type": "uint256"
-                                    }],
-                                    "name": "claimPrepaid",
-                                    "outputs": [],
-                                    "payable": false,
-                                    "type": "function"
-                                }, {
-                                    "inputs": [{
-                                        "name": "_founderHash",
-                                        "type": "bytes32"
-                                    }, {
-                                        "name": "_cofounderAddress",
-                                        "type": "address"
-                                    }, {
-                                        "name": "_numOfBackers",
-                                        "type": "uint256"
-                                    }],
-                                    "payable": false,
-                                    "type": "constructor"
-                                }, {
-                                    "payable": false,
-                                    "type": "fallback"
-                                }, {
-                                    "anonymous": false,
-                                    "inputs": [{
-                                        "indexed": false,
-                                        "name": "_newFounderAddr",
-                                        "type": "address"
-                                    }],
-                                    "name": "FounderSwitchRequestEvent",
-                                    "type": "event"
-                                }, {
-                                    "anonymous": false,
-                                    "inputs": [{
-                                        "indexed": false,
-                                        "name": "_newFounderAddr",
-                                        "type": "address"
-                                    }],
-                                    "name": "FounderSwitchedEvent",
-                                    "type": "event"
-                                }, {
-                                    "anonymous": false,
-                                    "inputs": [{
-                                        "indexed": false,
-                                        "name": "_newCofounderAddr",
-                                        "type": "address"
-                                    }],
-                                    "name": "CofounderSwitchedEvent",
-                                    "type": "event"
-                                }, {
-                                    "anonymous": false,
-                                    "inputs": [{
-                                        "indexed": false,
-                                        "name": "backer",
-                                        "type": "address"
-                                    }, {
-                                        "indexed": false,
-                                        "name": "index",
-                                        "type": "uint256"
-                                    }, {
-                                        "indexed": false,
-                                        "name": "price",
-                                        "type": "uint256"
-                                    }, {
-                                        "indexed": false,
-                                        "name": "amount",
-                                        "type": "uint256"
-                                    }],
-                                    "name": "AddedPrepaidTokensEvent",
-                                    "type": "event"
-                                }, {
-                                    "anonymous": false,
-                                    "inputs": [{
-                                        "indexed": false,
-                                        "name": "backer",
-                                        "type": "address"
-                                    }, {
-                                        "indexed": false,
-                                        "name": "index",
-                                        "type": "uint256"
-                                    }, {
-                                        "indexed": false,
-                                        "name": "price",
-                                        "type": "uint256"
-                                    }, {
-                                        "indexed": false,
-                                        "name": "amount",
-                                        "type": "uint256"
-                                    }],
-                                    "name": "PrepaidTokensClaimedEvent",
-                                    "type": "event"
-                                }, {
-                                    "anonymous": false,
-                                    "inputs": [{
-                                        "indexed": false,
-                                        "name": "backer",
-                                        "type": "address"
-                                    }, {
-                                        "indexed": false,
-                                        "name": "index",
-                                        "type": "uint256"
-                                    }, {
-                                        "indexed": false,
-                                        "name": "price",
-                                        "type": "uint256"
-                                    }, {
-                                        "indexed": false,
-                                        "name": "amount",
-                                        "type": "uint256"
-                                    }],
-                                    "name": "TokensClaimedEvent",
-                                    "type": "event"
-                                }, {
-                                    "anonymous": false,
-                                    "inputs": [{
-                                        "indexed": false,
-                                        "name": "backer",
-                                        "type": "address"
-                                    }, {
-                                        "indexed": false,
-                                        "name": "amount",
-                                        "type": "uint256"
-                                    }],
-                                    "name": "RedeemEvent",
-                                    "type": "event"
-                                }, {
-                                    "anonymous": false,
-                                    "inputs": [{
-                                        "indexed": false,
-                                        "name": "withdrawalId",
-                                        "type": "uint256"
-                                    }, {
-                                        "indexed": false,
-                                        "name": "amount",
-                                        "type": "uint256"
-                                    }, {
-                                        "indexed": false,
-                                        "name": "reason",
-                                        "type": "bytes"
-                                    }],
-                                    "name": "WithdrawalCreatedEvent",
-                                    "type": "event"
-                                }, {
-                                    "anonymous": false,
-                                    "inputs": [{
-                                        "indexed": false,
-                                        "name": "withdrawalId",
-                                        "type": "uint256"
-                                    }, {
-                                        "indexed": false,
-                                        "name": "backer",
-                                        "type": "address"
-                                    }, {
-                                        "indexed": false,
-                                        "name": "backerStakeWeigth",
-                                        "type": "uint256"
-                                    }, {
-                                        "indexed": false,
-                                        "name": "totalStakeWeight",
-                                        "type": "uint256"
-                                    }],
-                                    "name": "WithdrawalVotedEvent",
-                                    "type": "event"
-                                }, {
-                                    "anonymous": false,
-                                    "inputs": [{
-                                        "indexed": false,
-                                        "name": "withdrawalId",
-                                        "type": "uint256"
-                                    }, {
-                                        "indexed": false,
-                                        "name": "stakeWeight",
-                                        "type": "uint256"
-                                    }, {
-                                        "indexed": false,
-                                        "name": "isMultiPayment",
-                                        "type": "bool"
-                                    }, {
-                                        "indexed": false,
-                                        "name": "amount",
-                                        "type": "uint256"
-                                    }, {
-                                        "indexed": false,
-                                        "name": "reason",
-                                        "type": "bytes"
-                                    }],
-                                    "name": "WithdrawalApproved",
-                                    "type": "event"
-                                }],
                                 tokenContract,
-                                tokenInstance;
+                                tokenInstance,
+                                bar = null;
 
                             $(window).ready(function() {
+
+
+
                                 if (typeof web3 === 'undefined') {
                                     try {
                                         var provider = new Web3.providers.HttpProvider('http://localhost:8545');
@@ -680,17 +106,18 @@
                                     web3 = new Web3(web3.currentProvider);
                                 }
 
+
+
+
                                 if (typeof web3 !== "undefined" && web3 instanceof Web3) {
                                     try {
                                         var accounts_count = web3.eth.accounts.length;
 
-                                        if (accounts_count === 0) {
-                                            alert(ERR_NO_ACCOUNTS);
-                                            add_to_log(ERR_NO_ACCOUNTS);
-                                            return;
-                                        }
+
                                         tokenContract = web3.eth.contract(ABI);
                                         tokenInstance = tokenContract.at(TOKEN_ADDRESS);
+
+
                                         log_events(tokenInstance);
                                     } catch (e) {
                                         alert('Cannot initiate token contract instance. Please, make sure your node has RPC available.');
@@ -699,7 +126,16 @@
                                 } else {
                                     alert('Web3 not available.');
                                 }
-
+                                refresh_values();
+                                setInterval(
+                                    function() {
+                                        refresh_values();
+                                    }, 300000);
+                                if (accounts_count === 0) {
+                                    alert(ERR_NO_ACCOUNTS);
+                                    add_to_log(ERR_NO_ACCOUNTS);
+                                    return;
+                                }
                                 var $accounts = $('#eth_accounts');
 
                                 for (var i = 0; i < accounts_count; i++) {
@@ -814,7 +250,100 @@
                                     return false;
                                 }
                             }
+
+                            function refresh_values() {
+                                var claimedUnits = 0,
+                                    claimedPrepaidUnits = 0;
+
+                                tokenInstance.claimedPrepaidUnits((error, value) => {
+
+                                    claimedPrepaidUnits = value.toNumber();
+                                    console.log(claimedPrepaidUnits);
+                                    tokenInstance.claimedUnits((error, value) => {
+                                        claimedUnits = value.toNumber();
+                                        console.log(claimedUnits);
+                                        refresh_chart(claimedPrepaidUnits + claimedUnits);
+                                    });
+                                });
+
+                            }
+
+                            function refresh_chart(totalClaimed) {
+
+                                var promissoryUnits = 3000000;
+                                $("#tokensLeft").html(promissoryUnits - totalClaimed);
+                                var chartData = {
+
+                                    datasets: [{
+
+                                        data: [promissoryUnits - totalClaimed, totalClaimed],
+                                        backgroundColor: ["blue", "white"]
+
+                                    }]
+                                }
+
+                                var options = {
+                                    scaleFontColor: "#f00",
+                                    segmentStrokeColor: "transparent",
+                                    segmentStrokeWidth: 20,
+                                    segmentStrokeColor: "rgba(255, 255, 255, 0.4)",
+                                    datasetStrokeWidth: 5,
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                };
+                                var ctx = document.getElementById("myChart");
+                                var myChart = new Chart(ctx, {
+                                    type: 'pie',
+                                    fillOpacity: .3,
+                                    data: chartData,
+                                    options: options
+
+                                });
+
+
+                                if (!bar)
+                                    bar = new ProgressBar.Line('.progressbar-container', {
+                                        strokeWidth: 4,
+                                        easing: 'easeInOut',
+                                        duration: 1400,
+                                        color: '#FFEA82',
+                                        trailColor: '#eee',
+                                        trailWidth: 1,
+                                        svgStyle: {
+                                            width: '80%',
+                                            height: '100%'
+                                        },
+                                        text: {
+                                            style: {
+                                                // Text color.
+                                                // Default: same as stroke color (options.color)
+                                                color: 'white',
+                                                position: 'absolute',
+                                                right: '20%',
+                                                top: '10px',
+                                                padding: 0,
+                                                margin: 0,
+                                                transform: null
+                                            },
+                                            autoStyleContainer: false
+                                        },
+                                        from: {
+                                            color: '#FFEA82'
+                                        },
+                                        to: {
+                                            color: '#ED6A5A'
+                                        },
+                                        step: (state, bar) => {
+                                            bar.setText(Math.round(bar.value() * 100) + ' %');
+                                        }
+                                    });
+                                //bar.animate(0);
+                                if (bar)
+                                    bar.animate(totalClaimed / promissoryUnits); // Number from 0.0 to 1.0
+
+                            }
                         </script>
+
                         <div class="panelbox claim-container">
                             <div class="topline">
                                 <br /><br />
@@ -822,15 +351,104 @@
                                     <h1>Claim</h1>
                                 </div>
                             </div>
+                            <style>
+                                * {
+                                    margin: 0;
+                                    padding: 0;
+                                }
+                            </style>
                             <div class="centerblock">
-                                <div style="text-align: center;">
-                                    <div>
-                                        <select id="eth_accounts"></select>
-                                        <input type="password" id="account_password" placeholder="Account password"> At 40% discount 1 SUP = 0.02793705576 ETH
-                                        <input type="text" id="claim_value" placeholder="ETH amount"> Gas Price in WEI: <input type="text" id="gas_price" placeholder="Gas Price in WEI" value="200405" />
-                                        <input type="button" id="claim_button" onclick="claim();" value="Claim Tokens" />
-                                    </div><br />
+                                <div class="container">
+                                    <div class="row" style="text-align: left">
+                                        <div class="col-xs-6">
+                                            <div class="row">
+                                                <canvas id="myChart" width="150" height="150"></canvas>
+                                            </div>
+                                            <div class="row">
+                                                <div class="progressbar-container"></div>
+                                            </div>
+                                            <div class="row" style="text-align: center">
+                                                <span>Funding Goal Progress</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <span>Total tokens: 100,000,000</span>
+                                            <br><br><br>
+                                            <span>Total tokens available this round: 3,000,000</span>
+                                            <br><br><br>
+                                            <span>Tokens left :</span><span id="tokensLeft"></span>
+                                            <br><br><br>
+                                            <span>Discount : 40% </span>
+                                        </div>
+                                    </div>
+                                    <br><br><br>
+                                    <div class="row">
+
+                                        <div class="col-xs-6">
+                                            <select class="eth-inputs" id="eth_accounts"></select>
+                                        </div>
+                                        <div class="col-xs-6  caption-left">
+                                            <span> At 40% discount 1 SUP = 0.02793705576 ETH </span>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-xs-6 eth-inputs">
+
+                                            <input class="eth-inputs" type="password" id="account_password" placeholder="">
+
+                                        </div>
+                                        <div class="col-xs-6 caption-left">
+                                            <span> Account password </span>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-xs-6 eth-inputs">
+                                            <input class="eth-inputs" type="text" id="claim_value" placeholder="ETH amount">
+
+                                        </div>
+                                        <div class="col-xs-6 caption-left">
+                                            <span>ETH amount</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-xs-6 eth-inputs">
+                                            <input class="eth-inputs" type="text" id="gas_price" value="200405" />
+
+                                        </div>
+                                        <div class="col-xs-6 caption-left">
+                                            <span> Gas Price in WEI</span>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="row" style="text-align: left">
+                                        <div class="col-xs-6 caption-left">
+
+                                            <input type="button" id="claim_button" onclick="claim();" value="Claim Tokens" />
+                                        </div>
+                                    </div>
+                                    <!--<div>
+
+
+        <section id="myDivId" class="my-class"></section>
+        <select id="eth_accounts"></select>
+        <input type="password" id="account_password" placeholder="Account password"> At 40% discount 1 SUP = 0.02793705576 ETH
+        <input type="text" id="claim_value" placeholder="ETH amount"> Gas Price in WEI: <input type="text" id="gas_price" placeholder="Gas Price in WEI" value="200405" />
+        <input type="button" id="claim_button" onclick="claim();" value="Claim Tokens" />
+    </div>-->
+                                    <br />
                                     <div id='eth_log' style="height:100%; overflow-y: scroll"></div>
+                                </div>
+                                <div style="text-align: center;">
+
                                 </div>
 
                             </div>

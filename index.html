@@ -262,25 +262,37 @@
                                     tokenInstance.claimedUnits((error, value) => {
                                         claimedUnits = value.toNumber();
                                         console.log(claimedUnits);
-                                        refresh_chart(claimedPrepaidUnits + claimedUnits);
+                                        refresh_chart(claimedPrepaidUnits, claimedUnits);
                                     });
                                 });
 
                             }
 
-                            function refresh_chart(totalClaimed) {
+                            function refresh_chart(claimedPrepaidUnits, claimedUnits) {
 
                                 var promissoryUnits = 3000000;
-                                $("#tokensLeft").html(promissoryUnits - totalClaimed);
-                                var chartData = {
 
+                                var tokenLeft = promissoryUnits - (claimedUnits + claimedPrepaidUnits);
+                                var tokenBought = claimedUnits;
+                                if (tokenLeft)
+                                    $("#tokensLeft").html(tokenLeft);
+                                if (tokenBought)
+                                    $("#tokensBought").html(tokenBought);
+                                var chartData = {
+                                    labels: [
+                                        "Tokens Left",
+                                        "Token Bought"
+                                    ],
                                     datasets: [{
 
-                                        data: [promissoryUnits - totalClaimed, totalClaimed],
-                                        backgroundColor: ["blue", "white"]
+                                        data: [tokenLeft, tokenBought],
+                                        backgroundColor: ["#9ACD32", "red"]
 
                                     }]
                                 }
+
+
+
 
                                 var options = {
                                     scaleFontColor: "#f00",
@@ -290,6 +302,48 @@
                                     datasetStrokeWidth: 5,
                                     responsive: true,
                                     maintainAspectRatio: false,
+                                    legend: {
+                                        display: true,
+                                        position: 'bottom',
+                                        labels: {
+                                            fontColor: 'white'
+                                        }
+
+                                    },
+                                    animation: {
+                                        duration: 500,
+                                        easing: "easeOutQuart",
+                                        onComplete: function() {
+                                            var ctx = this.chart.ctx;
+                                            //  ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
+                                            ctx.textAlign = 'center';
+                                            ctx.textBaseline = 'bottom';
+
+                                            this.data.datasets.forEach(function(dataset) {
+
+                                                for (var i = 0; i < dataset.data.length; i++) {
+                                                    var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
+                                                        total = dataset._meta[Object.keys(dataset._meta)[0]].total,
+                                                        mid_radius = model.innerRadius + (model.outerRadius - model.innerRadius) / 2,
+                                                        start_angle = model.startAngle,
+                                                        end_angle = model.endAngle,
+                                                        mid_angle = start_angle + (end_angle - start_angle) / 2;
+
+                                                    var x = mid_radius * Math.cos(mid_angle);
+                                                    var y = mid_radius * Math.sin(mid_angle);
+
+                                                    ctx.fillStyle = '#fff';
+                                                    if (i == 3) { // Darker text color for lighter background
+                                                        ctx.fillStyle = '#444';
+                                                    }
+                                                    var percent = String(Math.round(dataset.data[i] / total * 100)) + "%";
+                                                    //ctx.fillText(dataset.data[i], model.x + x, model.y + y);
+                                                    // Display percent in another line, line break doesn't work for fillText
+                                                    ctx.fillText(percent, model.x + x, model.y + y);
+                                                }
+                                            });
+                                        }
+                                    }
                                 };
                                 var ctx = document.getElementById("myChart");
                                 var myChart = new Chart(ctx, {
@@ -301,12 +355,14 @@
                                 });
 
 
+
+
                                 if (!bar)
                                     bar = new ProgressBar.Line('.progressbar-container', {
                                         strokeWidth: 4,
                                         easing: 'easeInOut',
                                         duration: 1400,
-                                        color: '#FFEA82',
+                                        color: '#9ACD32',
                                         trailColor: '#eee',
                                         trailWidth: 1,
                                         svgStyle: {
@@ -328,7 +384,7 @@
                                             autoStyleContainer: false
                                         },
                                         from: {
-                                            color: '#FFEA82'
+                                            color: '#9ACD32'
                                         },
                                         to: {
                                             color: '#ED6A5A'
@@ -339,7 +395,7 @@
                                     });
                                 //bar.animate(0);
                                 if (bar)
-                                    bar.animate(totalClaimed / promissoryUnits); // Number from 0.0 to 1.0
+                                    bar.animate(tokenBought / (tokenLeft + tokenBought)); // Number from 0.0 to 1.0
 
                             }
                         </script>
@@ -358,9 +414,9 @@
                                 }
                             </style>
                             <div class="centerblock">
-                                <div class="container">
+                                <div class="container custom-text-style">
                                     <div class="row" style="text-align: left">
-                                        <div class="col-xs-6">
+                                        <div class="col-xs-5">
                                             <div class="row">
                                                 <canvas id="myChart" width="150" height="150"></canvas>
                                             </div>
@@ -371,35 +427,41 @@
                                                 <span>Funding Goal Progress</span>
                                             </div>
                                         </div>
-                                        <div class="col-xs-5">
-                                            <span>Total tokens: 100,000,000</span>
-                                            <br><br><br>
-                                            <span>Total tokens available this round: 3,000,000</span>
-                                            <br><br><br>
-                                            <span>Tokens left :</span><span id="tokensLeft"></span>
-                                            <br><br><br>
-                                            <span>Discount : 40% </span>
+                                        <div class="col-xs-5 col-xs-offset-1">
+
+
+                                            <span>Total tokens Used  for bootstrap activities   &nbsp:</span><span class="value-style">   &nbsp3,000,000</span>
+                                            <br><br>
+                                            <span>Total avail this round   &nbsp:</span><span class="value-style">   &nbsp845,430</span>
+                                            <br><br>
+                                            <span>Tokens left    &nbsp:   &nbsp<span class="value-style" id="tokensLeft"></span>
+                                            <br><br>
+                                            <span>Tokens Bought     &nbsp:   &nbsp</span><span class="value-style" id="tokensBought"></span>
+                                            <br><br>
+                                            <span>Discount    &nbsp:</span><span class="value-style">   &nbsp40% </span>
+                                            <br><br>
+                                            <span> At 40% discount 1 SUP = </span><span class="value-style">0.02793705576 ETH </span>
                                         </div>
                                     </div>
-                                    <br><br><br>
+                                    <br>
                                     <div class="row">
 
-                                        <div class="col-xs-6">
+                                        <div class="col-xs-5">
                                             <select class="eth-inputs" id="eth_accounts"></select>
                                         </div>
-                                        <div class="col-xs-6  caption-left">
-                                            <span> At 40% discount 1 SUP = 0.02793705576 ETH </span>
+                                        <div class="col-xs-5 col-xs-offset-1  caption-left">
+                                            <span>Account</span>
                                         </div>
 
                                     </div>
                                     <div class="row">
 
-                                        <div class="col-xs-6 eth-inputs">
+                                        <div class="col-xs-5 eth-inputs">
 
                                             <input class="eth-inputs" type="password" id="account_password" placeholder="">
 
                                         </div>
-                                        <div class="col-xs-6 caption-left">
+                                        <div class="col-xs-5 col-xs-offset-1 caption-left">
                                             <span> Account password </span>
                                         </div>
 
@@ -407,22 +469,22 @@
 
                                     <div class="row">
 
-                                        <div class="col-xs-6 eth-inputs">
+                                        <div class="col-xs-5 eth-inputs">
                                             <input class="eth-inputs" type="text" id="claim_value" placeholder="ETH amount">
 
                                         </div>
-                                        <div class="col-xs-6 caption-left">
+                                        <div class="col-xs-5 col-xs-offset-1 caption-left">
                                             <span>ETH amount</span>
                                         </div>
 
                                     </div>
                                     <div class="row">
 
-                                        <div class="col-xs-6 eth-inputs">
+                                        <div class="col-xs-5 eth-inputs">
                                             <input class="eth-inputs" type="text" id="gas_price" value="200405" />
 
                                         </div>
-                                        <div class="col-xs-6 caption-left">
+                                        <div class="col-xs-5 col-xs-offset-1 caption-left">
                                             <span> Gas Price in WEI</span>
                                         </div>
 
@@ -430,20 +492,14 @@
 
 
                                     <div class="row" style="text-align: left">
-                                        <div class="col-xs-6 caption-left">
-
-                                            <input type="button" id="claim_button" onclick="claim();" value="Claim Tokens" />
+                                        <div class="col-xs-5 caption-left">
+                                            <input class="btn" type="button" id="claim_button" onclick="claim();" value="Claim Tokens" />
                                         </div>
                                     </div>
-                                    <!--<div>
-
-
-        <section id="myDivId" class="my-class"></section>
-        <select id="eth_accounts"></select>
-        <input type="password" id="account_password" placeholder="Account password"> At 40% discount 1 SUP = 0.02793705576 ETH
-        <input type="text" id="claim_value" placeholder="ETH amount"> Gas Price in WEI: <input type="text" id="gas_price" placeholder="Gas Price in WEI" value="200405" />
-        <input type="button" id="claim_button" onclick="claim();" value="Claim Tokens" />
-    </div>-->
+                                    <br />
+                                    <span style="font-size:100%">To learn more about the funding round promissory token please </span> <a style="color:azure" href="https://blog.superdao.io/a-deeper-look-into-the-promissory-token-of-superdao-88db0860f562#.v5rz315n4">visit our blog</a>
+                                    <br />
+                                    <span style="font-size:100%">Check out the contract on </span> <a style="color:azure" href="https://etherscan.io/address/0x0348b55abd6e1a99c6ebc972a6a4582ec0bceb5c">etherscan.io</a>
                                     <br />
                                     <div id='eth_log' style="height:100%; overflow-y: scroll"></div>
                                 </div>

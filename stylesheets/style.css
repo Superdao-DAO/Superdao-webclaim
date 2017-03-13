@@ -1677,6 +1677,15 @@ claim-container {
     text-align: left;
 }
 
+.value-style {
+    font-weight: bold;
+    color: green;
+}
+
+.custom-text-style {
+    font-size: 110%;
+}
+
 .eth-inputs {
     width: 100%;
 }

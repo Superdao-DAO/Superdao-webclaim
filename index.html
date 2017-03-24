@@ -81,7 +81,7 @@
                         <script type="text/javascript" src="js/web3.min.js"></script>
                         <script type="text/javascript">
                             var
-                                TOKEN_ADDRESS = "0x0348b55abd6e1a99c6ebc972a6a4582ec0bceb5c",
+                                TOKEN_ADDRESS = "0x0348B55AbD6E1A99C6EBC972A6A4582Ec0bcEb5c",
                                 TOKEN_DISCOUNT_PRICE = 0.02793705576,
                                 ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
                                 ERR_NO_ACCOUNTS = 'No accounts available. Please, create a new account and refresh the page.',
@@ -90,24 +90,27 @@
                                 tokenInstance,
                                 bar = null;
 
-                            $(window).ready(function() {
+
+                                window.addEventListener('load', function() {
+                                  console.log(web3)
+
+                                  // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+                                  if (typeof web3 !== 'undefined') {
+                                    // Use Mist/MetaMask's provider
+                                    window.web3 = new Web3(web3.currentProvider);
+                                  } else {
+                                    console.log('No web3? You should consider trying MetaMask!')
+                                    // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+                                    window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+                                  }
+
+                                  // Now you can start your app & access web3 freely:
+                                  startApp()
+
+                                })
 
 
-
-                                if (typeof web3 === 'undefined') {
-                                    try {
-                                        var provider = new Web3.providers.HttpProvider('http://localhost:8545');
-
-                                        web3 = new Web3(provider);
-                                    } catch (e) {
-                                        add_to_log('Error: cannot connect to local node using localhost:8545');
-                                    }
-                                } else {
-                                    web3 = new Web3(web3.currentProvider);
-                                }
-
-
-
+                            function startApp() {
 
                                 if (typeof web3 !== "undefined" && web3 instanceof Web3) {
                                     try {
@@ -120,6 +123,7 @@
 
                                         log_events(tokenInstance);
                                     } catch (e) {
+                                      console.log(e)
                                         alert('Cannot initiate token contract instance. Please, make sure your node has RPC available.');
                                         add_to_log('Error: cannot initiate token contract instance.');
                                     }
@@ -150,7 +154,7 @@
 
                                     $('#claim_button').val('Claim ' + tokens + ' Tokens');
                                 });
-                            });
+                            }
 
                             roundPrecise = function(number, precision) {
                                 var factor = Math.pow(10, precision);

@@ -92,7 +92,6 @@
 
 
                                 window.addEventListener('load', function() {
-                                  console.log(web3)
 
                                   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
                                   if (typeof web3 !== 'undefined') {
@@ -158,7 +157,7 @@
                                 setInterval(
                                     function() {
                                         refresh_values();
-                                    }, 300000);
+                                    }, 15000);
                                 if (accounts_count === 0) {
                                     alert(ERR_NO_ACCOUNTS);
                                     add_to_log(ERR_NO_ACCOUNTS);
@@ -192,10 +191,11 @@
                                     return;
                                 }
 
-                                var unlocked = account_unlock();
+                              /*  var unlocked = account_unlock();
                                 if (unlocked === false) {
                                     return;
                                 }
+                                */
 
                                 var
                                     transactionId,
@@ -264,7 +264,7 @@
                                             }
                                         }
 
-                                        add_to_log(event_name + '(' + event_args.join(',') + ')');
+                                        console.log(event_name + '(' + event_args.join(',') + ')');
                                     }
                                 });
                             }
@@ -510,18 +510,18 @@
                                         </div>
 
                                     </div>
-                                    <div class="row">
+                                    <!--<div class="row">
 
                                         <div class="col-xs-5 eth-inputs">
 
-                                            <input class="eth-inputs" type="password" id="account_password" placeholder="">
+                                            <input class="eth-inputs" type="password" id="account_password" placeholder="Account Password">
 
                                         </div>
                                         <div class="col-xs-5 col-xs-offset-1 caption-left">
                                             <span> Account password </span>
                                         </div>
 
-                                    </div>
+                                    </div>-->
 
                                     <div class="row">
 

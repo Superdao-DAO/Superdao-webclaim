@@ -113,9 +113,33 @@
                             function startApp() {
 
                                 if (typeof web3 !== "undefined" && web3 instanceof Web3) {
+
+                                  //Ensure we are on the right network
+                                  web3.version.getNetwork((err, netId) => {
+                                      switch (netId) {
+                                        case "1":
+                                          console.log('This is mainnet')
+                                          break
+                                        case "2":
+                                          console.log('This is the deprecated Morden test network.')
+                                          break
+                                        case "3":
+                                          console.log('This is the ropsten test network.')
+                                          break
+                                        default:
+                                          console.log('This is an unknown network.')
+                                      }
+
+                                     if(netId!=1){
+                                        alert("Kindly switch to the Main Ethereum network, then refresh the page to proceed.");
+                                        return;
+                                      }
+
+                                    })
+
+
                                     try {
                                         var accounts_count = web3.eth.accounts.length;
-
 
                                         tokenContract = web3.eth.contract(ABI);
                                         tokenInstance = tokenContract.at(TOKEN_ADDRESS);
@@ -189,15 +213,33 @@
                                     return;
                                 }
 
+                                disable_button();
                                 try {
                                     transactionId = tokenInstance.claim({
+                                        from: $('#eth_accounts').val(),
                                         value: web3.toWei(_value, 'ether'),
                                         gas: _gasPrice
-                                    });
+                                    },function(error, result){
+                                      if(!error)
+                                          add_to_log('Transaction sent: <a href="https://etherscan.io/tx/' + result + '" target="_blank">' + result + '</a>');
+                                      else{
+                                        error = error.toString();
+                                        console.log(error)
+                                        if(Object.keys(error))
+                                        if(error.indexOf('Error: Error:') > -1){
+                                          error = error.substring(13)
+                                          if(error.length > 58)
+                                          error = error.substring(0,58)+"...";
+                                        }
+                                          add_to_log('<span style="color:red">'+error+'</span>');
+                                          }
+                                      enable_button();
+                                  })
 
-                                    add_to_log('Transaction sent: <a href="https://etherscan.io/tx/' + transactionId + '" target="_blank">' + transactionId + '</a>');
                                 } catch (e) {
-                                    add_to_log(e);
+                                  console.log("Excep:",e)
+                                    add_to_log('<span style="color:red">'+e.message+'</span>');
+                                    enable_button();
                                 }
                             }
 
@@ -253,6 +295,16 @@
                                     alert('Password cannot be empty.');
                                     return false;
                                 }
+                            }
+
+                            function disable_button(){
+                              $("#claim_button").prop('disabled',true);
+                              console.log('do disable')
+                            }
+
+                            function enable_button(){
+                              $("#claim_button").prop('disabled',false);
+                              console.log('do enable')
                             }
 
                             function refresh_values() {

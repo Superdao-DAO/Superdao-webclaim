@@ -1689,3 +1689,14 @@ claim-container {
 .eth-inputs {
     width: 100%;
 }
+
+
+.ct-series-a .ct-line,
+.ct-series-a .ct-point {
+  stroke: blue;
+}
+
+.ct-series-b .ct-line,
+.ct-series-b .ct-point {
+  stroke: green;
+}

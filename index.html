@@ -32,7 +32,8 @@
         //var bootstrapButton = $.fn.button.noConflict() // return $.fn.button to previously assigned value
         //$.fn.bootstrapBtn = bootstrapButton
     </script>
-
+        <link rel="stylesheet"
+          href="bower_components/chartist/dist/chartist.min.css">
 </head>
 
 
@@ -293,6 +294,8 @@
                                     $("#tokensLeft").html(tokenLeft);
                                 if (tokenBought)
                                     $("#tokensBought").html(tokenBought);
+
+
                                 var chartData = {
                                     labels: [
                                         "Tokens Left",
@@ -333,7 +336,7 @@
                                                         mid_radius = model.innerRadius + (model.outerRadius - model.innerRadius) / 2,
                                                         start_angle = model.startAngle,
                                                         end_angle = model.endAngle,
-                                                        mid_angle = start_angle + (end_angle - start_angle) / 2;
+                                                        mid_angle = startAngle_angle + (end_angle - start_angle) / 2;
                                                     var x = mid_radius * Math.cos(mid_angle);
                                                     var y = mid_radius * Math.sin(mid_angle);
                                                     ctx.fillStyle = '#fff';
@@ -349,13 +352,47 @@
                                         }
                                     }
                                 };
-                                var ctx = document.getElementById("myChart");
-                                var myChart = new Chart(ctx, {
-                                    type: 'pie',
-                                    fillOpacity: .3,
-                                    data: chartData,
-                                    options: options
-                                });
+                                //chartist
+var data = {
+  labels: ['tokensLeft', 'tokenBought'],
+  series: [tokenLeft, tokenBought]
+};
+
+var options = {
+  width: 300,
+  height: 200
+};
+
+var responsiveOptions = [
+  ['screen and (min-width: 640px)', {
+    chartPadding: 30,
+    labelOffset: 100,
+    labelDirection: 'explode',
+    labelInterpolationFnc: function(value) {
+      return value;
+    }
+  }],
+  ['screen and (min-width: 1024px)', {
+    labelOffset: 80,
+    chartPadding: 20
+  }]
+];
+var sum = function(a, b) { return a + b };
+new Chartist.Pie('.ct-chart', data, options,{
+  labelInterpolationFnc: function(value) {
+    return Math.round(value / data.series.reduce(sum) * 100) + '%';
+  }
+});
+                        //chartist end
+
+                      //          var ctx = document.getElementById("myChart");
+
+                     //           var myChart = new Chart(ctx, {
+                       //             type: 'pie',
+                         //           fillOpacity: .3,
+                           //         data: chartData,
+                              //      options: options
+                               // });
                                 if (!bar)
                                     bar = new ProgressBar.Line('.progressbar-container', {
                                         strokeWidth: 4,
@@ -416,8 +453,10 @@
                                     <div class="row" style="text-align: left">
                                         <div class="col-xs-5">
                                             <div class="row">
-                                                <canvas id="myChart" width="150" height="150"></canvas>
+                                              <!--  <canvas class="myChart" width="150" height="150"></canvas> -->
+                                              <div class="ct-chart" style="margin-bottom: 180px;"></div>
                                             </div>
+
                                             <div class="row">
                                                 <div class="progressbar-container"></div>
                                             </div>
@@ -635,7 +674,7 @@
                 }, 30000);
         });
     </script>
-
+ <script src="bower_components/chartist/dist/chartist.min.js"></script>
 </body>
 
 </html>

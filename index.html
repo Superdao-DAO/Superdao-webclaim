@@ -13,6 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+      
 
     <!--<link rel="stylesheet" type="text/css" href="stylesheets/ionicons.min.css">-->
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
@@ -90,10 +91,7 @@
                                 tokenContract,
                                 tokenInstance,
                                 bar = null;
-
-
                                 window.addEventListener('load', function() {
-
                                   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
                                   if (typeof web3 !== 'undefined') {
                                     // Use Mist/MetaMask's provider
@@ -103,17 +101,11 @@
                                     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
                                     window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
                                   }
-
                                   // Now you can start your app & access web3 freely:
                                   startApp()
-
                                 })
-
-
                             function startApp() {
-
                                 if (typeof web3 !== "undefined" && web3 instanceof Web3) {
-
                                   //Ensure we are on the right network
                                   web3.version.getNetwork((err, netId) => {
                                       switch (netId) {
@@ -129,22 +121,15 @@
                                         default:
                                           console.log('This is an unknown network.')
                                       }
-
                                      if(netId!=1){
                                         alert("Kindly switch to the Main Ethereum network, then refresh the page to proceed.");
                                         return;
                                       }
-
                                     })
-
-
                                     try {
                                         var accounts_count = web3.eth.accounts.length;
-
                                         tokenContract = web3.eth.contract(ABI);
                                         tokenInstance = tokenContract.at(TOKEN_ADDRESS);
-
-
                                         log_events(tokenInstance);
                                     } catch (e) {
                                       console.log(e)
@@ -165,55 +150,44 @@
                                     return;
                                 }
                                 var $accounts = $('#eth_accounts');
-
                                 for (var i = 0; i < accounts_count; i++) {
                                     var $option = $('<option>').attr('value', web3.eth.accounts[i]).text(web3.eth.accounts[i]);
                                     $accounts.append($option);
                                 }
-
                                 $('#claim_value').on('input', function() {
                                     var
                                         _value = +this.value,
                                         tokens = Math.floor(_value / TOKEN_DISCOUNT_PRICE);
-
                                     $('#claim_button').val('Claim ' + tokens + ' Tokens');
                                 });
                             }
-
                             roundPrecise = function(number, precision) {
                                 var factor = Math.pow(10, precision);
                                 var tempNumber = number * factor;
                                 var roundedTempNumber = Math.round(tempNumber);
                                 return roundedTempNumber / factor;
                             };
-
                             function claim() {
                                 if (!tokenInstance) {
                                     return;
                                 }
-
                               /*  var unlocked = account_unlock();
                                 if (unlocked === false) {
                                     return;
                                 }
                                 */
-
                                 var
                                     transactionId,
                                     _gasPrice = +$('#gas_price').val(),
                                     _value = +$('#claim_value').val(),
                                     tokenCountCheck = roundPrecise(_value % TOKEN_DISCOUNT_PRICE, 11);
-
                                 if (tokenCountCheck !== TOKEN_DISCOUNT_PRICE) {
                                     _value = roundPrecise(_value - tokenCountCheck, 11);
-
                                     $('#claim_value').val(_value);
                                 }
-
                                 if (_value === 0) {
                                     return;
                                 }
-
                                 disable_button();
                                 try {
                                     transactionId = tokenInstance.claim({
@@ -236,18 +210,15 @@
                                           }
                                       enable_button();
                                   })
-
                                 } catch (e) {
                                   console.log("Excep:",e)
                                     add_to_log('<span style="color:red">'+e.message+'</span>');
                                     enable_button();
                                 }
                             }
-
                             function add_to_log(text) {
                                 $('#eth_log').append($('<div>').html(text).addClass('log_row'));
                             }
-
                             function log_events(contractInstance) {
                                 var events = contractInstance.TokensClaimedEvent({
                                     fromBlock: 'latest'
@@ -258,25 +229,20 @@
                                         var
                                             event_name = 'Event ' + event.event,
                                             event_args = new Array();
-
                                         if (event.args.length !== 0) {
                                             for (var arg_name in event.args) {
                                                 event_args.push(arg_name + ':' + event.args[arg_name]);
                                             }
                                         }
-
                                         console.log(event_name + '(' + event_args.join(',') + ')');
                                     }
                                 });
                             }
-
                             function account_unlock() {
                                 web3.eth.defaultAccount = $('#eth_accounts').val();
-
                                 var password = $('#account_password').val();
                                 if (password) {
                                     var unlock_check;
-
                                     try {
                                         unlock_check = web3.personal.unlockAccount(web3.eth.defaultAccount, password);
                                     } catch (e) {
@@ -285,7 +251,6 @@
                                         }
                                         unlock_check = false;
                                     }
-
                                     if (unlock_check === false) {
                                         alert('Failed unlocking account. Please, try again.');
                                         return false;
@@ -297,23 +262,18 @@
                                     return false;
                                 }
                             }
-
                             function disable_button(){
                               $("#claim_button").prop('disabled',true);
                               console.log('do disable')
                             }
-
                             function enable_button(){
                               $("#claim_button").prop('disabled',false);
                               console.log('do enable')
                             }
-
                             function refresh_values() {
                                 var claimedUnits = 0,
                                     claimedPrepaidUnits = 0;
-
                                 tokenInstance.claimedPrepaidUnits((error, value) => {
-
                                     claimedPrepaidUnits = value.toNumber();
                                     console.log(claimedPrepaidUnits);
                                     tokenInstance.claimedUnits((error, value) => {
@@ -322,13 +282,11 @@
                                         refresh_chart(claimedPrepaidUnits, claimedUnits);
                                     });
                                 });
-
                             }
 
+
                             function refresh_chart(claimedPrepaidUnits, claimedUnits) {
-
                                 var promissoryUnits = 3000000;
-
                                 var tokenLeft = promissoryUnits - (claimedUnits + claimedPrepaidUnits);
                                 var tokenBought = claimedUnits;
                                 if (tokenLeft)
@@ -341,31 +299,24 @@
                                         "Token Bought"
                                     ],
                                     datasets: [{
-
                                         data: [tokenLeft, tokenBought],
                                         backgroundColor: ["#9ACD32", "red"]
-
                                     }]
                                 }
-
-
-
-
                                 var options = {
                                     scaleFontColor: "#f00",
                                     segmentStrokeColor: "transparent",
                                     segmentStrokeWidth: 20,
                                     segmentStrokeColor: "rgba(255, 255, 255, 0.4)",
                                     datasetStrokeWidth: 5,
-                                    responsive: true,
-                                    maintainAspectRatio: false,
+                                   responsive: false,
+                                    maintainAspectRatio: true,
                                     legend: {
                                         display: true,
                                         position: 'bottom',
                                         labels: {
                                             fontColor: 'white'
                                         }
-
                                     },
                                     animation: {
                                         duration: 500,
@@ -375,9 +326,7 @@
                                             //  ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
                                             ctx.textAlign = 'center';
                                             ctx.textBaseline = 'bottom';
-
                                             this.data.datasets.forEach(function(dataset) {
-
                                                 for (var i = 0; i < dataset.data.length; i++) {
                                                     var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
                                                         total = dataset._meta[Object.keys(dataset._meta)[0]].total,
@@ -385,10 +334,8 @@
                                                         start_angle = model.startAngle,
                                                         end_angle = model.endAngle,
                                                         mid_angle = start_angle + (end_angle - start_angle) / 2;
-
                                                     var x = mid_radius * Math.cos(mid_angle);
                                                     var y = mid_radius * Math.sin(mid_angle);
-
                                                     ctx.fillStyle = '#fff';
                                                     if (i == 3) { // Darker text color for lighter background
                                                         ctx.fillStyle = '#444';
@@ -408,12 +355,7 @@
                                     fillOpacity: .3,
                                     data: chartData,
                                     options: options
-
                                 });
-
-
-
-
                                 if (!bar)
                                     bar = new ProgressBar.Line('.progressbar-container', {
                                         strokeWidth: 4,
@@ -453,7 +395,6 @@
                                 //bar.animate(0);
                                 if (bar)
                                     bar.animate(tokenBought / (tokenLeft + tokenBought)); // Number from 0.0 to 1.0
-
                             }
                         </script>
 
@@ -512,16 +453,12 @@
 
                                     </div>
                                     <!--<div class="row">
-
                                         <div class="col-xs-5 eth-inputs">
-
                                             <input class="eth-inputs" type="password" id="account_password" placeholder="Account Password">
-
                                         </div>
                                         <div class="col-xs-5 col-xs-offset-1 caption-left">
                                             <span> Account password </span>
                                         </div>
-
                                     </div>-->
 
                                     <div class="row">
@@ -607,39 +544,28 @@
     <script>
         $(function() {
             $('.marquee').marquee({
-
                 //If you wish to always animate using jQuery
                 allowCss3Support: true,
-
                 //works when allowCss3Support is set to true - for full list see http://www.w3.org/TR/2013/WD-css3-transitions-20131119/#transition-timing-function
                 css3easing: 'linear',
-
                 //requires jQuery easing plugin. Default is 'linear'
                 easing: 'linear',
-
                 //pause time before the next animation turn in milliseconds
                 delayBeforeStart: 0,
                 //'left', 'right', 'up' or 'down'
                 direction: 'left',
-
                 //true or false - should the marquee be duplicated to show an effect of continues flow
                 duplicated: true,
-
                 //speed in milliseconds of the marquee in milliseconds
                 duration: 10000,
-
                 //gap in pixels between the tickers
                 gap: 20,
-
                 //on cycle pause the marquee
                 pauseOnCycle: false,
-
                 //on hover pause the marquee - using jQuery plugin https://github.com/tobia/Pause
                 pauseOnHover: true,
-
                 //the marquee is visible initially positioned next to the border towards it will be moving
                 startVisible: false
-
             });
         });
     </script>
@@ -655,7 +581,6 @@
             usd_btc: 682.9,
             mkt_cap: '',
         }
-
         function updatePrices() {
             var newprices = {};
             newprices.btc_eth = prices.btc_eth;
@@ -665,22 +590,17 @@
             newprices.eth_sup = parseFloat((prices.btc_eth / prices.btc_sup).toFixed(6));
             newprices.usd_sup = parseFloat((prices.usd_btc * prices.btc_sup).toFixed(4));
             newprices.mkt_cap = parseInt((100000000 * newprices.usd_sup).toFixed(0));
-
             prices = newprices;
             var pairs = Object.keys(newprices);
             for (i in pairs) {
-
                 //remove mkt Cap for now
                 if (pairs[i] == 'mkt_cap') return;
-
                 var spans = document.getElementsByClassName(pairs[i]);
-
                 for (s = 0; s < spans.length; s++) {
                     spans[s].innerText = ' ' + prices[pairs[i]];
                 }
             }
         }
-
         function getPrices() {
             var err = 0;
             $.get('https://www.cryptocompare.com/api/data/price?fsym=ETH&tsyms=BTC')
@@ -691,7 +611,6 @@
                             return;
                         }
                         prices.btc_eth = parseFloat(d.Data[0].Price).toFixed(6)
-
                         $.get('https://www.cryptocompare.com/api/data/price?fsym=BTC&tsyms=USD')
                             .then(
                                 function(d) {
@@ -703,12 +622,10 @@
                                     updatePrices();
                                 },
                                 function() {
-
                                 });
                     },
                     function(e) {});
         }
-
         $(function() {
             updatePrices();
             getPrices();

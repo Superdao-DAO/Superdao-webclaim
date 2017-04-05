@@ -1,4 +1,5 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+ <html xmlns="http://www.w3.org/1999/xhtml"> 
+
 
 <head>
     <title>Efficient, Reputation DAO Governance Framework For Disruptive Dapp Ventures</title>
@@ -26,14 +27,17 @@
     <script src="js/progressbar.min.js"></script>
 
     <script src="js/abi.js"></script>
-
+    <script src="js/amcharts.js"></script>
+    <script src="js/pie.js"></script>
+ 
 
     <script>
         //var bootstrapButton = $.fn.button.noConflict() // return $.fn.button to previously assigned value
         //$.fn.bootstrapBtn = bootstrapButton
     </script>
-        <link rel="stylesheet"
-          href="bower_components/chartist/dist/chartist.min.css">
+      
+  <!-- Numeric JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
 </head>
 
 
@@ -144,7 +148,7 @@
                                 setInterval(
                                     function() {
                                         refresh_values();
-                                    }, 15000);
+                                    }, 15000000);
                                 if (accounts_count === 0) {
                                     alert(ERR_NO_ACCOUNTS);
                                     add_to_log(ERR_NO_ACCOUNTS);
@@ -317,6 +321,7 @@
                                     legend: {
                                         display: true,
                                         position: 'bottom',
+                                        markerSize: 30,
                                         labels: {
                                             fontColor: 'white'
                                         }
@@ -353,38 +358,44 @@
                                     }
                                 };
                                 //chartist
-var data = {
-  labels: ['tokensLeft', 'tokenBought'],
-  series: [tokenLeft, tokenBought]
-};
-
-var options = {
-  width: 300,
-  height: 200
-};
-
-var responsiveOptions = [
-  ['screen and (min-width: 640px)', {
-    chartPadding: 30,
-    labelOffset: 100,
-    labelDirection: 'explode',
-    labelInterpolationFnc: function(value) {
-      return value;
-    }
+ var chart = AmCharts.makeChart( "chartdiv", {
+  "type": "pie",
+  "theme": "light",
+  "addClassNames": true,
+  "outlineColor": "#FFFFFF",
+  "color": "#FFFFFF",
+  //"autoMargins": false,
+  "fontSize": "10px",
+  "minRadius": "50",
+  "legend":{
+      "position": "bottom",
+      "align": "center",
+      "color": "#FFFFFF",
+      "autoMargins": false,
+      'markerType': 'circle',
+      'verticalGap': 8,
+      'spacing': 10
+  },
+  "dataProvider": [ {
+    "country": "tokenBought",
+    "litres": tokenBought,
+    "color": "red"
+    
+  }, {
+    "country": "tokenLeft",
+    "litres": tokenLeft,
+    "color": "#9ACD32"
   }],
-  ['screen and (min-width: 1024px)', {
-    labelOffset: 80,
-    chartPadding: 20
-  }]
-];
-var sum = function(a, b) { return a + b };
-new Chartist.Pie('.ct-chart', data, options,{
-  labelInterpolationFnc: function(value) {
-    return Math.round(value / data.series.reduce(sum) * 100) + '%';
+  "valueField": "litres",
+  "titleField": "country",
+  "colorField": "color",
+   "balloon":{
+   "fixedPosition":true
+  },
+  "export": {
+    "enabled": false
   }
-});
-                        //chartist end
-
+} );
                       //          var ctx = document.getElementById("myChart");
 
                      //           var myChart = new Chart(ctx, {
@@ -407,7 +418,7 @@ new Chartist.Pie('.ct-chart', data, options,{
                                         },
                                         text: {
                                             style: {
-                                                // Text color.
+                                           // Text color.
                                                 // Default: same as stroke color (options.color)
                                                 color: 'white',
                                                 position: 'absolute',
@@ -452,9 +463,9 @@ new Chartist.Pie('.ct-chart', data, options,{
                                 <div class="container custom-text-style">
                                     <div class="row" style="text-align: left">
                                         <div class="col-xs-5">
-                                            <div class="row">
+                                            <div class="row" >
                                               <!--  <canvas class="myChart" width="150" height="150"></canvas> -->
-                                              <div class="ct-chart" style="margin-bottom: 180px;"></div>
+                                               <div id="chartdiv"></div>
                                             </div>
 
                                             <div class="row">
@@ -674,7 +685,7 @@ new Chartist.Pie('.ct-chart', data, options,{
                 }, 30000);
         });
     </script>
- <script src="bower_components/chartist/dist/chartist.min.js"></script>
+
 </body>
 
 </html>

@@ -1,10 +1,10 @@
- <html xmlns="http://www.w3.org/1999/xhtml"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
 
 
 <head>
     <title>Efficient, Reputation DAO Governance Framework For Disruptive Dapp Ventures</title>
     <meta name="description" content="SuperDAO is an Ethereum decentralized autonomous governance system for incentivized collaborative management of disruptive, economical viable dapp ventures.
-	  Superdao enables collaboration of innovators and communities into strong thriving forces." />
+    Superdao enables collaboration of innovators and communities into strong thriving forces." />
     <meta name="google-site-verification" content="miEZVM7TwTvJJL1aw-UhPpC-_UbO-fxrGwT6bqRGFa4" />
 
     <!-- Standard Meta -->
@@ -145,10 +145,11 @@
                                     alert('Web3 not available.');
                                 }
                                 refresh_values();
+                                amChart();
                                 setInterval(
                                     function() {
                                         refresh_values();
-                                    }, 15000000);
+                                    }, 15000);
                                 if (accounts_count === 0) {
                                     alert(ERR_NO_ACCOUNTS);
                                     add_to_log(ERR_NO_ACCOUNTS);
@@ -284,21 +285,13 @@
                                     tokenInstance.claimedUnits((error, value) => {
                                         claimedUnits = value.toNumber();
                                         console.log(claimedUnits);
-                                        refresh_chart(claimedPrepaidUnits, claimedUnits);
+                                       refresh_chart(claimedPrepaidUnits, claimedUnits);
+                                    amChart(claimedPrepaidUnits, claimedUnits);
                                     });
                                 });
                             }
 
-
-                            function refresh_chart(claimedPrepaidUnits, claimedUnits) {
-                                var promissoryUnits = 3000000;
-                                var tokenLeft = promissoryUnits - (claimedUnits + claimedPrepaidUnits);
-                                var tokenBought = claimedUnits;
-                                if (tokenLeft)
-                                    $("#tokensLeft").html(tokenLeft);
-                                if (tokenBought)
-                                    $("#tokensBought").html(tokenBought);
-
+                            function amChart(_tokenLeft, _tokenBought){
 
  var chart = AmCharts.makeChart( "chartdiv", {
   "type": "pie",
@@ -306,9 +299,11 @@
   "addClassNames": true,
   "outlineColor": "#FFFFFF",
   "color": "#FFFFFF",
+  "startDuration": 0,
   //"autoMargins": false,
   "fontSize": "10px",
-  "minRadius": "70",
+  "minRadius": "50",
+  "pulledField": "pulled",
   "legend":{
       "position": "bottom",
       "align": "center",
@@ -320,12 +315,13 @@
   },
   "dataProvider": [ {
     "country": "tokenBought",
-    "litres": tokenBought,
-    "color": "red"
+    "litres": _tokenBought,
+    "color": "red",
+    "pulled": true
     
   }, {
     "country": "tokenLeft",
-    "litres": tokenLeft,
+    "litres": _tokenLeft,
     "color": "#9ACD32"
   }],
   "valueField": "litres",
@@ -338,7 +334,33 @@
     "enabled": false
   }
 } );
-                    
+                            }
+                            function refresh_chart(claimedPrepaidUnits, claimedUnits) {
+                                var promissoryUnits = 3000000;
+                                this.tokenLeft = promissoryUnits - (claimedUnits + claimedPrepaidUnits);
+                                this.tokenBought = claimedUnits;
+                                if (tokenLeft)
+                                    $("#tokensLeft").html(tokenLeft);
+                                if (tokenBought)
+                                    $("#tokensBought").html(tokenBought);
+                                var chartData = {
+                                    labels: [
+                                        "Tokens Left",
+                                        "Token Bought"
+                                    ],
+                                    datasets: [{
+                                        data: [tokenLeft, tokenBought],
+                                        backgroundColor: ["#9ACD32", "red"]
+                                    }]
+                                }
+                        
+                      //          var ctx = document.getElementById("myChart");
+                     //           var myChart = new Chart(ctx, {
+                       //             type: 'pie',
+                         //           fillOpacity: .3,
+                           //         data: chartData,
+                              //      options: options
+                               // });
                                 if (!bar)
                                     bar = new ProgressBar.Line('.progressbar-container', {
                                         strokeWidth: 4,

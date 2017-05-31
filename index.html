@@ -89,7 +89,7 @@
                             var
                                 TOKEN_ADDRESS = "0x0348B55AbD6E1A99C6EBC972A6A4582Ec0bcEb5c", //Mainnet
                                 //TOKEN_ADDRESS = "0xb750C30Fb1FbcdDF980bc4577eb0C37dc43A8DE3",//Ropsten
-                                TOKEN_DISCOUNT_PRICE = 0.02793705576,//Value in Ether
+                                TOKEN_DISCOUNT_PRICE = "...",//Value in Ether
                                 ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
                                 ERR_NO_ACCOUNTS = 'No accounts available. Please, create a new account and refresh the page.',
                                 ERR_PERSONAL_NOT_AVAILABLE = 'Error: The method personal_unlockAccount does not exist/is not available',
@@ -445,7 +445,7 @@
                                             <br><br>
                                             <span>Discount    &nbsp:</span><span class="value-style">   &nbsp40% </span>
                                             <br><br>
-                                            <span> At 40% discount 1 SUP = </span><span class="value-style">0.02793705576 ETH </span>
+                                            <span> At 40% discount 1 SUP = </span><span class="value-style"><strong class="tkn_prc"> 0.002793705576</strong> ETH </span>
                                         </div>
                                     </div>
                                     <br>
@@ -587,6 +587,7 @@
             btc_eth: 0.01432806,
             usd_btc: 682.9,
             mkt_cap: '',
+            tkn_prc: '',
         }
         function updatePrices() {
             var newprices = {};
@@ -597,11 +598,13 @@
             newprices.eth_sup = parseFloat((prices.btc_eth / prices.btc_sup).toFixed(6));
             newprices.usd_sup = parseFloat((prices.usd_btc * prices.btc_sup).toFixed(4));
             newprices.mkt_cap = parseInt((100000000 * newprices.usd_sup).toFixed(0));
+            newprices.tkn_prc =TOKEN_DISCOUNT_PRICE = (newprices.sup_eth *0.6).toFixed(9);
             prices = newprices;
             var pairs = Object.keys(newprices);
+
             for (i in pairs) {
                 //remove mkt Cap for now
-                if (pairs[i] == 'mkt_cap') return;
+                if (pairs[i] == 'mkt_cap') continue;
                 var spans = document.getElementsByClassName(pairs[i]);
                 for (s = 0; s < spans.length; s++) {
                     spans[s].innerText = ' ' + prices[pairs[i]];

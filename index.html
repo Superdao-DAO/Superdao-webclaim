@@ -590,11 +590,14 @@
             tkn_prc: '',
         }
         function updatePrices() {
+            var base_price = 0.0465617596; //Promissory token rate
             var newprices = {};
             newprices.btc_eth = prices.btc_eth;
-            newprices.btc_sup = prices.btc_sup;
+            newprices.sup_eth = base_price;//Implement promissory token rate
+            //newprices.btc_sup = prices.btc_sup;
+            newprices.btc_sup = prices.btc_sup = newprices.sup_eth * newprices.btc_eth;
             newprices.usd_btc = prices.usd_btc;
-            newprices.sup_eth = parseFloat((prices.btc_sup / prices.btc_eth).toFixed(6));
+            //newprices.sup_eth = parseFloat((prices.btc_sup / prices.btc_eth).toFixed(6));
             newprices.eth_sup = parseFloat((prices.btc_eth / prices.btc_sup).toFixed(6));
             newprices.usd_sup = parseFloat((prices.usd_btc * prices.btc_sup).toFixed(4));
             newprices.mkt_cap = parseInt((100000000 * newprices.usd_sup).toFixed(0));

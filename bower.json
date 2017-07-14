@@ -1,0 +1,18 @@
+{
+  "name": "Superdao-webclaim",
+  "homepage": "https://github.com/Superdao-DAO/Superdao-webclaim",
+  "authors": [
+    "coderwithattitude <coderwithattitude@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "chartist": "^0.10.1"
+  }
+}

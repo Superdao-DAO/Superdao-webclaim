@@ -1,9 +1,10 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+
 
 <head>
     <title>Efficient, Reputation DAO Governance Framework For Disruptive Dapp Ventures</title>
     <meta name="description" content="SuperDAO is an Ethereum decentralized autonomous governance system for incentivized collaborative management of disruptive, economical viable dapp ventures.
-	  Superdao enables collaboration of innovators and communities into strong thriving forces." />
+    Superdao enables collaboration of innovators and communities into strong thriving forces." />
     <meta name="google-site-verification" content="miEZVM7TwTvJJL1aw-UhPpC-_UbO-fxrGwT6bqRGFa4" />
 
     <!-- Standard Meta -->
@@ -26,13 +27,17 @@
     <script src="js/progressbar.min.js"></script>
 
     <script src="js/abi.js"></script>
-
+    <script src="js/amcharts.js"></script>
+    <script src="js/pie.js"></script>
+ 
 
     <script>
         //var bootstrapButton = $.fn.button.noConflict() // return $.fn.button to previously assigned value
         //$.fn.bootstrapBtn = bootstrapButton
     </script>
-
+      
+  <!-- Numeric JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
 </head>
 
 
@@ -84,7 +89,7 @@
                             var
                                 TOKEN_ADDRESS = "0x0348B55AbD6E1A99C6EBC972A6A4582Ec0bcEb5c", //Mainnet
                                 //TOKEN_ADDRESS = "0xb750C30Fb1FbcdDF980bc4577eb0C37dc43A8DE3",//Ropsten
-                                TOKEN_DISCOUNT_PRICE = 0.02793705576,//Value in Ether
+                                TOKEN_DISCOUNT_PRICE = "...",//Value in Ether
                                 ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
                                 ERR_NO_ACCOUNTS = 'No accounts available. Please, create a new account and refresh the page.',
                                 ERR_PERSONAL_NOT_AVAILABLE = 'Error: The method personal_unlockAccount does not exist/is not available',
@@ -140,6 +145,7 @@
                                     alert('Web3 not available.');
                                 }
                                 refresh_values();
+                                amChart();
                                 setInterval(
                                     function() {
                                         refresh_values();
@@ -279,16 +285,60 @@
                                     tokenInstance.claimedUnits((error, value) => {
                                         claimedUnits = value.toNumber();
                                         console.log(claimedUnits);
-                                        refresh_chart(claimedPrepaidUnits, claimedUnits);
+                                       refresh_chart(claimedPrepaidUnits, claimedUnits);
+                                    amChart(claimedPrepaidUnits, claimedUnits);
                                     });
                                 });
                             }
 
+                            function amChart(_tokenLeft, _tokenBought){
 
+ var chart = AmCharts.makeChart( "chartdiv", {
+  "type": "pie",
+  "theme": "light",
+  "addClassNames": true,
+  "outlineColor": "#FFFFFF",
+  "color": "#FFFFFF",
+  "startDuration": 0,
+  //"autoMargins": false,
+  "fontSize": "10px",
+  "minRadius": "50",
+  "pulledField": "pulled",
+  "legend":{
+      "position": "bottom",
+      "align": "center",
+      "color": "#FFFFFF",
+      "autoMargins": false,
+      'markerType': 'circle',
+      'verticalGap': 8,
+      'spacing': 10
+  },
+  "dataProvider": [ {
+    "country": "tokenBought",
+    "litres": _tokenBought,
+    "color": "red",
+    "pulled": true
+    
+  }, {
+    "country": "tokenLeft",
+    "litres": _tokenLeft,
+    "color": "#9ACD32"
+  }],
+  "valueField": "litres",
+  "titleField": "country",
+  "colorField": "color",
+   "balloon":{
+   "fixedPosition":true
+  },
+  "export": {
+    "enabled": false
+  }
+} );
+                            }
                             function refresh_chart(claimedPrepaidUnits, claimedUnits) {
                                 var promissoryUnits = 3000000;
-                                var tokenLeft = promissoryUnits - (claimedUnits + claimedPrepaidUnits);
-                                var tokenBought = claimedUnits;
+                                this.tokenLeft = promissoryUnits - (claimedUnits + claimedPrepaidUnits);
+                                this.tokenBought = claimedUnits;
                                 if (tokenLeft)
                                     $("#tokensLeft").html(tokenLeft);
                                 if (tokenBought)
@@ -303,59 +353,14 @@
                                         backgroundColor: ["#9ACD32", "red"]
                                     }]
                                 }
-                                var options = {
-                                    scaleFontColor: "#f00",
-                                    segmentStrokeColor: "transparent",
-                                    segmentStrokeWidth: 20,
-                                    segmentStrokeColor: "rgba(255, 255, 255, 0.4)",
-                                    datasetStrokeWidth: 5,
-                                   responsive: false,
-                                    maintainAspectRatio: true,
-                                    legend: {
-                                        display: true,
-                                        position: 'bottom',
-                                        labels: {
-                                            fontColor: 'white'
-                                        }
-                                    },
-                                    animation: {
-                                        duration: 500,
-                                        easing: "easeOutQuart",
-                                        onComplete: function() {
-                                            var ctx = this.chart.ctx;
-                                            //  ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
-                                            ctx.textAlign = 'center';
-                                            ctx.textBaseline = 'bottom';
-                                            this.data.datasets.forEach(function(dataset) {
-                                                for (var i = 0; i < dataset.data.length; i++) {
-                                                    var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
-                                                        total = dataset._meta[Object.keys(dataset._meta)[0]].total,
-                                                        mid_radius = model.innerRadius + (model.outerRadius - model.innerRadius) / 2,
-                                                        start_angle = model.startAngle,
-                                                        end_angle = model.endAngle,
-                                                        mid_angle = start_angle + (end_angle - start_angle) / 2;
-                                                    var x = mid_radius * Math.cos(mid_angle);
-                                                    var y = mid_radius * Math.sin(mid_angle);
-                                                    ctx.fillStyle = '#fff';
-                                                    if (i == 3) { // Darker text color for lighter background
-                                                        ctx.fillStyle = '#444';
-                                                    }
-                                                    var percent = String(Math.round(dataset.data[i] / total * 100)) + "%";
-                                                    //ctx.fillText(dataset.data[i], model.x + x, model.y + y);
-                                                    // Display percent in another line, line break doesn't work for fillText
-                                                    ctx.fillText(percent, model.x + x, model.y + y);
-                                                }
-                                            });
-                                        }
-                                    }
-                                };
-                                var ctx = document.getElementById("myChart");
-                                var myChart = new Chart(ctx, {
-                                    type: 'pie',
-                                    fillOpacity: .3,
-                                    data: chartData,
-                                    options: options
-                                });
+                        
+                      //          var ctx = document.getElementById("myChart");
+                     //           var myChart = new Chart(ctx, {
+                       //             type: 'pie',
+                         //           fillOpacity: .3,
+                           //         data: chartData,
+                              //      options: options
+                               // });
                                 if (!bar)
                                     bar = new ProgressBar.Line('.progressbar-container', {
                                         strokeWidth: 4,
@@ -370,7 +375,7 @@
                                         },
                                         text: {
                                             style: {
-                                                // Text color.
+                                           // Text color.
                                                 // Default: same as stroke color (options.color)
                                                 color: 'white',
                                                 position: 'absolute',
@@ -415,9 +420,11 @@
                                 <div class="container custom-text-style">
                                     <div class="row" style="text-align: left">
                                         <div class="col-xs-5">
-                                            <div class="row">
-                                                <canvas id="myChart" width="150" height="150"></canvas>
+                                            <div class="row" >
+                                              <!--  <canvas class="myChart" width="150" height="150"></canvas> -->
+                                               <div id="chartdiv"></div>
                                             </div>
+
                                             <div class="row">
                                                 <div class="progressbar-container"></div>
                                             </div>
@@ -438,7 +445,7 @@
                                             <br><br>
                                             <span>Discount    &nbsp:</span><span class="value-style">   &nbsp40% </span>
                                             <br><br>
-                                            <span> At 40% discount 1 SUP = </span><span class="value-style">0.02793705576 ETH </span>
+                                            <span> At 40% discount 1 SUP = </span><span class="value-style"><strong class="tkn_prc"> 0.002793705576</strong> ETH </span>
                                         </div>
                                     </div>
                                     <br>
@@ -580,21 +587,27 @@
             btc_eth: 0.01432806,
             usd_btc: 682.9,
             mkt_cap: '',
+            tkn_prc: '',
         }
         function updatePrices() {
+            var base_price = 0.0465617596; //Promissory token rate
             var newprices = {};
             newprices.btc_eth = prices.btc_eth;
-            newprices.btc_sup = prices.btc_sup;
+            newprices.sup_eth = base_price;//Implement promissory token rate
+            //newprices.btc_sup = prices.btc_sup;
+            newprices.btc_sup = prices.btc_sup = newprices.sup_eth * newprices.btc_eth;
             newprices.usd_btc = prices.usd_btc;
-            newprices.sup_eth = parseFloat((prices.btc_sup / prices.btc_eth).toFixed(6));
+            //newprices.sup_eth = parseFloat((prices.btc_sup / prices.btc_eth).toFixed(6));
             newprices.eth_sup = parseFloat((prices.btc_eth / prices.btc_sup).toFixed(6));
             newprices.usd_sup = parseFloat((prices.usd_btc * prices.btc_sup).toFixed(4));
             newprices.mkt_cap = parseInt((100000000 * newprices.usd_sup).toFixed(0));
+            newprices.tkn_prc =TOKEN_DISCOUNT_PRICE = (newprices.sup_eth *0.6).toFixed(9);
             prices = newprices;
             var pairs = Object.keys(newprices);
+
             for (i in pairs) {
                 //remove mkt Cap for now
-                if (pairs[i] == 'mkt_cap') return;
+                if (pairs[i] == 'mkt_cap') continue;
                 var spans = document.getElementsByClassName(pairs[i]);
                 for (s = 0; s < spans.length; s++) {
                     spans[s].innerText = ' ' + prices[pairs[i]];

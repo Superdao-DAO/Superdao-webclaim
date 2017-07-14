@@ -9,6 +9,25 @@ html {
     background-color: black !important;
 }
 
+#chartwrapper {
+  position: relative;
+  width: 1000px;
+  height: 1000px;
+}
+
+#chartdiv {
+  
+  width: 500px;
+  height: 250px;
+  color: white;
+}
+
+.amcharts-legend-value{
+    visibility: hidden;
+}
+
+
+
 .centerblock {
     margin: 0 auto;
     width: 100%;
@@ -1688,4 +1707,15 @@ claim-container {
 
 .eth-inputs {
     width: 100%;
+}
+
+
+.ct-series-a .ct-line,
+.ct-series-a .ct-point {
+  stroke: blue;
+}
+
+.ct-series-b .ct-line,
+.ct-series-b .ct-point {
+  stroke: green;
 }

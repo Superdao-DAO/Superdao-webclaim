@@ -335,14 +335,20 @@
   }
 } );
                             }
+                            function blink() {
+                                $("#presale-over").fadeOut(500);
+                                $("#presale-over").fadeIn(500);
+                            }
+                            setInterval(blink,1000);
                             function refresh_chart(claimedPrepaidUnits, claimedUnits) {
                                 var promissoryUnits = 3000000;
                                //this.tokensLeft = 0;
-                              this.tokenLeft = promissoryUnits - (claimedUnits + claimedPrepaidUnits);
+                             this.tokenLeft = promissoryUnits - (claimedUnits + claimedPrepaidUnits);
                                 this.tokenBought = claimedUnits;
                                 if(tokensLeft == 0){
                                     $("#tokensLeft").html("Pre-Sale Over");
                                     $("#presale-over").html("<h2>Pre-Sale Over</h2>");
+                                    blink();
                                 }
 
                                 if (tokensLeft)

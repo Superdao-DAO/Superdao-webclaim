@@ -337,9 +337,15 @@
                             }
                             function refresh_chart(claimedPrepaidUnits, claimedUnits) {
                                 var promissoryUnits = 3000000;
-                                this.tokenLeft = promissoryUnits - (claimedUnits + claimedPrepaidUnits);
+                               //this.tokensLeft = 0;
+                              this.tokenLeft = promissoryUnits - (claimedUnits + claimedPrepaidUnits);
                                 this.tokenBought = claimedUnits;
-                                if (tokenLeft)
+                                if(tokensLeft == 0){
+                                    $("#tokensLeft").html("Pre-Sale Over");
+                                    $("#presale-over").html("<h2>Pre-Sale Over</h2>");
+                                }
+
+                                if (tokensLeft)
                                     $("#tokensLeft").html(tokenLeft);
                                 if (tokenBought)
                                     $("#tokensBought").html(tokenBought);
@@ -408,6 +414,9 @@
                                 <br /><br />
                                 <div class="nothing-fancy">
                                     <h1>Claim</h1>
+                                </div>
+                                <div id="presale-over" style="color:white;">
+
                                 </div>
                             </div>
                             <style>

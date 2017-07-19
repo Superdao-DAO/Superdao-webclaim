@@ -285,8 +285,8 @@
                                     tokenInstance.claimedUnits((error, value) => {
                                         claimedUnits = value.toNumber();
                                         console.log(claimedUnits);
-                                       refresh_chart(claimedPrepaidUnits, claimedUnits);
-                                    amChart(claimedPrepaidUnits, claimedUnits);
+                                       var values = refresh_chart(claimedPrepaidUnits, claimedUnits);
+                                    amChart(values[1], values[0]);
                                     });
                                 });
                             }
@@ -316,13 +316,13 @@
   "dataProvider": [ {
     "country": "tokenBought",
     "litres": _tokenBought,
-    "color": "red",
+    "color": "#9ACD32",
     "pulled": true
-    
+
   }, {
     "country": "tokenLeft",
     "litres": _tokenLeft,
-    "color": "#9ACD32"
+    "color": "red"
   }],
   "valueField": "litres",
   "titleField": "country",
@@ -335,11 +335,23 @@
   }
 } );
                             }
+                            function blink() {
+                                $("#presale-over").fadeOut(500);
+                                $("#presale-over").fadeIn(500);
+                            }
+                            setInterval(blink,1000);
                             function refresh_chart(claimedPrepaidUnits, claimedUnits) {
                                 var promissoryUnits = 3000000;
-                                this.tokenLeft = promissoryUnits - (claimedUnits + claimedPrepaidUnits);
+                               //this.tokensLeft = 0;
+                             this.tokenLeft = promissoryUnits - (claimedUnits + claimedPrepaidUnits);
                                 this.tokenBought = claimedUnits;
-                                if (tokenLeft)
+                                if(tokensLeft == 0){
+                                    $("#tokensLeft").html("Pre-Sale Over");
+                                    $("#presale-over").html("<h2>Pre-Sale Over</h2>");
+                                    blink();
+                                }
+
+                                if (tokensLeft)
                                     $("#tokensLeft").html(tokenLeft);
                                 if (tokenBought)
                                     $("#tokensBought").html(tokenBought);
@@ -400,6 +412,8 @@
                                 //bar.animate(0);
                                 if (bar)
                                     bar.animate(tokenBought / (tokenLeft + tokenBought)); // Number from 0.0 to 1.0
+                                    //Return values to be used in the Amchart
+                                    return [tokenBought,tokenLeft];
                             }
                         </script>
 
@@ -408,6 +422,9 @@
                                 <br /><br />
                                 <div class="nothing-fancy">
                                     <h1>Claim</h1>
+                                </div>
+                                <div id="presale-over" style="color:white;">
+
                                 </div>
                             </div>
                             <style>
@@ -455,18 +472,10 @@
                                             <select class="eth-inputs" id="eth_accounts"></select>
                                         </div>
                                         <div class="col-xs-5 col-xs-offset-1  caption-left">
-                                            <span>Account</span>
+                                            <span  class="v-span">Account</span>
                                         </div>
 
                                     </div>
-                                    <!--<div class="row">
-                                        <div class="col-xs-5 eth-inputs">
-                                            <input class="eth-inputs" type="password" id="account_password" placeholder="Account Password">
-                                        </div>
-                                        <div class="col-xs-5 col-xs-offset-1 caption-left">
-                                            <span> Account password </span>
-                                        </div>
-                                    </div>-->
 
                                     <div class="row">
 
@@ -475,7 +484,7 @@
 
                                         </div>
                                         <div class="col-xs-5 col-xs-offset-1 caption-left">
-                                            <span>ETH amount</span>
+                                            <span  class="v-span">ETH amount</span>
                                         </div>
 
                                     </div>
@@ -486,7 +495,7 @@
 
                                         </div>
                                         <div class="col-xs-5 col-xs-offset-1 caption-left">
-                                            <span> Gas Price in WEI</span>
+                                            <span class="v-span"> Gas Price in WEI</span>
                                         </div>
 
                                     </div>

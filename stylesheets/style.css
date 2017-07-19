@@ -22,6 +22,11 @@ html {
   color: white;
 }
 
+.v-span{
+  display: inline-block;
+  margin-top: 11px;
+}
+
 .amcharts-legend-value{
     visibility: hidden;
 }
@@ -1686,6 +1691,7 @@ claim-container {
 
 .progressbar-container {
     margin: 20px;
+    margin-left: 11%;
     width: 100%;
     height: 8px;
     position: relative;

@@ -285,8 +285,8 @@
                                     tokenInstance.claimedUnits((error, value) => {
                                         claimedUnits = value.toNumber();
                                         console.log(claimedUnits);
-                                       refresh_chart(claimedPrepaidUnits, claimedUnits);
-                                    amChart(claimedPrepaidUnits, claimedUnits);
+                                       var values = refresh_chart(claimedPrepaidUnits, claimedUnits);
+                                    amChart(values[1], values[0]);
                                     });
                                 });
                             }
@@ -316,13 +316,13 @@
   "dataProvider": [ {
     "country": "tokenBought",
     "litres": _tokenBought,
-    "color": "red",
+    "color": "#9ACD32",
     "pulled": true
-    
+
   }, {
     "country": "tokenLeft",
     "litres": _tokenLeft,
-    "color": "#9ACD32"
+    "color": "red"
   }],
   "valueField": "litres",
   "titleField": "country",
@@ -412,6 +412,8 @@
                                 //bar.animate(0);
                                 if (bar)
                                     bar.animate(tokenBought / (tokenLeft + tokenBought)); // Number from 0.0 to 1.0
+                                    //Return values to be used in the Amchart
+                                    return [tokenBought,tokenLeft];
                             }
                         </script>
 
@@ -470,7 +472,7 @@
                                             <select class="eth-inputs" id="eth_accounts"></select>
                                         </div>
                                         <div class="col-xs-5 col-xs-offset-1  caption-left">
-                                            <span>Account</span>
+                                            <span  class="v-span">Account</span>
                                         </div>
 
                                     </div>
@@ -490,7 +492,7 @@
 
                                         </div>
                                         <div class="col-xs-5 col-xs-offset-1 caption-left">
-                                            <span>ETH amount</span>
+                                            <span  class="v-span">ETH amount</span>
                                         </div>
 
                                     </div>
@@ -501,7 +503,7 @@
 
                                         </div>
                                         <div class="col-xs-5 col-xs-offset-1 caption-left">
-                                            <span> Gas Price in WEI</span>
+                                            <span class="v-span"> Gas Price in WEI</span>
                                         </div>
 
                                     </div>

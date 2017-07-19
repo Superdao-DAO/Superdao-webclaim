@@ -316,13 +316,13 @@
   "dataProvider": [ {
     "country": "tokenBought",
     "litres": _tokenBought,
-    "color": "#9ACD32",
+    "color": "red",
     "pulled": true
 
   }, {
     "country": "tokenLeft",
     "litres": _tokenLeft,
-    "color": "red"
+    "color": "#9ACD32"
   }],
   "valueField": "litres",
   "titleField": "country",
@@ -343,8 +343,8 @@
                             function refresh_chart(claimedPrepaidUnits, claimedUnits) {
                                 var promissoryUnits = 3000000;
                                //this.tokensLeft = 0;
-                             this.tokenLeft = promissoryUnits - (claimedUnits + claimedPrepaidUnits);
-                                this.tokenBought = claimedUnits;
+                               this.tokenBought = claimedUnits + claimedPrepaidUnits;
+                               this.tokenLeft = promissoryUnits - this.tokenBought;
                                 if(tokensLeft == 0){
                                     $("#tokensLeft").html("Pre-Sale Over");
                                     $("#presale-over").html("<h2>Pre-Sale Over</h2>");
@@ -378,8 +378,8 @@
                                         strokeWidth: 4,
                                         easing: 'easeInOut',
                                         duration: 1400,
-                                        color: '#9ACD32',
-                                        trailColor: '#eee',
+                                        color: 'red',
+                                        trailColor: '#9ACD32',
                                         trailWidth: 1,
                                         svgStyle: {
                                             width: '80%',
@@ -406,7 +406,7 @@
                                             color: '#ED6A5A'
                                         },
                                         step: (state, bar) => {
-                                            bar.setText(Math.round(bar.value() * 100) + ' %');
+                                            bar.setText(parseFloat(bar.value() * 100).toFixed(2) + ' %');
                                         }
                                     });
                                 //bar.animate(0);

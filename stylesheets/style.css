@@ -16,9 +16,10 @@ html {
 }
 
 #chartdiv {
-  
-  width: 500px;
-  height: 250px;
+  margin-left:15%;
+  width:90%;
+  max-width: 500px;
+  max-height: 250px;
   color: white;
 }
 

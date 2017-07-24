@@ -612,15 +612,15 @@
             .then(
                 function (d) {
                     if (Object.keys(d.Data).length < 1) {
-                        err++
+                        err++;
                         return;
                     }
-                    prices.btc_eth = parseFloat(d.Data[0].Price).toFixed(6)
+                    prices.btc_eth = parseFloat(d.Data[0].Price).toFixed(6);
                     $.get('https://www.cryptocompare.com/api/data/price?fsym=BTC&tsyms=USD')
                         .then(
                             function (d) {
                                 if (Object.keys(d.Data).length < 1) {
-                                    err++
+                                    err++;
                                     return;
                                 }
                                 prices.usd_btc = parseFloat(d.Data[0].Price).toFixed(2);

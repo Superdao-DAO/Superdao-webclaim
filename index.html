@@ -56,7 +56,8 @@
                             TOKEN_DISCOUNT_PRICE = "...",//Value in Ether
                             ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
                             ERR_NO_ACCOUNTS = 'No accounts available. Please, create a new account and refresh the page.',
-                            ERR_PERSONAL_NOT_AVAILABLE = 'Error: The method personal_unlockAccount does not exist/is not available',
+                            ERR_NO_METAMASK = 'Metamask is recommened to use. Security!!!',
+                            ERR_NO_WEB3 = "Web3 not available.",
                             tokenContract,
                             tokenInstance,
                             isblinking,
@@ -68,6 +69,7 @@
                                 window.web3 = new Web3(web3.currentProvider);
                             } else {
                                 console.log('No web3? You should consider trying MetaMask!');
+                                alert(ERR_NO_METAMASK);
                                 // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
                                 window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
                             }
@@ -109,8 +111,8 @@
                                     add_to_log('Error: cannot initiate token contract instance.');
                                 }
                             } else {
-                                alert('Web3 not available.');
                             }
+                            alert(ERR_NO_WEB3);
                             refresh_values();
                             amChart();
                             setInterval(

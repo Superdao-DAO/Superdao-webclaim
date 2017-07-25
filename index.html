@@ -59,6 +59,7 @@
                             ERR_PERSONAL_NOT_AVAILABLE = 'Error: The method personal_unlockAccount does not exist/is not available',
                             tokenContract,
                             tokenInstance,
+                            isblinking,
                             bar = null;
                         window.addEventListener('load', function () {
                             // Checking if Web3 has been injected by the browser (Mist/MetaMask)
@@ -310,7 +311,7 @@
                             $("#presale-over").fadeIn(500);
                         }
 
-                        setInterval(blink, 1000);
+
 
                         function refresh_chart(claimedPrepaidUnits, claimedUnits) {
                             var promissoryUnits = 3000000;
@@ -319,6 +320,8 @@
                             if (tokensLeft === 0) {
                                 $("#tokensLeft").html("Pre-Sale Over");
                                 $("#presale-over").html("<h2>Pre-Sale Over</h2>");
+                                if(isblinking)clearInterval(isblinking);
+                                isblinking = setInterval(blink, 1000);
                                 blink();
                             }
 
@@ -567,6 +570,11 @@
             startVisible: false
         });
     });
+</script>
+
+<script>
+//RPC api access
+
 </script>
 
 <script>

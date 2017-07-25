@@ -46,10 +46,12 @@
               ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
               ERR_NO_ACCOUNTS = 'No accounts available. Please, create a new account and refresh the page.',
               ERR_PERSONAL_NOT_AVAILABLE = 'Error: The method personal_unlockAccount does not exist/is not available',
-              ERR_NO_METAMASK = 'Metamask is recommened to use. Security!!!',
+              ERR_NO_METAMASK = 'Metamask is recommened for use. Security!!!',
               ERR_NO_WEB3 = "Web3 not available.",
               tokenContract,
               tokenInstance,
+              claimedUnits,
+              claimedPrepaidUnits,
               isblinking,
               bar = null;
             window.addEventListener('load', function () {
@@ -88,8 +90,9 @@
                       console.log('This is an unknown network.');
                   }
                   if (netId !== "1") {
+                    disable_button();
                     alert(
-                      "Kindly switch to the Main Ethereum network, then refresh the page to proceed.");
+                      "Kindly switch to the Main Ethereum network, then refresh the page to claim Tokens.");
                     return;
                   }
                 });
@@ -100,11 +103,13 @@
                   log_events(tokenInstance);
                 } catch (e) {
                   console.log(e);
+                  disable_button();
                   alert(
                     'Cannot initiate token contract instance. Please, make sure your node has RPC available.');
                   add_to_log('Error: cannot initiate token contract instance.');
                 }
               } else {
+                disable_button();
                 alert(ERR_NO_WEB3);
               }
               refresh_values();
@@ -116,6 +121,7 @@
               if (accounts_count === 0) {
                 alert(ERR_NO_ACCOUNTS);
                 add_to_log(ERR_NO_ACCOUNTS);
+                disable_button();
                 return;
               }
               var $accounts = $('#eth_accounts');
@@ -163,6 +169,7 @@
                   gas: _gasPrice
                 }, function (error, result) {
                   if (!error) {
+                    _value = +$('#claim_value').val("");
                     add_to_log('Transaction sent: <a href="https://etherscan.io/tx/'
                       + result + '" target="_blank">' + result + '</a>');
                   } else {
@@ -179,6 +186,7 @@
                         + '</span>');
                     }
                   }
+                  refresh_values();
                   enable_button();
                 })
               } catch (e) {
@@ -223,18 +231,12 @@
             }
 
             function refresh_values() {
-              var claimedUnits = 0,
-                claimedPrepaidUnits = 0;
-              tokenInstance.claimedPrepaidUnits(function (error, value) {
-                claimedPrepaidUnits = value.toNumber();
-                console.log(claimedPrepaidUnits);
-                tokenInstance.claimedUnits(function (error, value) {
-                  claimedUnits = value.toNumber();
-                  console.log(claimedUnits);
+                fetchContractData()
+                .then(function(a,b){
+                  console.log("in then",claimedPrepaidUnits, claimedUnits)
                   var values = refresh_chart(claimedPrepaidUnits, claimedUnits);
                   amChart(values[1], values[0]);
                 });
-              });
             }
 
             function amChart(_tokenLeft, _tokenBought) {
@@ -285,8 +287,6 @@
               $("#presale-over").fadeOut(500);
               $("#presale-over").fadeIn(500);
             }
-
-            setInterval(blink, 1000);
 
             function refresh_chart(claimedPrepaidUnits, claimedUnits) {
               var promissoryUnits = 3000000;
@@ -554,18 +554,42 @@
 <script>
   //RPC api access
   var apiaddress = "https://api.etherscan.io/api",
+  //var apiaddress = "https://ropsten.etherscan.io/api",//ropsten api
+  calls = {
+    claimedUnits : "claimedUnits()",
+    claimedPrepaidUnits: "claimedPrepaidUnits()"
+  }
 
   function fetchContractData(){
-      $.post(apiaddress,{
-        action:"eth_call",
-        apikey:apikey,
-        module:"proxy",
-        to:TOKEN_ADDRESS,
-        data:0x538df6f2,
+    claimedPrepaidUnits = claimedUnits = 0;
+    return $.post(apiaddress,{
+      action:"eth_call",
+      apikey:apikey,
+      module:"proxy",
+      to:TOKEN_ADDRESS,
+      data:getFunctionSignature(calls["claimedPrepaidUnits"]),
       })
-          .then(function(d){
+          .then(function(d,e){
+              claimedPrepaidUnits = web3.toDecimal(d.result);
+              console.log("claimed prepaid",claimedPrepaidUnits);
+          })
+          .then(function(){
+            return $.post(apiaddress,{
+              action:"eth_call",
+              apikey:apikey,
+              module:"proxy",
+              to:TOKEN_ADDRESS,
+              data:getFunctionSignature(calls["claimedUnits"]),
+            })
+            .then(function(d,e){
+                claimedUnits = web3.toDecimal(d.result);
+                console.log("claimed",claimedUnits);
+            })
+          })
+  }
 
-          });
+  function getFunctionSignature(fnx){
+    return web3.sha3(fnx).substring(0,10);
   }
 
 

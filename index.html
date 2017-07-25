@@ -1,54 +1,41 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-
 <head>
     <title>Efficient, Reputation DAO Governance Framework For Disruptive Dapp Ventures</title>
     <meta name="description" content="SuperDAO is an Ethereum decentralized autonomous governance system for incentivized collaborative management of disruptive, economical viable dapp ventures.
     Superdao enables collaboration of innovators and communities into strong thriving forces."/>
     <meta name="google-site-verification" content="miEZVM7TwTvJJL1aw-UhPpC-_UbO-fxrGwT6bqRGFa4"/>
-
     <!-- Standard Meta -->
     <meta charset="utf-8"/>
-
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
     <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
     <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
     <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'/>
-    <script type="text/javascript" src="js/jQuery/jquery-3.1.0.min.js"></script>
+    <script type="text/javascript" src="js/lib/jQuery/jquery-3.1.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="js/jquery.marquee.min.js"></script>
-    <script src="js/Chart.min.js"></script>
-    <script src="js/progressbar.min.js"></script>
-
+    <script src="js/lib/jquery.marquee.min.js"></script>
+    <script src="js/lib/Chart.min.js"></script>
+    <script src="js/lib/progressbar.min.js"></script>
     <script src="js/abi.js"></script>
-    <script src="js/amcharts.js"></script>
-    <script src="js/pie.js"></script>
-
+    <script src="js/lib/amcharts.js"></script>
+    <script src="js/lib/pie.js"></script>
     <!-- Numeric JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
 </head>
-
 
 <body>
 <div class="container">
     <h2 id="toptxt">Superdao : Efficient, tiered & reputation DAO Governance Framework<span id="toptxtspan">|</span>
     </h2>
-
     <div class="wrapper1">
-
         <div class="container1">
             <!-- particles.js container -->
             <div id="particles-js"></div>
-
             <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
             <div class="wrapper">
                 <div class="container">
-                    <script type="text/javascript" src="js/web3.min.js"></script>
+                    <script type="text/javascript" src="js/lib/web3.min.js"></script>
                     <script type="text/javascript">
                         var
                             TOKEN_ADDRESS = "0x0348B55AbD6E1A99C6EBC972A6A4582Ec0bcEb5c", //Mainnet
@@ -433,29 +420,22 @@
                                 </div>
                                 <br>
                                 <div class="row">
-
                                     <div class="col-xs-5">
                                         <select class="eth-inputs" id="eth_accounts"></select>
                                     </div>
                                     <div class="col-xs-5 col-xs-offset-1  caption-left">
                                         <span class="v-span">Account</span>
                                     </div>
-
                                 </div>
-
                                 <div class="row">
-
                                     <div class="col-xs-5 eth-inputs">
                                         <input class="eth-inputs" type="text" id="claim_value" placeholder="ETH amount">
-
                                     </div>
                                     <div class="col-xs-5 col-xs-offset-1 caption-left">
                                         <span class="v-span">ETH amount</span>
                                     </div>
-
                                 </div>
                                 <div class="row">
-
                                     <div class="col-xs-5 eth-inputs">
                                         <input class="eth-inputs" type="text" id="gas_price" value="200405"/>
 
@@ -463,10 +443,7 @@
                                     <div class="col-xs-5 col-xs-offset-1 caption-left">
                                         <span class="v-span"> Gas Price in WEI</span>
                                     </div>
-
                                 </div>
-
-
                                 <div class="row" style="text-align: left">
                                     <div class="col-xs-5 caption-left">
                                         <input class="btn" type="button" id="claim_button" onclick="claim();"
@@ -485,20 +462,14 @@
                                 <div id='eth_log' style="height:100%; overflow-y: scroll"></div>
                             </div>
                             <div style="text-align: center;">
-
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>
-
     </div>
 </div>
-
 <div class="footer">
     <div id="footer-social" class="buttom left">
         <a href="https://twitter.com/SuperDAOHQ" title="twitter" target="_blank"><i class="ion-social-twitter"></i></a>
@@ -510,7 +481,6 @@
         <a href="https://www.youtube.com/channel/UCYtAwj5PohhqPsJJ1KouBew" title="youtube" target="_blank"><i
                 class="ion-social-youtube"></i></a>
     </div>
-
     <div class="footer2">
         <div class="marquee">
             <img src="assets/images/SuperdaoLogo.png" height="20px" width="15px" alt=""> &nbsp;SUPERNEUM &nbsp;Market
@@ -538,8 +508,6 @@
         </button>
     </a>
 </div>
-
-
 <script>
     $(function () {
         $('.marquee').marquee({
@@ -568,7 +536,6 @@
         });
     });
 </script>
-
 <script>
     //Prices feed
     prices = {
@@ -642,7 +609,5 @@
             }, 30000);
     });
 </script>
-
 </body>
-
 </html>

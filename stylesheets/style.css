@@ -10,29 +10,27 @@ html {
 }
 
 #chartwrapper {
-  position: relative;
-  width: 1000px;
-  height: 1000px;
+    position: relative;
+    width: 1000px;
+    height: 1000px;
 }
 
 #chartdiv {
-  margin-left:15%;
-  width:90%;
-  max-width: 500px;
-  max-height: 250px;
-  color: white;
+    margin-left: 15%;
+    width: 90%;
+    max-width: 500px;
+    max-height: 250px;
+    color: white;
 }
 
-.v-span{
-  display: inline-block;
-  margin-top: 11px;
+.v-span {
+    display: inline-block;
+    margin-top: 11px;
 }
 
-.amcharts-legend-value{
+.amcharts-legend-value {
     visibility: hidden;
 }
-
-
 
 .centerblock {
     margin: 0 auto;
@@ -61,7 +59,8 @@ html {
     overflow: hidden;
 }
 
-.marquee {}
+.marquee {
+}
 
 .centerblockc {
     padding-left: 20px;
@@ -87,11 +86,11 @@ html {
     height: auto !important;
 }
 
-.blurring.dimmable>.inverted.dimmer {
+.blurring.dimmable > .inverted.dimmer {
     background-color: rgba(0, 0, 0, .8) !important;
 }
 
-.ui.dimmer>.content {
+.ui.dimmer > .content {
     padding: 0px 0.73em;
 }
 
@@ -99,7 +98,7 @@ html {
     margin-bottom: 1.8em !important;
 }
 
-.ui.cards>.card {
+.ui.cards > .card {
     margin-left: auto !important;
     margin-right: auto !important;
 }
@@ -112,14 +111,14 @@ html {
     transform: scale(0.8);
 }
 
-.panel-centered .ui.cards>.card .content a.header {
+.panel-centered .ui.cards > .card .content a.header {
     width: 80%;
     display: flex;
     height: 4.2em;
     text-align: left;
 }
 
-.panel-centered .ui.cards>.card .content a.header:hover {
+.panel-centered .ui.cards > .card .content a.header:hover {
     background: transparent;
 }
 
@@ -188,8 +187,7 @@ html {
 }
 
 .buttom.left a:hover {
-    color: rgba(85, 85, 225, 0.5);
-    ;
+    color: rgba(85, 85, 225, 0.5);;
 }
 
 button.buttom.right:hover {
@@ -270,7 +268,6 @@ canvas {
     display: block;
     vertical-align: bottom;
 }
-
 
 /* ---- particles.js container ---- */
 
@@ -480,11 +477,11 @@ h1 {
     transition: transform 3.8s ease;
 }
 
-#Superdao-nav:target~.wheel-wrapper,
-#Governance-nav:target~.wheel-wrapper,
-#CoreTeam-nav:target~.wheel-wrapper,
-#Dapps-nav:target~.wheel-wrapper,
-#Community-nav:target~.wheel-wrapper {
+#Superdao-nav:target ~ .wheel-wrapper,
+#Governance-nav:target ~ .wheel-wrapper,
+#CoreTeam-nav:target ~ .wheel-wrapper,
+#Dapps-nav:target ~ .wheel-wrapper,
+#Community-nav:target ~ .wheel-wrapper {
     transform: translateX(-60%);
     transition: transform 0.5s ease;
 }
@@ -1716,13 +1713,12 @@ claim-container {
     width: 100%;
 }
 
-
 .ct-series-a .ct-line,
 .ct-series-a .ct-point {
-  stroke: blue;
+    stroke: blue;
 }
 
 .ct-series-b .ct-line,
 .ct-series-b .ct-point {
-  stroke: green;
+    stroke: green;
 }

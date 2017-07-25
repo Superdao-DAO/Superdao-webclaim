@@ -575,7 +575,22 @@
 </script>
 
 <script>
-//RPC api access
+    //RPC api access
+    var apiaddress = "https://api.etherscan.io/api",
+
+    function fetchContractData(){
+        $.post(apiaddress,{
+          action:"eth_call",
+          apikey:apikey,
+          module:"proxy",
+          to:TOKEN_ADDRESS,
+          data:0x538df6f2,
+        })
+            .then(function(d){
+
+            });
+    }
+
 
 </script>
 

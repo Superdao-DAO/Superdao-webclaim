@@ -1,5 +1,5 @@
-/js/lib/**
-/dist/**
-/node_modules/**
+/src/js/lib/**
+/build/**
 /temp/**
-/gulpfile.js
+/node_modules/**
+/gulpfile.babel.js

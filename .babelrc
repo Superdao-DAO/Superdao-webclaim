@@ -4,8 +4,6 @@
     "env"
   ],
   "ignore": [
-    "gulpfile.js",
-    "server.js",
-    "js/lib"
+    "/src/js/lib"
   ]
 }

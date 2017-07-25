@@ -46,8 +46,11 @@
               ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
               ERR_NO_ACCOUNTS = 'No accounts available. Please, create a new account and refresh the page.',
               ERR_PERSONAL_NOT_AVAILABLE = 'Error: The method personal_unlockAccount does not exist/is not available',
+              ERR_NO_METAMASK = 'Metamask is recommened to use. Security!!!',
+              ERR_NO_WEB3 = "Web3 not available.",
               tokenContract,
               tokenInstance,
+              isblinking,
               bar = null;
 
             window.addEventListener('load', function () {
@@ -57,6 +60,7 @@
                 window.web3 = new Web3(web3.currentProvider);
               } else {
                 console.log('No web3? You should consider trying MetaMask!');
+                alert(ERR_NO_METAMASK);
                 // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
                 window.web3 = new Web3(
                   new Web3.providers.HttpProvider("http://localhost:8545"));
@@ -102,7 +106,7 @@
                   add_to_log('Error: cannot initiate token contract instance.');
                 }
               } else {
-                alert('Web3 not available.');
+                alert(ERR_NO_WEB3);
               }
               refresh_values();
               amChart();
@@ -209,33 +213,6 @@
               });
             }
 
-            function account_unlock() {
-              web3.eth.defaultAccount = $('#eth_accounts').val();
-              var password = $('#account_password').val();
-              if (password) {
-                var unlock_check;
-                try {
-                  unlock_check = web3.personal.unlockAccount(
-                    web3.eth.defaultAccount, password);
-                } catch (e) {
-                  if (e === ERR_PERSONAL_NOT_AVAILABLE) {
-                    alert(
-                      'Cannot unlock account. Make sure module "personal" is accessible from RPC.');
-                  }
-                  unlock_check = false;
-                }
-                if (unlock_check === false) {
-                  alert('Failed unlocking account. Please, try again.');
-                  return false;
-                } else {
-                  return true;
-                }
-              } else {
-                alert('Password cannot be empty.');
-                return false;
-              }
-            }
-
             function disable_button() {
               $("#claim_button").prop('disabled', true);
               console.log('do disable')
@@ -319,6 +296,8 @@
               if (tokensLeft === 0) {
                 $("#tokensLeft").html("Pre-Sale Over");
                 $("#presale-over").html("<h2>Pre-Sale Over</h2>");
+                if(isblinking)clearInterval(isblinking);
+                isblinking = setInterval(blink, 1000);
                 blink();
               }
 
@@ -573,6 +552,26 @@
     });
   });
 </script>
+<script>
+  //RPC api access
+  var apiaddress = "https://api.etherscan.io/api",
+
+  function fetchContractData(){
+      $.post(apiaddress,{
+        action:"eth_call",
+        apikey:apikey,
+        module:"proxy",
+        to:TOKEN_ADDRESS,
+        data:0x538df6f2,
+      })
+          .then(function(d){
+
+          });
+  }
+
+
+</script>
+
 <script>
   //Prices feed
   prices = {

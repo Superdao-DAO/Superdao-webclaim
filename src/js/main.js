@@ -1,5 +1,7 @@
 import {apikey, ABI} from './abi';
 
+const $ = require('jquery');
+
 /**
  * Main application class.
  */
@@ -10,6 +12,7 @@ export class MainApp {
    */
   constructor() {
     console.log('ok '+apikey+' '+ABI.toString());
+    console.log($.toString());
   }
 }
 

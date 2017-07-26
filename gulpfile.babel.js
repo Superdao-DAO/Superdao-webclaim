@@ -10,7 +10,10 @@ var noop = require("gulp-noop");
 var uglify = require('gulp-uglify');
 var exit = require('gulp-exit');
 
+
 var paths = {
+  favicon: 'src/favicon.ico',
+  favicon_out: './build',
   images: 'src/assets/images/**/*',
   images_out: 'build/assets/images',
   index:'./src/index.html',
@@ -23,6 +26,7 @@ var paths = {
   main_out_name: 'main.js',
   main_out_dir: './build/js'
 };
+
 
 function compile(watch, debug=false) {
   var bundler = watchify(browserify(paths.main, { debug: debug }).transform(babel));
@@ -49,6 +53,13 @@ function compile(watch, debug=false) {
   rebundle();
 
 }
+
+
+gulp.task('favicon', [], function() {
+  gulp.src(paths.favicon)
+  // Perform minification tasks, etc here
+  .pipe(gulp.dest(paths.favicon_out));
+});
 
 // Copy all static images
 gulp.task('images', [], function() {
@@ -93,8 +104,22 @@ gulp.task('watch-styles', function() {
   gulp.watch(paths.styles, ['styles']);
 });
 
-gulp.task('build-debug', ['images', 'index', 'libs', 'styles'],function() { return compile(false, true); });
-gulp.task('build-release', ['images', 'index', 'libs', 'styles'], function() { return compile(); });
-gulp.task('watch-debug', ['watch-images', 'watch-index', 'watch-libs', 'watch-styles'],function() { return compile(true, true); });
+gulp.task('watch-favicon', function() {
+  gulp.watch(paths.favicon, ['favicon']);
+});
+
+
+gulp.task('build-debug', ['images', 'index', 'libs', 'styles', 'favicon'], function() {
+  return compile(false, true);
+});
+
+gulp.task('build-release', ['images', 'index', 'libs', 'styles', 'favicon'], function() {
+  return compile();
+});
+
+gulp.task('watch-debug', ['watch-images', 'watch-index', 'watch-libs', 'watch-styles', 'watch-favicon'], function() {
+  return compile(true, true);
+});
+
 gulp.task('default', ['build-release']);
 

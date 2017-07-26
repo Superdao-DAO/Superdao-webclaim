@@ -2,12 +2,12 @@
   "name": "superdao-webclaim",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "build/js/main.js",
   "scripts": {
-    "eslint": "eslint ./src/js",
-    "babel": "babel ./src/js --out-dir temp/babel/js",
+    "eslint": "eslint ./src/js/app",
     "build-debug": "npm run eslint && gulp build-debug",
-    "build-release": "npm run eslint && gulp build-release"
+    "build-release": "npm run eslint && gulp build-release",
+    "watch-debug": "npm run eslint && gulp watch-debug"
   },
   "repository": {
     "type": "git",
@@ -20,7 +20,6 @@
   },
   "homepage": "https://github.com/Superdao-DAO/Superdao-webclaim#readme",
   "devDependencies": {
-    "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
     "babel-preset-env": "^1.6.0",
     "babelify": "^7.3.0",
@@ -29,6 +28,7 @@
     "eslint-config-google": "^0.9.1",
     "gulp": "^3.9.1",
     "gulp-cli": "^1.3.0",
+    "gulp-exit": "0.0.2",
     "gulp-imagemin": "^3.3.0",
     "gulp-noop": "^1.0.0",
     "gulp-uglify": "^3.0.0",

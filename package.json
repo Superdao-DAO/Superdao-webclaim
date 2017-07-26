@@ -6,8 +6,8 @@
   "scripts": {
     "eslint": "eslint ./src/js",
     "babel": "babel ./src/js --out-dir temp/babel/js",
-    "build-debug": "gulp build-debug",
-    "build-release": "gulp build-release"
+    "build-debug": "npm run eslint && gulp build-debug",
+    "build-release": "npm run eslint && gulp build-release"
   },
   "repository": {
     "type": "git",

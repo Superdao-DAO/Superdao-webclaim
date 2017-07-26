@@ -17,7 +17,7 @@ export class MainApp {
   }
 }
 
-/* Entry Point **/
+/** Entry Point **/
 $(document).ready( function() {
   new MainApp();
 });

@@ -1,7 +1,7 @@
 /**
  * This is the main promissory token contract class
  */
-export class Contract {
+export default class {
   /**
    * This is the class constructor
    * @constructor

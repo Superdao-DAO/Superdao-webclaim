@@ -1,11 +1,12 @@
 const $ = require('jquery');
+
 global.jQuery = $;
 require('jquery.marquee');
 
 /**
  * Main effects class
  */
-export class Effects {
+export default class {
   /**
    * Main class constructor
    */
@@ -16,7 +17,7 @@ export class Effects {
   /**
    * Start moving the footer ribbon
    */
-  initMarquee() {
+  static initMarquee() {
     $('.marquee').marquee({
       // If you wish to always animate using jQuery
       allowCss3Support: true,

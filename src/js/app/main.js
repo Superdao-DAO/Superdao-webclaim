@@ -1,5 +1,6 @@
 import {apikey, ABI} from './abi';
 import {strings} from './strings';
+import {Effects} from './effects';
 
 const $ = require('jquery');
 
@@ -12,6 +13,7 @@ export class MainApp {
    * @constructor
    */
   constructor() {
+    this.effects = new Effects();
     console.log('ok '+apikey+' '+ABI.toString()+' '+strings.toString());
     console.log($.toString());
   }

@@ -1,10 +1,9 @@
 {
-  "extends": ["eslint:recommended", "google"],
+  "extends": ["airbnb-base"],
   "env": {
     "browser": true,
     "node": true
   },
-  "parser": "babel-eslint",
   "rules": {
     // Additional, per-project rules...
     "no-console": 0

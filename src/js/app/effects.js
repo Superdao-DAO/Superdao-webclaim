@@ -11,7 +11,7 @@ export default class {
    * Main class constructor
    */
   constructor() {
-    this.initMarquee();
+    this.constructor.initMarquee();
   }
 
   /**

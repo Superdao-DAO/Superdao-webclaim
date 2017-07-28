@@ -4,7 +4,8 @@
   "description": "",
   "main": "build/js/main.js",
   "scripts": {
-    "eslint": "eslint ./src/js/app",
+    "server": "static ./build",
+    "lint": "eslint ./src/js/app",
     "build-debug": "npm run eslint && gulp build-debug",
     "build-release": "npm run eslint && gulp build-release",
     "watch-debug": "npm run eslint && gulp watch-debug"
@@ -32,6 +33,7 @@
     "gulp-imagemin": "^3.3.0",
     "gulp-noop": "^1.0.0",
     "gulp-uglify": "^3.0.0",
+    "node-static": "^0.7.9",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.9.0"

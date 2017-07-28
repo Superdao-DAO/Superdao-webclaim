@@ -1,6 +1,9 @@
 const ProgressBar = require('progressbar.js');
-const AmCharts = require('amcharts/dist/amcharts/pie.js');
 const $ = require('jquery');
+require('amcharts/dist/amcharts/amcharts.js');
+require('amcharts/dist/amcharts/pie.js');
+
+const AmCharts = window.AmCharts;
 
 /**
  * Token sale chart class
@@ -10,6 +13,7 @@ export default class {
    * Class constructor
    */
   constructor() {
+    this.constructor.registerChart(90000, 150000);
     this.refreshChart(100, 10);
   }
 

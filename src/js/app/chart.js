@@ -1,7 +1,7 @@
 const ProgressBar = require('progressbar.js');
 const $ = require('jquery');
-require('amcharts/dist/amcharts/amcharts.js');
-require('amcharts/dist/amcharts/pie.js');
+require('amcharts3');
+require('amcharts3/amcharts/pie');
 
 const AmCharts = window.AmCharts;
 
@@ -14,7 +14,7 @@ export default class {
    */
   constructor() {
     this.constructor.registerChart(90000, 150000);
-    this.refreshChart(100, 10);
+    this.refreshChart(90000, 150000);
   }
 
   /**

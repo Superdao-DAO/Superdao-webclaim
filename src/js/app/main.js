@@ -1,7 +1,9 @@
-import { apikey, ABI } from './abi';
-import strings from './strings';
 import Effects from './effects';
 import Chart from './chart';
+import Token from './token';
+import tokenConfig from './config/token';
+import { apikey, ABI } from './abi';
+import strings from './strings';
 
 const $ = require('jquery');
 
@@ -16,6 +18,11 @@ class MainApp {
    * @constructor
    */
   constructor() {
+    /*
+    // Now you can start your app & access web3 freely:
+    startApp()
+    */
+    this.token = new Token(tokenConfig.main_token_address);
     this.effects = new Effects();
     this.chart = new Chart();
     console.log(`ok ${apikey} ${ABI.toString()} ${strings.toString()}`);

@@ -1,0 +1,5 @@
+/src/js/lib/**
+/build/**
+/temp/**
+/node_modules/**
+/gulpfile.babel.js

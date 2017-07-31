@@ -1,0 +1,48 @@
+{
+  "name": "superdao-webclaim",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/js/main.js",
+  "scripts": {
+    "server": "static ./build",
+    "lint": "eslint ./src/js/app",
+    "build-debug": "npm run eslint && gulp build-debug",
+    "build-release": "npm run eslint && gulp build-release",
+    "watch-debug": "npm run eslint && gulp watch-debug"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Superdao-DAO/Superdao-webclaim.git"
+  },
+  "author": "panos",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/Superdao-DAO/Superdao-webclaim/issues"
+  },
+  "homepage": "https://github.com/Superdao-DAO/Superdao-webclaim#readme",
+  "devDependencies": {
+    "babel-preset-env": "^1.6.0",
+    "babelify": "^7.3.0",
+    "browserify": "^14.4.0",
+    "eslint": "^4.3.0",
+    "eslint-config-airbnb-base": "^11.3.1",
+    "eslint-plugin-import": "^2.7.0",
+    "gulp": "^3.9.1",
+    "gulp-cli": "^1.3.0",
+    "gulp-exit": "0.0.2",
+    "gulp-imagemin": "^3.3.0",
+    "gulp-noop": "^1.0.0",
+    "gulp-uglify": "^3.0.0",
+    "node-static": "^0.7.9",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.9.0"
+  },
+  "dependencies": {
+    "amcharts3": "^3.21.2",
+    "jquery": "^3.2.1",
+    "jquery.marquee": "^1.3.94",
+    "progressbar.js": "^1.0.1",
+    "web3": "^1.0.0-beta.13"
+  }
+}

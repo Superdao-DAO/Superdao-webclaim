@@ -27,28 +27,31 @@ export default class {
       console.log(strings.err_no_web3);
       alert(strings.err_no_metamask);
       // fallback - use your fallback strategy
-      this.web3 = new Web3(new Web3.providers.HttpProvider(tokenConfig.main_http_endpoint));
+      this.web3 = new Web3(new Web3.providers.HttpProvider(
+        test ? tokenConfig.test_http_endpoint
+          : tokenConfig.main_http_endpoint,
+      ));
       this.injected = false;
     }
   }
 
-/*
-  claim() {
-    if (!tokenInstance) {
-      return;
+  /*
+    claim() {
+      if (!tokenInstance) {
+        return;
+      }
+      var
+        transactionId,
+        _gasPrice = +$('#gas_price').val(),
+        _value = +$('#claim_value').val(),
+        tokenCountCheck = roundPrecise(_value % TOKEN_DISCOUNT_PRICE, 11);
+      if (tokenCountCheck !== TOKEN_DISCOUNT_PRICE) {
+        _value = roundPrecise(_value - tokenCountCheck, 11);
+        $('#claim_value').val(_value);
+      }
+      if (_value === 0) {
+        return;
+      }
     }
-    var
-      transactionId,
-      _gasPrice = +$('#gas_price').val(),
-      _value = +$('#claim_value').val(),
-      tokenCountCheck = roundPrecise(_value % TOKEN_DISCOUNT_PRICE, 11);
-    if (tokenCountCheck !== TOKEN_DISCOUNT_PRICE) {
-      _value = roundPrecise(_value - tokenCountCheck, 11);
-      $('#claim_value').val(_value);
-    }
-    if (_value === 0) {
-      return;
-    }
-  }
-*/
+  */
 }

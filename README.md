@@ -67,7 +67,7 @@ See also the list of [contributors](https://github.com/Superdao-DAO/Superdao-web
 
 ## License
 
-TBD
+GNU General Public License Version 3
 
 ## Acknowledgments
 

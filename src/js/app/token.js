@@ -35,11 +35,11 @@ export default class {
     }
   }
 
-  roundPrecise(number, precision) {
-    this.factor = 10 ** precision;
-    this.tempNumber = number * this.factor;
-    this.roundedTempNumber = Math.round(this.tempNumber);
-    return this.roundedTempNumber / this.factor;
+  static roundPrecise(number, precision) {
+    const factor = 10 ** precision;
+    const tempNumber = number * factor;
+    const roundedTempNumber = Math.round(tempNumber);
+    return roundedTempNumber / factor;
   }
   /*
     claim() {

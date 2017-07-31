@@ -15,7 +15,7 @@
     "url": "git+https://github.com/Superdao-DAO/Superdao-webclaim.git"
   },
   "author": "panos",
-  "license": "",
+  "license": "GPLv3",
   "bugs": {
     "url": "https://github.com/Superdao-DAO/Superdao-webclaim/issues"
   },

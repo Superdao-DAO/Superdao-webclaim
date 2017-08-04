@@ -5,6 +5,7 @@ import ABI from './abi';
 import SupError from './error';
 
 const Web3 = require('web3');
+const $ = require('jquery');
 
 /**
  * This is the main promissory token class
@@ -86,9 +87,9 @@ export default class {
     let transactionId;
     let _gasPrice = $('#gas_price').val();
     let _value = $('#claim_value').val();
-    let tokenCountCheck = roundPrecise(_value % TOKEN_DISCOUNT_PRICE, 11);
+    let tokenCountCheck = this.constructor.roundPrecise(_value % TOKEN_DISCOUNT_PRICE, 11);
     if (tokenCountCheck !== TOKEN_DISCOUNT_PRICE) {
-      _value = roundPrecise(_value - tokenCountCheck, 11);
+      _value = this.constructor.roundPrecise(_value - tokenCountCheck, 11);
       $('#claim_value').val(_value);
     }
     if (_value === 0) {

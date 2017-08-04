@@ -15,7 +15,7 @@
     "url": "git+https://github.com/Superdao-DAO/Superdao-webclaim.git"
   },
   "author": "panos",
-  "license": "GPLv3",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/Superdao-DAO/Superdao-webclaim/issues"
   },
@@ -39,9 +39,11 @@
     "watchify": "^3.9.0"
   },
   "dependencies": {
+    "alertify.js": "^1.0.12",
     "amcharts3": "^3.21.2",
     "jquery": "^3.2.1",
     "jquery.marquee": "^1.3.94",
+    "mobile-detect": "^1.3.6",
     "progressbar.js": "^1.0.1",
     "web3": "^1.0.0-beta.13"
   }

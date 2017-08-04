@@ -7,6 +7,7 @@ import strings from './strings';
 
 const $ = require('jquery');
 const MobileDetect = require('mobile-detect');
+const alertify = require('alertify.js');
 
 let app; // eslint-disable-line no-unused-vars
 

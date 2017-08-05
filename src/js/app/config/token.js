@@ -3,4 +3,5 @@ export default {
   test_token_address: '0xb750C30Fb1FbcdDF980bc4577eb0C37dc43A8DE3', // Ropsten
   main_http_endpoint: 'https://mainnet.infura.io/urqieIqbDlwAjNcOCwht',
   test_http_endpoint: 'https://ropsten.infura.io/urqieIqbDlwAjNcOCwht',
+  apikey: '',
 };

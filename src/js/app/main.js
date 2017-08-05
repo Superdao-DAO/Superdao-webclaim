@@ -27,9 +27,9 @@ class MainApp {
     this.mobileDetect = new MobileDetect(window.navigator.userAgent);
     if (this.mobileDetect.phone()) {
       // confirm dialog
-      alertify.confirm("Message", function () {
+      alertify.confirm('Message', () => {
         // user clicked "ok"
-      }, function() {
+      }, () => {
         // user clicked "cancel"
       });
       return;

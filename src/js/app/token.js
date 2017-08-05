@@ -3,6 +3,8 @@ import tokenConfig from './config/token';
 import environment from './config/environment';
 import ABI from './abi';
 import SupError from './error';
+import uiControl from './ui';
+import uiIdentity from './config/ui';
 
 const Web3 = require('web3');
 const $ = require('jquery');
@@ -85,15 +87,48 @@ export default class {
       throw SupError(strings.err_token_inst_not_init);
     }
     let transactionId;
-    let _gasPrice = $('#gas_price').val();
-    let _value = $('#claim_value').val();
-    let tokenCountCheck = this.constructor.roundPrecise(_value % TOKEN_DISCOUNT_PRICE, 11);
-    if (tokenCountCheck !== TOKEN_DISCOUNT_PRICE) {
-      _value = this.constructor.roundPrecise(_value - tokenCountCheck, 11);
-      $('#claim_value').val(_value);
+    const gasPrice = $(uiIdentity.gas_price_input).val();
+    let value = $(uiControl.claim_eth_input).val();
+    const tokenCountCheck = this.constructor.roundPrecise(value % strings.token_discount_price, 11);
+    if (tokenCountCheck !== strings.token_discount_price) {
+      value = this.constructor.roundPrecise(value - tokenCountCheck, 11);
+      $(uiControl.claim_eth_input).val(value);
     }
-    if (_value === 0) {
-      return;
+    if (value === 0) {
+      // return;
+    }
+    uiControl.disableElement(uiIdentity.claim_button);
+    try {
+      transactionId = this.tokenInstance.claim({
+        from: $(uiIdentity.eth_account).val(),
+        value: Web3.toWei(value, 'ether'),
+        gas: gasPrice,
+      }, (error, result) => {
+        if (!error) {
+          console.log(transactionId);
+          value = +$(uiControl.claim_eth_input).val('');
+          uiControl.addToLog(`Transaction sent: <a href="https://etherscan.io/tx/',
+            ${result},'" target="_blank">', ${result}</a>`);
+        } else {
+          let errorData = error.toString();
+          console.log(errorData);
+          if (Object.keys(error)) {
+            if (error.indexOf('Error: Error:') > -1) {
+              errorData = error.substring(13);
+              if (error.length > 58) {
+                errorData = `${error.substring(0, 58)}, ...`;
+              }
+            }
+            uiControl.addToLog(`<span style="color:red">, ${error}, </span>`);
+          }
+        }
+        uiControl.refreshValues();
+        uiControl.enableElement();
+      });
+    } catch (e) {
+      console.log('Excep:', e);
+      uiControl.addToLog(`<span style="color:red">, ${e.message}, </span>`);
+      uiControl.enableElement();
     }
   }
 }

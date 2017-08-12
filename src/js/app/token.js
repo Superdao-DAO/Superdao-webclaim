@@ -18,6 +18,11 @@ export default class {
    * @constructor
    */
   constructor() {
+    this.ethAccount = uiIdentity.eth_account;
+    this.claimBtn = uiIdentity.claim_button;
+    this.gasPriceInput = uiIdentity.gas_price_input;
+    this.claimEtherInput = uiIdentity.claim_eth_input;
+    this.loggingElement = uiIdentity.logging_element;
     if (!environment.debug) {
       this.address = tokenConfig.main_token_address;
     } else {
@@ -87,26 +92,26 @@ export default class {
       throw SupError(strings.err_token_inst_not_init);
     }
     let transactionId;
-    const gasPrice = $(uiIdentity.gas_price_input).val();
-    let value = $(uiControl.claim_eth_input).val();
+    const gasPrice = $(this.gasPriceInput).val();
+    let value = $(this.claimEtherInput).val();
     const tokenCountCheck = this.constructor.roundPrecise(value % strings.token_discount_price, 11);
     if (tokenCountCheck !== strings.token_discount_price) {
       value = this.constructor.roundPrecise(value - tokenCountCheck, 11);
-      $(uiControl.claim_eth_input).val(value);
+      $(this.claimEtherInput).val(value);
     }
     if (value === 0) {
       // return;
     }
-    uiControl.disableElement(uiIdentity.claim_button);
+    uiControl.disableElement(this.claimBtn);
     try {
       transactionId = this.tokenInstance.claim({
-        from: $(uiIdentity.eth_account).val(),
+        from: $(this.ethAccount).val(),
         value: Web3.toWei(value, 'ether'),
         gas: gasPrice,
       }, (error, result) => {
         if (!error) {
           console.log(transactionId);
-          value = +$(uiControl.claim_eth_input).val('');
+          value = +$(this.claimEtherInput).val('');
           uiControl.addToLog(`Transaction sent: <a href="https://etherscan.io/tx/',
             ${result},'" target="_blank">', ${result}</a>`);
         } else {

@@ -23,6 +23,8 @@ export default class {
     this.gasPriceInput = uiIdentity.gas_price_input;
     this.claimEtherInput = uiIdentity.claim_eth_input;
     this.loggingElement = uiIdentity.logging_element;
+    this.apiaddress = 'https://api.etherscan.io/api'; // RPC API access
+    // this.apiaddress = "https://ropsten.etherscan.io/api",//ropsten api
     if (!environment.debug) {
       this.address = tokenConfig.main_token_address;
     } else {
@@ -135,5 +137,49 @@ export default class {
       uiControl.addToLog(`<span style="color:red">, ${e.message}, </span>`);
       uiControl.enableElement();
     }
+  }
+  fetchContractData() {
+    const calls = {
+      claimedUnits: 'claimedUnits()',
+      claimedPrepaidUnits: 'claimedPrepaidUnits()',
+    };
+    let claimedPrepaidUnits = 0;
+    let claimedUnits = 0;
+    return $.post(this.apiaddress, {
+      action: 'eth_call',
+      apikey: tokenConfig.apikey,
+      module: 'proxy',
+      to: tokenConfig.main_token_address,
+      data: this.constructor.getFunctionSignature(calls.claimedPrepaidUnits),
+    })
+      .then((d, e) => {
+        if (e) {
+          console.log(e);
+          return;
+        }
+        claimedPrepaidUnits = Web3.toDecimal(d.result);
+        console.log('claimed prepaid', claimedPrepaidUnits);
+      })
+      .then(() => {
+        $.post(this.apiaddress, {
+          action: 'eth_call',
+          apikey: tokenConfig.apikey,
+          module: 'proxy',
+          to: tokenConfig.main_token_address,
+          data: this.constructor.getFunctionSignature(calls.claimedUnits),
+        })
+          .then((d, e) => {
+            if (e) {
+              console.log(e);
+              return;
+            }
+            claimedUnits = Web3.toDecimal(d.result);
+            console.log('claimed', claimedUnits);
+          });
+      });
+  }
+
+  static getFunctionSignature(fnx) {
+    return Web3.sha3(fnx).substring(0, 10);
   }
 }

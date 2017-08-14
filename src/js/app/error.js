@@ -1,4 +1,4 @@
-import alertify from 'alertify.js';
+const alertify = require('alertify.js');
 
 export class SupError {
   constructor(message) {

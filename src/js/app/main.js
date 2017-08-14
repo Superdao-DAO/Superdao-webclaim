@@ -7,6 +7,7 @@ import strings from './strings';
 
 const $ = require('jquery');
 const MobileDetect = require('mobile-detect');
+const alertify = require('alertify.js');
 
 let app; // eslint-disable-line no-unused-vars
 
@@ -26,9 +27,9 @@ class MainApp {
     this.mobileDetect = new MobileDetect(window.navigator.userAgent);
     if (this.mobileDetect.phone()) {
       // confirm dialog
-      alertify.confirm("Message", function () {
+      alertify.confirm('Message', () => {
         // user clicked "ok"
-      }, function() {
+      }, () => {
         // user clicked "cancel"
       });
       return;

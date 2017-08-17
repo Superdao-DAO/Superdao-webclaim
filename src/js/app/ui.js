@@ -1,4 +1,3 @@
-import api from './api';
 import Chart from './chart';
 import uiIdentity from './config/ui';
 

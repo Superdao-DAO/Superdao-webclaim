@@ -33,7 +33,7 @@ export default class {
     // Checking if Web3 has been injected by the browser (Mist/MetaMask)
     if (typeof window.web3 !== 'undefined') {
       // Use Mist/MetaMask's provider
-      this.web3 = new Web3(window.web3.currentProvider);
+      this.web3 = window.web3;
       this.injected = true;
     } else {
       console.log(strings.err_no_web3);

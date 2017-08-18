@@ -1,4 +1,4 @@
-export const ABI = [{
+const ABI = [{
   constant: true,
   inputs: [],
   name: 'lastPrice',
@@ -583,4 +583,6 @@ export const ABI = [{
   type: 'event',
 }];
 
-export const apikey = 'GKU3FHXM86JQ2TM68P44RUCJS97SSW31X3';
+const apikey = 'GKU3FHXM86JQ2TM68P44RUCJS97SSW31X3';
+
+export { apikey, ABI };

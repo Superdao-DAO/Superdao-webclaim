@@ -1,7 +1,7 @@
+import { ABI } from './abi';
 import strings from './strings';
 import tokenConfig from './config/token';
 import environment from './config/environment';
-import ABI from './abi';
 import SupError from './error';
 import uiControl from './ui';
 import uiIdentity from './config/ui';
@@ -18,6 +18,7 @@ export default class {
    * @constructor
    */
   constructor() {
+    this.abi = ABI;
     this.ethAccount = uiIdentity.eth_account;
     this.claimBtn = uiIdentity.claim_button;
     this.gasPriceInput = uiIdentity.gas_price_input;
@@ -33,7 +34,7 @@ export default class {
     // Checking if Web3 has been injected by the browser (Mist/MetaMask)
     if (typeof window.web3 !== 'undefined') {
       // Use Mist/MetaMask's provider
-      this.web3 = window.web3;
+      this.web3 = new Web3(window.web3.currentProvider);
       this.injected = true;
     } else {
       console.log(strings.err_no_web3);
@@ -52,7 +53,7 @@ export default class {
   makeContractInst() {
     try {
       this.accounts_count = this.web3.eth.accounts.length;
-      this.tokenInstance = this.web3.eth.contract(ABI).at(this.address);
+      this.tokenInstance = this.web3.eth.contract(this.abi).at(this.address);
     } catch (e) {
       console.log(e);
       // disable_button();
@@ -61,25 +62,26 @@ export default class {
   }
 
   checkNetwork() {
-    const netId = this.web3.version.network;
-    switch (netId) {
-      case '1':
-        console.log(strings.inf_msg_mainet);
-        break;
-      case '2':
-        console.log(
-          strings.inf_msg_morden);
-        break;
-      case '3':
-        console.log(strings.inf_msg_ropsten);
-        break;
-      default:
-        console.log(strings.inf_msg_net_unk);
-    }
-    if (netId !== '1' && !environment.debug) {
-      // disable_button();
-      throw SupError(strings.err_no_main_net_claim);
-    }
+    this.web3.version.getNetwork((err, netId) => {
+      switch (netId) {
+        case '1':
+          console.log(strings.inf_msg_mainet);
+          break;
+        case '2':
+          console.log(
+            strings.inf_msg_morden);
+          break;
+        case '3':
+          console.log(strings.inf_msg_ropsten);
+          break;
+        default:
+          console.log(strings.inf_msg_net_unk);
+      }
+      if (netId !== '1' && !environment.debug) {
+        // disable_button();
+        throw SupError(strings.err_no_main_net_claim);
+      }
+    });
   }
 
   static roundPrecise(number, precision) {

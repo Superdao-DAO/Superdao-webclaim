@@ -20,25 +20,20 @@ class MainApp {
    * @constructor
    */
   constructor() {
-    /*
-    // Now you can start your app & access web3 freely:
-    startApp()
-    */
     this.mobileDetect = new MobileDetect(window.navigator.userAgent);
     if (this.mobileDetect.phone()) {
       // confirm dialog
-      alertify.confirm('Message', () => {
-        // user clicked "ok"
+      alertify.confirm(strings.ask_msg_mobile, () => {
+        this.init();
       }, () => {
         // user clicked "cancel"
       });
-      return;
     }
+  }
+  init() {
     this.token = new Token(tokenConfig.main_token_address);
     this.effects = new Effects();
     this.chart = new Chart();
-    console.log(`ok ${apikey} ${ABI.toString()} ${strings.toString()}`);
-    console.log($.toString());
   }
 }
 

@@ -24,8 +24,6 @@ export default class {
     this.gasPriceInput = uiIdentity.gas_price_input;
     this.claimEtherInput = uiIdentity.claim_eth_input;
     this.loggingElement = uiIdentity.logging_element;
-    this.apiaddress = 'https://api.etherscan.io/api'; // RPC API access
-    // this.apiaddress = "https://ropsten.etherscan.io/api",//ropsten api
     if (!environment.debug) {
       this.address = tokenConfig.main_token_address;
     } else {

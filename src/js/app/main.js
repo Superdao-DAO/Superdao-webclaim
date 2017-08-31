@@ -2,7 +2,6 @@ import Effects from './effects';
 import Chart from './chart';
 import Token from './token';
 import tokenConfig from './config/token';
-import { apikey, ABI } from './abi';
 import strings from './strings';
 
 const $ = require('jquery');
@@ -28,6 +27,9 @@ class MainApp {
       }, () => {
         // user clicked "cancel"
       });
+    }
+    else {
+      this.init();
     }
   }
   init() {

@@ -62,26 +62,25 @@ export default class {
   }
 
   checkNetwork() {
-    this.web3.version.getNetwork((err, netId) => {
-      switch (netId) {
-        case '1':
-          console.log(strings.inf_msg_mainet);
-          break;
-        case '2':
-          console.log(
-            strings.inf_msg_morden);
-          break;
-        case '3':
-          console.log(strings.inf_msg_ropsten);
-          break;
-        default:
-          console.log(strings.inf_msg_net_unk);
-      }
-      if (netId !== '1' && !environment.debug) {
-        // disable_button();
-        throw SupError(strings.err_no_main_net_claim);
-      }
-    });
+    const netId = this.web3.version.network;
+    switch (netId) {
+      case '1':
+        console.log(strings.inf_msg_mainet);
+        break;
+      case '2':
+        console.log(
+          strings.inf_msg_morden);
+        break;
+      case '3':
+        console.log(strings.inf_msg_ropsten);
+        break;
+      default:
+        console.log(strings.inf_msg_net_unk);
+    }
+    if (netId !== '1' && !environment.debug) {
+      // disable_button();
+      throw SupError(strings.err_no_main_net_claim);
+    }
   }
 
   static roundPrecise(number, precision) {

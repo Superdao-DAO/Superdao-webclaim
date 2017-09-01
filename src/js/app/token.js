@@ -6,6 +6,7 @@ import SupError from './error';
 import uiControl from './ui';
 import uiIdentity from './config/ui';
 
+const alertify = require('alertifyjs');
 const Web3 = require('web3');
 const $ = require('jquery');
 
@@ -36,7 +37,7 @@ export default class {
       this.injected = true;
     } else {
       console.log(strings.err_no_web3);
-      alert(strings.err_no_metamask);
+      alertify.warning(strings.err_no_metamask);
       // fallback - use your fallback strategy
       this.web3 = new Web3(new Web3.providers.HttpProvider(
         environment.debug ? tokenConfig.test_http_endpoint
@@ -55,7 +56,7 @@ export default class {
     } catch (e) {
       console.log(e);
       // disable_button();
-      alert(strings.err_no_token_instance);
+      alertify.error(strings.err_no_token_instance);
     }
   }
 

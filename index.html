@@ -617,6 +617,8 @@
     mkt_cap: '',
     tkn_prc: ''
   };
+  price_api = 'https://min-api.cryptocompare.com/data/price';
+  //price_api = 'https://www.cryptocompare.com/api/data/price';
 
   function updatePrices() {
     var base_price = 0.0465617596; //Promissory token rate
@@ -646,22 +648,22 @@
 
   function getPrices() {
     var err = 0;
-    $.get('https://www.cryptocompare.com/api/data/price?fsym=ETH&tsyms=BTC')
+    $.get(price_api+'?fsym=ETH&tsyms=BTC')
     .then(
       function (d) {
-        if (Object.keys(d.Data).length < 1) {
+        if (Object.keys(d).length < 1) {
           err++;
           return;
         }
-        prices.btc_eth = parseFloat(d.Data[0].Price).toFixed(6);
-        $.get('https://www.cryptocompare.com/api/data/price?fsym=BTC&tsyms=USD')
+        prices.btc_eth = parseFloat(d['BTC']).toFixed(6);
+        $.get(price_api+'?fsym=BTC&tsyms=USD')
         .then(
           function (d) {
-            if (Object.keys(d.Data).length < 1) {
+            if (Object.keys(d).length < 1) {
               err++;
               return;
             }
-            prices.usd_btc = parseFloat(d.Data[0].Price).toFixed(2);
+            prices.usd_btc = parseFloat(d['USD']).toFixed(2);
             updatePrices();
           },
           function () {

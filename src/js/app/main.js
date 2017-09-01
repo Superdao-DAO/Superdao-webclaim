@@ -33,9 +33,18 @@ class MainApp {
     }
   }
   init() {
-    this.token = new Token(tokenConfig.main_token_address);
-    this.effects = new Effects();
     this.chart = new Chart();
+    this.token = new Token(this);
+    this.effects = new Effects();
+  }
+  registerAndUpdate() {
+    if (this.registered !== true) {
+      this.chart.constructor.registerChart(this.token.tokensLeft,
+        this.token.tokensBought);
+    }
+    this.registered = true;
+    this.chart.refreshChart(this.token.tokensLeft,
+      this.token.tokensBought);
   }
 }
 

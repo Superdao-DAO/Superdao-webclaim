@@ -9,13 +9,6 @@ const AmCharts = window.AmCharts;
  * Token sale chart class
  */
 export default class {
-  /**
-   * Class constructor
-   */
-  constructor() {
-    this.constructor.registerChart(90000, 150000);
-    this.refreshChart(90000, 150000);
-  }
 
   /**
    * Create the token status chart
@@ -69,11 +62,8 @@ export default class {
     $('#presale-over').fadeOut(500).fadeIn(500);
   }
 
-  refreshChart(claimedPrepaidUnits, claimedUnits) {
-    const promissoryUnits = 3000000;
-    this.tokenBought = claimedUnits + claimedPrepaidUnits;
-    this.tokenLeft = promissoryUnits - this.tokenBought;
-    if (this.tokenLeft === 0) {
+  refreshChart(tokensLeft, tokensBought) {
+    if (tokensLeft === 0) {
       $('#tokensLeft').html('Pre-Sale Over');
       $('#presale-over').html('<h2>Pre-Sale Over</h2>');
       if (this.isblinking) clearInterval(this.isblinking);
@@ -81,11 +71,11 @@ export default class {
       this.blink();
     }
 
-    if (this.tokensLeft) {
-      $('#tokensLeft').html(this.tokenLeft);
+    if (tokensLeft) {
+      $('#tokensLeft').html(tokensLeft);
     }
-    if (this.tokenBought) {
-      $('#tokensBought').html(this.tokenBought);
+    if (tokensBought) {
+      $('#tokensBought').html(tokensBought);
     }
 
     if (!this.bar) {
@@ -127,9 +117,9 @@ export default class {
       });
     }
     if (this.bar) {
-      this.bar.animate(this.tokenBought / (this.tokenLeft + this.tokenBought));
+      this.bar.animate(tokensBought / (tokensLeft + tokensBought))
     } // Number from 0.0 to 1.0
     // Return values to be used in the Amchart
-    return [this.tokenBought, this.tokenLeft];
+    return [tokensBought, tokensLeft];
   }
 }

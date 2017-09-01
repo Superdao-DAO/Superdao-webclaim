@@ -1,4 +1,4 @@
-import { ABI } from './abi';
+import {ABI} from './abi';
 import strings from './strings';
 import tokenConfig from './config/token';
 import environment from './config/environment';
@@ -6,9 +6,11 @@ import SupError from './error';
 import uiControl from './ui';
 import uiIdentity from './config/ui';
 
+const Wait = require('wait-async');
 const alertify = require('alertifyjs');
 const Web3 = require('web3');
 const $ = require('jquery');
+const wait = new Wait();
 
 /**
  * This is the main promissory token class
@@ -18,7 +20,8 @@ export default class {
    * This is the class constructor
    * @constructor
    */
-  constructor() {
+  constructor(parent) {
+    this.parent = parent;
     this.abi = ABI;
     this.ethAccount = uiIdentity.eth_account;
     this.claimBtn = uiIdentity.claim_button;
@@ -47,6 +50,7 @@ export default class {
     }
     this.checkNetwork();
     this.makeContractInst();
+    this.fetchContractDataAndUpdate();
   }
 
   makeContractInst() {
@@ -90,13 +94,14 @@ export default class {
   }
 
   claim() {
-    if (!this.tokenInstance) {
-      throw SupError(strings.err_token_inst_not_init);
+    if (typeof this.tokenInstance === 'undefined') {
+      this.makeContractInst();
     }
     let transactionId;
     const gasPrice = $(this.gasPriceInput).val();
     let value = $(this.claimEtherInput).val();
-    const tokenCountCheck = this.constructor.roundPrecise(value % strings.token_discount_price, 11);
+    const tokenCountCheck = this.constructor.roundPrecise(value
+      % strings.token_discount_price, 11);
     if (tokenCountCheck !== strings.token_discount_price) {
       value = this.constructor.roundPrecise(value - tokenCountCheck, 11);
       $(this.claimEtherInput).val(value);
@@ -138,48 +143,64 @@ export default class {
       uiControl.enableElement();
     }
   }
-  fetchContractData() {
-    const calls = {
-      claimedUnits: 'claimedUnits()',
-      claimedPrepaidUnits: 'claimedPrepaidUnits()',
-    };
-    let claimedPrepaidUnits = 0;
-    let claimedUnits = 0;
-    return $.post(this.apiaddress, {
-      action: 'eth_call',
-      apikey: tokenConfig.apikey,
-      module: 'proxy',
-      to: tokenConfig.main_token_address,
-      data: this.constructor.getFunctionSignature(calls.claimedPrepaidUnits),
-    })
-      .then((d, e) => {
-        if (e) {
-          console.log(e);
-          return;
-        }
-        claimedPrepaidUnits = Web3.toDecimal(d.result);
-        console.log('claimed prepaid', claimedPrepaidUnits);
-      })
-      .then(() => {
-        $.post(this.apiaddress, {
-          action: 'eth_call',
-          apikey: tokenConfig.apikey,
-          module: 'proxy',
-          to: tokenConfig.main_token_address,
-          data: this.constructor.getFunctionSignature(calls.claimedUnits),
-        })
-          .then((d, e) => {
-            if (e) {
-              console.log(e);
-              return;
-            }
-            claimedUnits = Web3.toDecimal(d.result);
-            console.log('claimed', claimedUnits);
-          });
-      });
+
+  fetchContractDataAndUpdate() {
+    if (typeof this.tokenInstance === 'undefined') {
+      this.makeContractInst();
+    }
+    this.tokenInstance.claimedPrepaidUnits(wait((error, result) => {
+      if (!error) {
+        this.claimedPrepaidUnits = result;
+      }
+      else {
+        throw SupError(error);
+      }
+    }));
+    this.tokenInstance.claimedUnits(wait((error, result) => {
+      if (!error) {
+        this.claimedUnits = result;
+      }
+      else {
+        throw SupError(error);
+      }
+    }));
+    this.tokenInstance.lastPrice(wait((error, result) => {
+      if (!error) {
+        this.lastPrice = result;
+      }
+      else {
+        throw SupError(error);
+      }
+    }));
+    this.tokenInstance.promissoryUnits(wait((error, result) => {
+      if (!error) {
+        this.promissoryUnits = result;
+      }
+      else {
+        throw SupError(error);
+      }
+    }));
+    wait.then(() => {
+      this.parent.registerAndUpdate();
+    });
   }
 
-  static getFunctionSignature(fnx) {
-    return Web3.sha3(fnx).substring(0, 10);
+  get tokensLeft() {
+    if (
+      typeof this.claimedUnits === 'undefined' ||
+      typeof this.claimedPrepaidUnits === 'undefined' ||
+      typeof this.promissoryUnits === 'undefined') {
+      throw SupError(strings.err_units_not_set);
+    }
+    return this.promissoryUnits.minus(this.claimedUnits.plus(this.claimedPrepaidUnits)).toNumber();
+  }
+
+  get tokensBought() {
+    if (
+      typeof this.claimedUnits === 'undefined' ||
+      typeof this.claimedPrepaidUnits === 'undefined'){
+      throw SupError(strings.err_units_not_set);
+    }
+    return this.claimedUnits.plus(this.claimedPrepaidUnits).toNumber();
   }
 }

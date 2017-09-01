@@ -10,6 +10,7 @@ export default {
   err_no_token_instance: 'Cannot initiate token contract instance. Please, make sure your node has RPC available.',
   err_no_main_net_claim: 'Kindly switch to the Main Ethereum network, then refresh the page to claim Tokens.',
   err_token_inst_not_init: 'Token instance not initialized',
+  err_units_not_set: 'Token units not set',
   inf_msg_mainet: 'This is mainnet',
   inf_msg_morden: 'This is the deprecated Morden test network.',
   inf_msg_ropsten: 'This is the ropsten test network.',

@@ -39,7 +39,6 @@
     "node-static": "^0.7.9",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "wait-async": "^1.0.1",
     "watchify": "^3.9.0"
   },
   "dependencies": {
@@ -49,6 +48,7 @@
     "jquery.marquee": "^1.3.94",
     "mobile-detect": "^1.3.6",
     "progressbar.js": "^1.0.1",
-    "web3": "^0.19.0"
+    "web3": "^0.19.0",
+    "wait-async": "^1.0.1"
   }
 }

@@ -1,7 +1,6 @@
 import Effects from './effects';
 import Chart from './chart';
 import Token from './token';
-import tokenConfig from './config/token';
 import strings from './strings';
 
 const $ = require('jquery');
@@ -27,8 +26,7 @@ class MainApp {
       }, () => {
         // user clicked "cancel"
       });
-    }
-    else {
+    } else {
       this.init();
     }
   }
@@ -43,7 +41,7 @@ class MainApp {
         this.token.tokensBought);
     }
     this.registered = true;
-    this.chart.refreshChart(this.token.tokensLeft,
+    this.chart.refreshChartBar(this.token.tokensLeft,
       this.token.tokensBought);
   }
 }

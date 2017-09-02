@@ -1,8 +1,8 @@
-import {ABI} from './abi';
+import { ABI } from './abi';
 import strings from './strings';
 import tokenConfig from './config/token';
 import environment from './config/environment';
-import SupError from './error';
+import { SupError } from './error';
 import uiControl from './ui';
 import uiIdentity from './config/ui';
 
@@ -10,6 +10,7 @@ const Wait = require('wait-async');
 const alertify = require('alertifyjs');
 const Web3 = require('web3');
 const $ = require('jquery');
+
 const wait = new Wait();
 
 /**
@@ -44,7 +45,7 @@ export default class {
       // fallback - use your fallback strategy
       this.web3 = new Web3(new Web3.providers.HttpProvider(
         environment.debug ? tokenConfig.test_http_endpoint
-          : tokenConfig.main_http_endpoint,
+          : tokenConfig.main_http_endpoint // eslint-disable-line comma-dangle
       ));
       this.injected = false;
     }
@@ -60,7 +61,7 @@ export default class {
     } catch (e) {
       console.log(e);
       // disable_button();
-      alertify.error(strings.err_no_token_instance);
+      throw SupError(strings.err_no_token_instance);
     }
   }
 
@@ -84,13 +85,6 @@ export default class {
       // disable_button();
       throw SupError(strings.err_no_main_net_claim);
     }
-  }
-
-  static roundPrecise(number, precision) {
-    const factor = 10 ** precision;
-    const tempNumber = number * factor;
-    const roundedTempNumber = Math.round(tempNumber);
-    return roundedTempNumber / factor;
   }
 
   claim() {
@@ -151,32 +145,28 @@ export default class {
     this.tokenInstance.claimedPrepaidUnits(wait((error, result) => {
       if (!error) {
         this.claimedPrepaidUnits = result;
-      }
-      else {
+      } else {
         throw SupError(error);
       }
     }));
     this.tokenInstance.claimedUnits(wait((error, result) => {
       if (!error) {
         this.claimedUnits = result;
-      }
-      else {
+      } else {
         throw SupError(error);
       }
     }));
     this.tokenInstance.lastPrice(wait((error, result) => {
       if (!error) {
         this.lastPrice = result;
-      }
-      else {
+      } else {
         throw SupError(error);
       }
     }));
     this.tokenInstance.promissoryUnits(wait((error, result) => {
       if (!error) {
         this.promissoryUnits = result;
-      }
-      else {
+      } else {
         throw SupError(error);
       }
     }));
@@ -192,13 +182,14 @@ export default class {
       typeof this.promissoryUnits === 'undefined') {
       throw SupError(strings.err_units_not_set);
     }
-    return this.promissoryUnits.minus(this.claimedUnits.plus(this.claimedPrepaidUnits)).toNumber();
+    return this.promissoryUnits.minus(
+      this.claimedUnits.plus(this.claimedPrepaidUnits)).toNumber();
   }
 
   get tokensBought() {
     if (
       typeof this.claimedUnits === 'undefined' ||
-      typeof this.claimedPrepaidUnits === 'undefined'){
+      typeof this.claimedPrepaidUnits === 'undefined') {
       throw SupError(strings.err_units_not_set);
     }
     return this.claimedUnits.plus(this.claimedPrepaidUnits).toNumber();

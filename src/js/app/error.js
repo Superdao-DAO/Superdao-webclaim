@@ -5,6 +5,7 @@ export class SupError {
     alertify.error(message);
     this.message = message;
   }
+
   toString() {
     return this.message;
   }
@@ -14,6 +15,7 @@ export class ValueError {
   constructor(message) {
     this.message = message;
   }
+
   toString() {
     return this.message;
   }

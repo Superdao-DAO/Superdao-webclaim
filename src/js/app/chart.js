@@ -1,8 +1,8 @@
 import chartConf from './config/chart';
 import barConf from './config/bar';
+import uiConf from './config/ui';
 
 const ProgressBar = require('progressbar.js');
-const $ = require('jquery');
 require('amcharts3');
 require('amcharts3/amcharts/pie');
 
@@ -17,37 +17,37 @@ export default class {
    * @param _tokenLeft
    * @param _tokenBought
    */
-  static registerChart(_tokenLeft, _tokenBought) {
-    chartConf.dataProvider[0].litres = _tokenLeft;
-    chartConf.dataProvider[1].litres = _tokenBought;
-    AmCharts.makeChart('chartdiv', chartConf);
+  registerChart(tokenLeft, tokenBought) {
+    if (!this.chart) {
+      chartConf.dataProvider[0].litres = tokenLeft;
+      chartConf.dataProvider[1].litres = tokenBought;
+      this.chart = AmCharts.makeChart(uiConf.chart_element, chartConf);
+    }
   }
 
-  static blink() {
-    $('#presale-over').fadeOut(500).fadeIn(500);
-  }
-
-  refreshChartBar(tokensLeft, tokensBought) {
-    if (tokensLeft === 0) {
-      $('#tokensLeft').html('Pre-Sale Over');
-      $('#presale-over').html('<h2>Pre-Sale Over</h2>');
-      if (this.isblinking) clearInterval(this.isblinking);
-      this.isblinking = setInterval(this.blink, 1000);
-      this.blink();
-    }
-
-    if (tokensLeft) {
-      $('#tokensLeft').html(tokensLeft);
-    }
-    if (tokensBought) {
-      $('#tokensBought').html(tokensBought);
-    }
-
+  registerBar(tokensLeft, tokensBought) {
     if (!this.bar) {
-      this.bar = new ProgressBar.Line('.progressbar-container', barConf);
+      this.bar = new ProgressBar.Line(uiConf.bar_element, barConf);
+      this.updateBar(tokensLeft, tokensBought);
     }
+  }
+
+  updateChart(tokensLeft, tokensBought) {
+    if (this.chart) {
+      const dataProvider = chartConf.dataProvider;
+      dataProvider[0].litres = tokensLeft;
+      dataProvider[1].litres = tokensBought;
+      this.chart.animateAgain();
+    } else {
+      this.registerChart(tokensLeft, tokensBought);
+    }
+  }
+
+  updateBar(tokensLeft, tokensBought) {
     if (this.bar) {
       this.bar.animate(tokensBought / (tokensLeft + tokensBought));
-    } // Number from 0.0 to 1.0
+    } else {
+      this.registerBar(tokensLeft, tokensBought);
+    }
   }
 }

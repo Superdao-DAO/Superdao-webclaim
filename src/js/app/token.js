@@ -1,8 +1,8 @@
-import { ABI } from './abi';
+import {ABI} from './abi';
 import strings from './strings';
 import tokenConfig from './config/token';
 import environment from './config/environment';
-import { SupError } from './error';
+import {SupError} from './error';
 import uiControl from './ui';
 import uiIdentity from './config/ui';
 
@@ -61,7 +61,7 @@ export default class {
     } catch (e) {
       console.log(e);
       // disable_button();
-      throw SupError(strings.err_no_token_instance);
+      throw new SupError(strings.err_no_token_instance);
     }
   }
 
@@ -83,7 +83,7 @@ export default class {
     }
     if (netId !== '1' && !environment.debug) {
       // disable_button();
-      throw SupError(strings.err_no_main_net_claim);
+      throw new SupError(strings.err_no_main_net_claim);
     }
   }
 
@@ -146,28 +146,28 @@ export default class {
       if (!error) {
         this.claimedPrepaidUnits = result;
       } else {
-        throw SupError(error);
+        throw new SupError(error);
       }
     }));
     this.tokenInstance.claimedUnits(wait((error, result) => {
       if (!error) {
         this.claimedUnits = result;
       } else {
-        throw SupError(error);
+        throw new SupError(error);
       }
     }));
     this.tokenInstance.lastPrice(wait((error, result) => {
       if (!error) {
         this.lastPrice = result;
       } else {
-        throw SupError(error);
+        throw new SupError(error);
       }
     }));
     this.tokenInstance.promissoryUnits(wait((error, result) => {
       if (!error) {
         this.promissoryUnits = result;
       } else {
-        throw SupError(error);
+        throw new SupError(error);
       }
     }));
     wait.then(() => {
@@ -180,7 +180,7 @@ export default class {
       typeof this.claimedUnits === 'undefined' ||
       typeof this.claimedPrepaidUnits === 'undefined' ||
       typeof this.promissoryUnits === 'undefined') {
-      throw SupError(strings.err_units_not_set);
+      throw new SupError(strings.err_units_not_set);
     }
     return this.promissoryUnits.minus(
       this.claimedUnits.plus(this.claimedPrepaidUnits)).toNumber();
@@ -190,7 +190,7 @@ export default class {
     if (
       typeof this.claimedUnits === 'undefined' ||
       typeof this.claimedPrepaidUnits === 'undefined') {
-      throw SupError(strings.err_units_not_set);
+      throw new SupError(strings.err_units_not_set);
     }
     return this.claimedUnits.plus(this.claimedPrepaidUnits).toNumber();
   }

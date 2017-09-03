@@ -16,4 +16,5 @@ export default {
   inf_msg_ropsten: 'This is the ropsten test network.',
   inf_msg_net_unk: 'This is an unknown network.',
   ask_msg_mobile: 'Mobile device detected. Continue?',
+  lbl_presale_over: 'Pre-Sale Over',
 };

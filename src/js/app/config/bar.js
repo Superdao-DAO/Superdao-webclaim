@@ -31,6 +31,6 @@ export default {
   },
   step(state, bar) {
     bar.setText(`${parseFloat(bar.value() * 100).toFixed(2)
-    } %`);
+      } %`);
   },
 };

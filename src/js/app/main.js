@@ -2,6 +2,7 @@ import Effects from './effects';
 import Chart from './chart';
 import Token from './token';
 import strings from './strings';
+import Ui from './ui';
 
 const $ = require('jquery');
 const MobileDetect = require('mobile-detect');
@@ -30,19 +31,28 @@ class MainApp {
       this.init();
     }
   }
+
   init() {
+    this.ui = new Ui();
     this.chart = new Chart();
     this.token = new Token(this);
     this.effects = new Effects();
   }
+
   registerAndUpdate() {
-    if (this.registered !== true) {
-      this.chart.constructor.registerChart(this.token.tokensLeft,
-        this.token.tokensBought);
-    }
-    this.registered = true;
-    this.chart.refreshChartBar(this.token.tokensLeft,
+    this.chart.updateChart(this.token.tokensLeft,
       this.token.tokensBought);
+    this.chart.updateBar(this.token.tokensLeft,
+      this.token.tokensBought);
+    this.ui.setTokensLeft(this.token.tokensLeft);
+    this.ui.setTokensBought(this.token.tokensBought);
+    this.presaleStatusCheck();
+  }
+
+  presaleStatusCheck() {
+    if (this.token.tokensLeft === 0) {
+      this.ui.showPresaleOver();
+    }
   }
 }
 

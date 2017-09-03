@@ -585,4 +585,4 @@ const ABI = [{
 
 const apikey = 'GKU3FHXM86JQ2TM68P44RUCJS97SSW31X3';
 
-export {apikey, ABI};
+export { apikey, ABI };

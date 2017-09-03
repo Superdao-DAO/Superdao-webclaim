@@ -1,8 +1,8 @@
-import {ABI} from './abi';
+import { ABI } from './abi';
 import strings from './strings';
 import tokenConfig from './config/token';
 import environment from './config/environment';
-import {SupError} from './error';
+import { SupError } from './error';
 import uiControl from './ui';
 import uiIdentity from './config/ui';
 

@@ -1724,3 +1724,15 @@ claim-container {
 }
 
 .amcharts-chart-div a {display:none !important;}
+
+.ribbon-separator {
+  color: blue;
+  margin-right: 8px;
+  margin-left: 8px;
+}
+
+.ribbon-values {
+  color: green;
+  margin-right: 5px;
+  margin-left: 5px;
+}

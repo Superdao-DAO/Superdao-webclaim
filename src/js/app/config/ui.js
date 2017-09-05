@@ -10,4 +10,8 @@ export default {
   token_price_element: '#tokenPrice',
   chart_element: 'chartdiv',
   bar_element: '.progressbar-container',
+  ribbon_token_price: '#ribTokenPrice',
+  ribbon_token_dollar_price: '#ribDolPrice',
+  ribbon_token_btc_price: '#ribSupBtcPrice',
+  ribbon_ether_btc_price: '#ribEthBtcPrice',
 };

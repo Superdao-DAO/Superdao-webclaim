@@ -6,10 +6,10 @@ var browserify = require('browserify');
 var watchify = require('watchify');
 var babel = require('babelify');
 var imagemin = require('gulp-imagemin');
-var noop = require("gulp-noop");
+var noop = require('gulp-noop');
 var uglify = require('gulp-uglify');
 var exit = require('gulp-exit');
-
+var del = require('del');
 
 var paths = {
   favicon: 'src/favicon.ico',
@@ -28,8 +28,10 @@ var paths = {
 };
 
 
-function compile(watch, debug=false) {
-  var bundler = watchify(browserify(paths.main, { debug: debug }).transform(babel));
+function compile(watch, debug = false) {
+  var bundler;
+  del(`${paths.main}.map`);
+  bundler = watchify(browserify(paths.main, { debug: debug }).transform(babel));
 
   function rebundle() {
     bundler.bundle()

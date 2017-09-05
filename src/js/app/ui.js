@@ -1,5 +1,5 @@
-import Chart from './chart';
-import uiIdentity from './config/ui';
+import uiConf from './config/ui';
+import strings from './strings';
 
 const $ = require('jquery');
 
@@ -7,45 +7,54 @@ export default class {
   constructor() {
     this.elemInsts = {};
   }
+
   disableElement(elemID) {
-    this.elemInsts[elemID] = $(elemID).prop('disabled', true);
+    this.getElement(elemID).prop('disabled', true);
   }
+
   enableElement(elemID) {
     this.getElement(elemID).prop('disabled', false);
   }
+
   getElement(elemID) {
     if (!(elemID in this.elemInsts)) {
       this.elemInsts[elemID] = $(elemID);
     }
     return this.elemInsts[elemID];
   }
-  refreshValues() {
-    this.api.fetchContractData()
-      .then(() => {
-        console.log('in then', api.claimedPrepaidUnits, api.claimedUnits);
-        const values = Chart.refresh_chart(api.claimedPrepaidUnits, api.claimedUnits);
-        Chart.amChart(values[1], values[0]);
-      });
+
+  showPresaleOver() {
+    this.getElement(uiConf.tokens_left_element).html(strings.lbl_presale_over);
+    this.getElement(uiConf.presale_over_element).html(
+      `<h2>${strings.lbl_presale_over}</h2>`);
+    if (this.isblinking) {
+      clearInterval(this.isblinking);
+    }
+    this.isblinking = setInterval(this.constructor.blink, 1000);
+    this.constructor.blink();
   }
-  addToLog(text) {
-    this.$(uiIdentity.logging_element).append($('<div>').html(text).addClass('log_row'));
+
+  setTokensLeft(tokensLeft) {
+    if (tokensLeft) {
+      this.getElement(uiConf.tokens_left_element).html(tokensLeft.toLocaleString());
+    }
   }
-  /* logEvents(contractInstance) {
-    const events = contractInstance.TokensClaimedEvent({
-      fromBlock: 'latest',
-    });
-    events.watch((error, event) => {
-      if (!error) {
-        console.log(event);
-        const eventName = 'Event ' + event.event;
-        const eventArgs = [];
-        if (event.args.length !== 0) {
-          for (const argName in event.args) {
-            eventArgs.push(argName + ':' + event.args[argName]);
-          }
-        }
-        console.log(eventName + '(' + eventArgs.join(',') + ')');
-      }
-    });
-  } */
+
+  setTokensBought(tokensBought) {
+    this.getElement(uiConf.tokens_bought_element).html(tokensBought.toLocaleString());
+  }
+
+  setTokenPriceEthDisc(tokenPrice) {
+    this.getElement(uiConf.token_price_element).html(tokenPrice);
+  }
+
+  setAccountDD(accounts) {
+    for (let i = 0, len = accounts.length; i < len; i += 1) {
+      this.getElement(uiConf.eth_account).append($('<option></option>').val(accounts[i]).html(accounts[i]));
+    }
+  }
+
+  static blink(elemID) {
+    this.getElement(elemID).fadeOut(500).fadeIn(500);
+  }
 }

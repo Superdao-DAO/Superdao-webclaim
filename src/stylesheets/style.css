@@ -1722,3 +1722,5 @@ claim-container {
 .ct-series-b .ct-point {
   stroke: green;
 }
+
+.amcharts-chart-div a {display:none !important;}

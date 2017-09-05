@@ -12,6 +12,7 @@ export default {
   err_token_inst_not_init: 'Token instance not initialized',
   err_units_not_set: 'Token units not set',
   err_price_not_set: 'Token price not set',
+  err_accounts_locked: 'Please unlock your wallet and refresh the page.',
   inf_msg_mainet: 'This is mainnet',
   inf_msg_morden: 'This is the deprecated Morden test network.',
   inf_msg_ropsten: 'This is the ropsten test network.',

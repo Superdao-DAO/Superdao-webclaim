@@ -52,7 +52,11 @@ class MainApp {
     this.ui.setTokensBought(this.token.tokensBought);
     this.ui.setTokenPriceEthDisc(this.token.tokenPriceDisc);
     if (this.presaleStatusCheck()) {
-      this.ui.setAccountDD(this.token.web3.eth.accounts);
+      try {
+        this.ui.setAccountDD(this.token.web3.eth.accounts);
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 

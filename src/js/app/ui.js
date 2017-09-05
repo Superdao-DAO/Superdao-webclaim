@@ -77,6 +77,14 @@ export default class {
     this.getElement(uiConf.ribbon_ether_btc_price).html(btcPrice);
   }
 
+  disableClaimButton() {
+    this.disableElement(uiConf.claim_button);
+  }
+
+  enableClaimButton() {
+    this.enableElement(uiConf.claim_button);
+  }
+
   static blink(elemID) {
     this.getElement(elemID).fadeOut(500).fadeIn(500);
   }

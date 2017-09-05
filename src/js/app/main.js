@@ -55,8 +55,11 @@ class MainApp {
       try {
         this.ui.setAccountDD(this.token.web3.eth.accounts);
       } catch (error) {
+        this.ui.disableClaimButton();
         console.log(error);
       }
+    } else {
+      this.ui.disableClaimButton();
     }
   }
 

@@ -7,6 +7,7 @@ export default {
   tokens_left_element: '#tokensLeft',
   tokens_bought_element: '#tokensBought',
   presale_over_element: '#presale-over',
+  token_price_element: '#tokenPrice',
   chart_element: 'chartdiv',
   bar_element: '.progressbar-container',
 };

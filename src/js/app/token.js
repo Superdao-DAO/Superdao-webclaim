@@ -194,4 +194,19 @@ export default class {
     }
     return this.claimedUnits.plus(this.claimedPrepaidUnits).toNumber();
   }
+
+  get tokenPriceDisc() {
+    if (typeof this.lastPrice === 'undefined') {
+      throw new SupError(strings.err_price_not_set);
+    }
+    const ethPrice = this.web3.fromWei(this.lastPrice, 'ether');
+    return ethPrice.minus(ethPrice.times(0.40)).toNumber();
+  }
+
+  get tokenPrice() {
+    if (typeof this.lastPrice === 'undefined') {
+      throw new SupError(strings.err_price_not_set);
+    }
+    return this.web3.fromWei(this.lastPrice, 'ether').toNumber();
+  }
 }

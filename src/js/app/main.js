@@ -46,13 +46,19 @@ class MainApp {
       this.token.tokensBought);
     this.ui.setTokensLeft(this.token.tokensLeft);
     this.ui.setTokensBought(this.token.tokensBought);
-    this.presaleStatusCheck();
+    this.ui.setTokenPriceEthDisc(this.token.tokenPriceDisc);
+    this.ui.setAccountDD(this.token.web3.eth.accounts);
+    if (this.presaleStatusCheck()) {
+
+    }
   }
 
   presaleStatusCheck() {
     if (this.token.tokensLeft === 0) {
       this.ui.showPresaleOver();
+      return false;
     }
+    return true;
   }
 }
 

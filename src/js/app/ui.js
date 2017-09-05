@@ -36,12 +36,22 @@ export default class {
 
   setTokensLeft(tokensLeft) {
     if (tokensLeft) {
-      this.getElement(uiConf.tokens_left_element).html(tokensLeft);
+      this.getElement(uiConf.tokens_left_element).html(tokensLeft.toLocaleString());
     }
   }
 
   setTokensBought(tokensBought) {
-    this.getElement(uiConf.tokens_bought_element).html(tokensBought);
+    this.getElement(uiConf.tokens_bought_element).html(tokensBought.toLocaleString());
+  }
+
+  setTokenPriceEthDisc(tokenPrice) {
+    this.getElement(uiConf.token_price_element).html(tokenPrice);
+  }
+
+  setAccountDD(accounts) {
+    for (let i = 0, len = accounts.length; i < len; i += 1) {
+      this.getElement(uiConf.eth_account).append($('<option></option>').val(accounts[i]).html(accounts[i]));
+    }
   }
 
   static blink(elemID) {

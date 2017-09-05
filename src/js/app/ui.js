@@ -1,5 +1,6 @@
 import uiConf from './config/ui';
 import strings from './strings';
+import { SupError } from './error';
 
 const $ = require('jquery');
 
@@ -51,6 +52,9 @@ export default class {
   }
 
   setAccountDD(accounts) {
+    if(accounts.length === 0){
+      throw new SupError(strings.err_accounts_locked);
+    }
     for (let i = 0, len = accounts.length; i < len; i += 1) {
       this.getElement(uiConf.eth_account).append(
         $('<option></option>').val(accounts[i]).html(accounts[i]));

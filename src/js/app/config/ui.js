@@ -10,6 +10,7 @@ export default {
   token_price_element: '#tokenPrice',
   chart_element: 'chartdiv',
   bar_element: '.progressbar-container',
+  token_usd_price: '#discTokenPrice',
   ribbon_token_price: '#ribTokenPrice',
   ribbon_token_dollar_price: '#ribDolPrice',
   ribbon_token_btc_price: '#ribSupBtcPrice',

@@ -178,8 +178,10 @@ export default class {
       }
     }));
     wait.then(() => {
-      this.parent.mainRegisterAndUpdate();
-      this.parent.ribbonUpdate();
+      this.parent.getRemotePrices(() => {
+        this.parent.mainRegisterAndUpdate();
+        this.parent.ribbonUpdClbk();
+      });
     });
   }
 

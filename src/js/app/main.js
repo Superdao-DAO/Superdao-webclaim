@@ -51,6 +51,9 @@ class MainApp {
     this.ui.setTokensLeft(this.token.tokensLeft);
     this.ui.setTokensBought(this.token.tokensBought);
     this.ui.setTokenPriceEthDisc(this.token.tokenPriceDisc);
+    this.ui.setTokenPriceUsdDisc(
+      new BigNumber(this.token.tokenPriceDisc).mul(this.ethUsdPrice).toFixed(
+        2));
     if (this.presaleStatusCheck()) {
       try {
         this.ui.setAccountDD(this.token.web3.eth.accounts);
@@ -63,8 +66,7 @@ class MainApp {
     }
   }
 
-  ribbonUpdate() {
-    this.ui.setRibbonTokenPrice(this.token.tokenPrice);
+  getRemotePrices(callback) {
     $.get(mainConf.ether_price_uri('ETH', 'USD'), wait((data) => {
       this.ethUsdPrice = data.USD;
     }));
@@ -72,8 +74,7 @@ class MainApp {
       this.ethBtcPrice = data.BTC;
     }));
     wait.then(() => {
-      this.ribbonUpdClbk();
-      this.effects.constructor.updateMarquee();
+      callback();
     });
   }
 
@@ -86,11 +87,13 @@ class MainApp {
   }
 
   ribbonUpdClbk() {
+    this.ui.setRibbonTokenPrice(this.token.tokenPrice);
     this.ui.setRibbonDollarPrice(
       new BigNumber(this.ethUsdPrice).mul(this.token.tokenPrice).toNumber());
     this.ui.setRibbonSupBtcPrice(
       new BigNumber(this.ethBtcPrice).mul(this.token.tokenPrice).toNumber());
     this.ui.setRibbonEthBtcPrice(this.ethBtcPrice);
+    this.effects.constructor.updateMarquee();
   }
 }
 

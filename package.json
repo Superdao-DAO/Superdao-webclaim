@@ -44,11 +44,12 @@
   "dependencies": {
     "alertifyjs": "^1.11.0",
     "amcharts3": "^3.21.2",
+    "bignumber.js": "^4.0.4",
     "jquery": "^3.2.1",
     "jquery.marquee": "^1.3.94",
     "mobile-detect": "^1.3.6",
     "progressbar.js": "^1.0.1",
-    "web3": "^0.19.0",
-    "wait-async": "^1.0.1"
+    "wait-async": "^1.0.1",
+    "web3": "^0.19.0"
   }
 }

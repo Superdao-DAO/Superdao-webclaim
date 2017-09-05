@@ -9,8 +9,10 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <script src="js/main.js"></script> <!-- *Build Test* Remove When Done Testing -->
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/css/alertify.min.css"/>
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/css/themes/default.min.css"/>
+  <link rel="stylesheet"
+        href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/css/alertify.min.css"/>
+  <link rel="stylesheet"
+        href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/css/themes/default.min.css"/>
   <link rel="stylesheet" type="text/css"
         href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
@@ -20,13 +22,20 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
   <!-- Analytics -->
   <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-      ga('create', 'UA-104237560-1', 'auto');
-      ga('send', 'pageview');
+    ga('create', 'UA-104237560-1', 'auto');
+    ga('send', 'pageview');
   </script>
 
 </head>
@@ -81,7 +90,7 @@
                     class="value-style">&nbsp3,000,000</span>
                     <br><br>
                     <span>Tokens left&nbsp:&nbsp<span class="value-style"
-                                                             id="tokensLeft"></span>
+                                                      id="tokensLeft"></span>
                                             <br><br>
                                             <span>Tokens Bought&nbsp:&nbsp</span><span
                         class="value-style"
@@ -169,29 +178,22 @@
   </div>
   <div class="footer2">
     <div class="marquee">
-      <img src="assets/images/SuperdaoLogo.png" height="20px" width="15px" alt=""> &nbsp;SUPERNEUM
-      &nbsp;Market
-      Cap: &nbsp; $
-      <strong id="mkt_cap" style="color:green"> ...</strong>&nbsp; <strong
-      style="color: blue">|</strong> &nbsp;Total
-      Tokens: &nbsp; <strong style="color: green;">100,000,000.00</strong> &nbsp;<strong
-      style="color: blue">|</strong> &nbsp; Price:
-      &nbsp; $ <strong style="color: green;" class="usd_sup"> 0.05134000</strong> &nbsp;
-      <strong
-        style="color: blue">|</strong> &nbsp; SUP : &nbsp; <strong style="color: green;"
-                                                                   class="sup_eth">0.05134000</strong>&nbsp;
-      ETH &nbsp;<strong style="color: blue"> |</strong> &nbsp; SUPERNEUM PRICE: &nbsp; <strong
-      style="color: green;" class="btc_sup">0.000551 </strong>&nbsp;BTC/SUP &nbsp;
-      <strong style="color: blue">|</strong> &nbsp; DAPPS: &nbsp; <img
-      src="assets/images/pokereum-icon.png"
-      height="22px" width="20px"> POKEREUM &nbsp;<img
-      src="assets/images/dappserysymbolmedium.png" height="20px" width="20px">&nbsp;DAPPSERY
-      &nbsp; <strong style="color: blue">|</strong>&nbsp;
-      <img src="assets/images/eth-logo.png" height="20px" width="25px" alt=""> ETH: &nbsp;
-      <strong style="color: green;" class="btc_eth"> 0.00013000</strong> BTC &nbsp; <strong
-      style="color: blue">|</strong>&nbsp;&nbsp; © 2016 SuperDAO. &nbsp;All rights reserved
-      &nbsp; <strong
-      style="color: blue">|</strong>
+      <img src="assets/images/SuperdaoLogo.png" height="20px" width="15px" alt="">SUPERNEUM Market
+      Cap: $<strong id="mkt_cap" class="ribbon-values">...</strong><strong
+      class="ribbon-separator">|</strong>Total Tokens:<strong
+      class="ribbon-values">100,000,000.00</strong><strong class="ribbon-separator">|</strong>Price:
+      $<strong class="ribbon-values" id="ribDolPrice">0</strong><strong
+      class="ribbon-separator">|</strong>SUP:<strong class="ribbon-values" id="ribTokenPrice">0</strong>ETH<strong
+      class="ribbon-separator">|</strong>SUPERNEUM PRICE:<strong class="ribbon-values" id="ribSupBtcPrice">0</strong>BTC/SUP<strong
+      class="ribbon-separator">|</strong>DAPPS:&nbsp;<img src="assets/images/pokereum-icon.png"
+                                                    height="22px"
+                                                    width="20px">&nbsp;POKEREUM&nbsp;<img
+      src="assets/images/dappserysymbolmedium.png" height="20px" width="20px">&nbsp;DAPPSERY&nbsp;<strong
+      class="ribbon-separator">|</strong><img src="assets/images/eth-logo.png" height="20px"
+                                              width="25px"
+                                              alt="">ETH:<strong class="ribbon-values" id="ribEthBtcPrice">0</strong>BTC<strong
+      class="ribbon-separator">|</strong>© 2017 SuperDAO. All rights reserved<strong
+      class="ribbon-separator">|</strong>
     </div>
   </div>
   <a href="http://crowdfunding.superdao.io">

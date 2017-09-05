@@ -36,12 +36,14 @@ export default class {
 
   setTokensLeft(tokensLeft) {
     if (tokensLeft) {
-      this.getElement(uiConf.tokens_left_element).html(tokensLeft.toLocaleString());
+      this.getElement(uiConf.tokens_left_element).html(
+        tokensLeft.toLocaleString());
     }
   }
 
   setTokensBought(tokensBought) {
-    this.getElement(uiConf.tokens_bought_element).html(tokensBought.toLocaleString());
+    this.getElement(uiConf.tokens_bought_element).html(
+      tokensBought.toLocaleString());
   }
 
   setTokenPriceEthDisc(tokenPrice) {
@@ -50,8 +52,25 @@ export default class {
 
   setAccountDD(accounts) {
     for (let i = 0, len = accounts.length; i < len; i += 1) {
-      this.getElement(uiConf.eth_account).append($('<option></option>').val(accounts[i]).html(accounts[i]));
+      this.getElement(uiConf.eth_account).append(
+        $('<option></option>').val(accounts[i]).html(accounts[i]));
     }
+  }
+
+  setRibbonDollarPrice(dollarPrice) {
+    this.getElement(uiConf.ribbon_token_dollar_price).html(dollarPrice);
+  }
+
+  setRibbonTokenPrice(tokenPrice) {
+    this.getElement(uiConf.ribbon_token_price).html(tokenPrice);
+  }
+
+  setRibbonSupBtcPrice(btcPrice) {
+    this.getElement(uiConf.ribbon_token_btc_price).html(btcPrice);
+  }
+
+  setRibbonEthBtcPrice(btcPrice) {
+    this.getElement(uiConf.ribbon_ether_btc_price).html(btcPrice);
   }
 
   static blink(elemID) {

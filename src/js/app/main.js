@@ -3,11 +3,15 @@ import Chart from './chart';
 import Token from './token';
 import strings from './strings';
 import Ui from './ui';
+import mainConf from './config/main';
 
 const $ = require('jquery');
 const MobileDetect = require('mobile-detect');
 const alertify = require('alertifyjs');
+const BigNumber = require('bignumber.js');
+const Wait = require('wait-async');
 
+const wait = new Wait();
 let app; // eslint-disable-line no-unused-vars
 
 /**
@@ -39,7 +43,7 @@ class MainApp {
     this.effects = new Effects();
   }
 
-  registerAndUpdate() {
+  mainRegisterAndUpdate() {
     this.chart.updateChart(this.token.tokensLeft,
       this.token.tokensBought);
     this.chart.updateBar(this.token.tokensLeft,
@@ -47,10 +51,22 @@ class MainApp {
     this.ui.setTokensLeft(this.token.tokensLeft);
     this.ui.setTokensBought(this.token.tokensBought);
     this.ui.setTokenPriceEthDisc(this.token.tokenPriceDisc);
-    this.ui.setAccountDD(this.token.web3.eth.accounts);
     if (this.presaleStatusCheck()) {
-
+      this.ui.setAccountDD(this.token.web3.eth.accounts);
     }
+  }
+
+  ribbonUpdate() {
+    this.ui.setRibbonTokenPrice(this.token.tokenPrice);
+    $.get(mainConf.ether_price_uri('ETH', 'USD'), wait((data) => {
+      this.ethUsdPrice = data.USD;
+    }));
+    $.get(mainConf.ether_price_uri('ETH', 'BTC'), wait((data) => {
+      this.ethBtcPrice = data.BTC;
+    }));
+    wait.then(() => {
+      this.ribbonUpdClbk();
+    });
   }
 
   presaleStatusCheck() {
@@ -59,6 +75,14 @@ class MainApp {
       return false;
     }
     return true;
+  }
+
+  ribbonUpdClbk() {
+    this.ui.setRibbonDollarPrice(
+      new BigNumber(this.ethUsdPrice).mul(this.token.tokenPrice).toNumber());
+    this.ui.setRibbonSupBtcPrice(
+      new BigNumber(this.ethBtcPrice).mul(this.token.tokenPrice).toNumber());
+    this.ui.setRibbonEthBtcPrice(this.ethBtcPrice);
   }
 }
 

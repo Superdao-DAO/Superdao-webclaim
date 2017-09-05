@@ -171,7 +171,8 @@ export default class {
       }
     }));
     wait.then(() => {
-      this.parent.registerAndUpdate();
+      this.parent.mainRegisterAndUpdate();
+      this.parent.ribbonUpdate();
     });
   }
 

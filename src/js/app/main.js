@@ -70,6 +70,7 @@ class MainApp {
     }));
     wait.then(() => {
       this.ribbonUpdClbk();
+      this.effects.constructor.updateMarquee();
     });
   }
 

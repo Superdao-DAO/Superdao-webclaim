@@ -48,4 +48,8 @@ export default class {
       startVisible: false,
     });
   }
+
+  static updateMarquee() {
+    $('.marquee').marquee("update");
+  }
 }

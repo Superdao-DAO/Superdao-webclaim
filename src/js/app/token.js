@@ -63,8 +63,8 @@ export default class {
   }
 
   checkNetworkAndInit() {
-    const netId = this.web3.version.getNetwork((error, result) => {
-      if(error) {
+    this.web3.version.getNetwork((error, result) => {
+      if (error) {
         throw new SupError(error);
       }
       switch (result) {

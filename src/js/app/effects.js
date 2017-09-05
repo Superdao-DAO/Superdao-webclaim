@@ -50,6 +50,6 @@ export default class {
   }
 
   static updateMarquee() {
-    $('.marquee').marquee("update");
+    $('.marquee').marquee('update');
   }
 }

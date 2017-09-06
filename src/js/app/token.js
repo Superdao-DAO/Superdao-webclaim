@@ -88,6 +88,7 @@ export default class {
     });
     this.makeContractInst();
     this.fetchContractDataAndUpdate();
+    this.tokensClaimedEvent();
   }
 
   claim() {
@@ -182,6 +183,17 @@ export default class {
         this.parent.mainRegisterAndUpdate();
         this.parent.ribbonUpdClbk();
       });
+    });
+  }
+
+  tokensClaimedEvent() {
+    const claimEvent = this.tokenInstance.TokensClaimedEvent();
+    claimEvent.watch((err, result) => {
+      if (!err) {
+        console.log(result);
+      } else {
+        throw new SupError(err);
+      }
     });
   }
 

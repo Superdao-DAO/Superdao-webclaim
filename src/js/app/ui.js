@@ -90,6 +90,12 @@ export default class {
     this.enableElement(uiConf.claim_button);
   }
 
+  bindClaim(callback) {
+    $(uiConf.claim_button).click(() => {
+      callback();
+    });
+  }
+
   static blink(elemID) {
     this.getElement(elemID).fadeOut(500).fadeIn(500);
   }

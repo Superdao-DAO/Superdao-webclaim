@@ -24,12 +24,12 @@ class MainApp {
    */
   constructor() {
     this.mobileDetect = new MobileDetect(window.navigator.userAgent);
-    if (this.mobileDetect.phone()) {
+    if (this.mobileDetect.mobileGrade()) {
       // confirm dialog
       alertify.confirm(strings.ask_msg_mobile, () => {
         this.init();
       }, () => {
-        // user clicked "cancel"
+        window.location = mainConf.mobile_redirect_uri;
       });
     } else {
       this.init();

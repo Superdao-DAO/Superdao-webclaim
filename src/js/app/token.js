@@ -53,6 +53,7 @@ export default class {
     this.makeContractInst();
     this.fetchContractDataAndUpdate();
     this.tokensClaimedEvent();
+    this.bindClaim();
   }
 
   makeContractInst() {
@@ -185,6 +186,12 @@ export default class {
       } else {
         throw new SupError(err);
       }
+    });
+  }
+
+  bindClaim() {
+    this.claimBtn.click(() => {
+      this.claim();
     });
   }
 

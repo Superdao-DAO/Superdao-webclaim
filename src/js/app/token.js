@@ -52,6 +52,7 @@ export default class {
     this.checkNetwork();
     this.makeContractInst();
     this.fetchContractDataAndUpdate();
+    this.tokensClaimedEvent();
   }
 
   makeContractInst() {
@@ -173,6 +174,17 @@ export default class {
     wait.then(() => {
       this.parent.mainRegisterAndUpdate();
       this.parent.ribbonUpdate();
+    });
+  }
+
+  tokensClaimedEvent() {
+    const claimEvent = this.tokenInstance.TokensClaimedEvent();
+    claimEvent.watch((err, result) => {
+      if (!err) {
+        console.log(result);
+      } else {
+        throw new SupError(err);
+      }
     });
   }
 

@@ -67,13 +67,9 @@ class MainApp {
   }
 
   getRemotePrices(callback) {
-    $.get(mainConf.ether_price_uri('ETH', 'USD'), wait((data) => {
-      this.ethUsdPrice = data.USD;
-    }));
-    $.get(mainConf.ether_price_uri('ETH', 'BTC'), wait((data) => {
+    $.get(mainConf.ether_price_uri('ETH', 'BTC,USD'), (data) => {
       this.ethBtcPrice = data.BTC;
-    }));
-    wait.then(() => {
+      this.ethUsdPrice = data.USD;
       callback();
     });
   }

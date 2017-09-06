@@ -24,7 +24,7 @@ class MainApp {
    */
   constructor() {
     this.mobileDetect = new MobileDetect(window.navigator.userAgent);
-    if (this.mobileDetect.mobileGrade()) {
+    if (this.mobileDetect.mobile()) {
       // confirm dialog
       alertify.confirm(strings.ask_msg_mobile, () => {
         this.init();

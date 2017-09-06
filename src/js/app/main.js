@@ -24,12 +24,12 @@ class MainApp {
    */
   constructor() {
     this.mobileDetect = new MobileDetect(window.navigator.userAgent);
-    if (this.mobileDetect.phone()) {
+    if (this.mobileDetect.mobile()) {
       // confirm dialog
       alertify.confirm(strings.ask_msg_mobile, () => {
         this.init();
       }, () => {
-        // user clicked "cancel"
+        window.location = mainConf.mobile_redirect_uri;
       });
     } else {
       this.init();
@@ -51,17 +51,22 @@ class MainApp {
     this.ui.setTokensLeft(this.token.tokensLeft);
     this.ui.setTokensBought(this.token.tokensBought);
     this.ui.setTokenPriceEthDisc(this.token.tokenPriceDisc);
+    this.ui.setTokenPriceUsdDisc(
+      new BigNumber(this.token.tokenPriceDisc).mul(this.ethUsdPrice).toFixed(
+        2));
     if (this.presaleStatusCheck()) {
       try {
         this.ui.setAccountDD(this.token.web3.eth.accounts);
       } catch (error) {
+        this.ui.disableClaimButton();
         console.log(error);
       }
+    } else {
+      this.ui.disableClaimButton();
     }
   }
 
-  ribbonUpdate() {
-    this.ui.setRibbonTokenPrice(this.token.tokenPrice);
+  getRemotePrices(callback) {
     $.get(mainConf.ether_price_uri('ETH', 'USD'), wait((data) => {
       this.ethUsdPrice = data.USD;
     }));
@@ -69,7 +74,7 @@ class MainApp {
       this.ethBtcPrice = data.BTC;
     }));
     wait.then(() => {
-      this.ribbonUpdClbk();
+      callback();
     });
   }
 
@@ -82,11 +87,13 @@ class MainApp {
   }
 
   ribbonUpdClbk() {
+    this.ui.setRibbonTokenPrice(this.token.tokenPrice);
     this.ui.setRibbonDollarPrice(
       new BigNumber(this.ethUsdPrice).mul(this.token.tokenPrice).toNumber());
     this.ui.setRibbonSupBtcPrice(
       new BigNumber(this.ethBtcPrice).mul(this.token.tokenPrice).toNumber());
     this.ui.setRibbonEthBtcPrice(this.ethBtcPrice);
+    this.effects.constructor.updateMarquee();
   }
 }
 

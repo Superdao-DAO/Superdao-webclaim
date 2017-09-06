@@ -51,6 +51,10 @@ export default class {
     this.getElement(uiConf.token_price_element).html(tokenPrice);
   }
 
+  setTokenPriceUsdDisc(tokenPrice) {
+    this.getElement(uiConf.token_usd_price).html(tokenPrice);
+  }
+
   setAccountDD(accounts) {
     if (accounts.length === 0) {
       throw new SupError(strings.err_accounts_locked);
@@ -62,7 +66,8 @@ export default class {
   }
 
   setRibbonDollarPrice(dollarPrice) {
-    this.getElement(uiConf.ribbon_token_dollar_price).html(dollarPrice);
+    this.getElement(uiConf.ribbon_token_dollar_price).html(
+      dollarPrice.toFixed(2));
   }
 
   setRibbonTokenPrice(tokenPrice) {
@@ -75,6 +80,14 @@ export default class {
 
   setRibbonEthBtcPrice(btcPrice) {
     this.getElement(uiConf.ribbon_ether_btc_price).html(btcPrice);
+  }
+
+  disableClaimButton() {
+    this.disableElement(uiConf.claim_button);
+  }
+
+  enableClaimButton() {
+    this.enableElement(uiConf.claim_button);
   }
 
   static blink(elemID) {

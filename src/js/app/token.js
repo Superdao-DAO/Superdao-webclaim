@@ -49,44 +49,47 @@ export default class {
       ));
       this.injected = false;
     }
-    this.checkNetwork();
-    this.makeContractInst();
-    this.fetchContractDataAndUpdate();
-    this.tokensClaimedEvent();
-    this.bindClaim();
+    this.checkNetworkAndInit();
   }
 
   makeContractInst() {
     try {
-      this.accounts_count = this.web3.eth.accounts.length;
       this.tokenInstance = this.web3.eth.contract(this.abi).at(this.address);
     } catch (e) {
       console.log(e);
-      // disable_button();
+      this.parent.ui.disableClaimButton();
       throw new SupError(strings.err_no_token_instance);
     }
   }
 
-  checkNetwork() {
-    const netId = this.web3.version.network;
-    switch (netId) {
-      case '1':
-        console.log(strings.inf_msg_mainet);
-        break;
-      case '2':
-        console.log(
-          strings.inf_msg_morden);
-        break;
-      case '3':
-        console.log(strings.inf_msg_ropsten);
-        break;
-      default:
-        console.log(strings.inf_msg_net_unk);
-    }
-    if (netId !== '1' && !environment.debug) {
-      // disable_button();
-      throw new SupError(strings.err_no_main_net_claim);
-    }
+  checkNetworkAndInit() {
+    this.web3.version.getNetwork((error, result) => {
+      if (error) {
+        throw new SupError(error);
+      }
+      switch (result) {
+        case '1':
+          console.log(strings.inf_msg_mainet);
+          break;
+        case '2':
+          console.log(
+            strings.inf_msg_morden);
+          break;
+        case '3':
+          console.log(strings.inf_msg_ropsten);
+          break;
+        default:
+          console.log(strings.inf_msg_net_unk);
+      }
+      if (result !== '1' && !environment.debug) {
+        this.parent.ui.disableClaimButton();
+        throw new SupError(strings.err_no_main_net_claim);
+      }
+    });
+    this.makeContractInst();
+    this.fetchContractDataAndUpdate();
+    this.tokensClaimedEvent();
+    this.bindClaim();
   }
 
   claim() {
@@ -148,6 +151,7 @@ export default class {
       if (!error) {
         this.claimedPrepaidUnits = result;
       } else {
+        this.parent.ui.disableClaimButton();
         throw new SupError(error);
       }
     }));
@@ -155,6 +159,7 @@ export default class {
       if (!error) {
         this.claimedUnits = result;
       } else {
+        this.parent.ui.disableClaimButton();
         throw new SupError(error);
       }
     }));
@@ -162,6 +167,7 @@ export default class {
       if (!error) {
         this.lastPrice = result;
       } else {
+        this.parent.ui.disableClaimButton();
         throw new SupError(error);
       }
     }));
@@ -169,12 +175,15 @@ export default class {
       if (!error) {
         this.promissoryUnits = result;
       } else {
+        this.parent.ui.disableClaimButton();
         throw new SupError(error);
       }
     }));
     wait.then(() => {
-      this.parent.mainRegisterAndUpdate();
-      this.parent.ribbonUpdate();
+      this.parent.getRemotePrices(() => {
+        this.parent.mainRegisterAndUpdate();
+        this.parent.ribbonUpdClbk();
+      });
     });
   }
 
@@ -200,6 +209,7 @@ export default class {
       typeof this.claimedUnits === 'undefined' ||
       typeof this.claimedPrepaidUnits === 'undefined' ||
       typeof this.promissoryUnits === 'undefined') {
+      this.parent.ui.disableClaimButton();
       throw new SupError(strings.err_units_not_set);
     }
     return this.promissoryUnits.minus(
@@ -210,6 +220,7 @@ export default class {
     if (
       typeof this.claimedUnits === 'undefined' ||
       typeof this.claimedPrepaidUnits === 'undefined') {
+      this.parent.ui.disableClaimButton();
       throw new SupError(strings.err_units_not_set);
     }
     return this.claimedUnits.plus(this.claimedPrepaidUnits).toNumber();
@@ -217,6 +228,7 @@ export default class {
 
   get tokenPriceDisc() {
     if (typeof this.lastPrice === 'undefined') {
+      this.parent.ui.disableClaimButton();
       throw new SupError(strings.err_price_not_set);
     }
     const ethPrice = this.web3.fromWei(this.lastPrice, 'ether');
@@ -225,6 +237,7 @@ export default class {
 
   get tokenPrice() {
     if (typeof this.lastPrice === 'undefined') {
+      this.parent.ui.disableClaimButton();
       throw new SupError(strings.err_price_not_set);
     }
     return this.web3.fromWei(this.lastPrice, 'ether').toNumber();

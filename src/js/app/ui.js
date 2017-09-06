@@ -1,12 +1,15 @@
 import uiConf from './config/ui';
 import strings from './strings';
 import { SupError } from './error';
+import token from './token';
 
 const $ = require('jquery');
 
 export default class {
   constructor() {
     this.elemInsts = {};
+    this.claimBtn = uiConf.claim_button;
+    this.bindClaim();
   }
 
   disableElement(elemID) {
@@ -88,6 +91,12 @@ export default class {
 
   enableClaimButton() {
     this.enableElement(uiConf.claim_button);
+  }
+
+  bindClaim() {
+    $(this.claimBtn).click(() => {
+      token.claim();
+    });
   }
 
   static blink(elemID) {

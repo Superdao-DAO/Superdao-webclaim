@@ -8,7 +8,6 @@ const $ = require('jquery');
 export default class {
   constructor() {
     this.elemInsts = {};
-    this.claimBtn = uiConf.claim_button;
     this.bindClaim();
   }
 
@@ -94,7 +93,7 @@ export default class {
   }
 
   bindClaim() {
-    $(this.claimBtn).click(() => {
+    $(uiConf.claim_button).click(() => {
       token.claim();
     });
   }

@@ -42,6 +42,9 @@ class MainApp {
     this.ui.bindClaim(() => {
       this.token.claim();
     });
+    this.ui.bindEtherValue(() => {
+      this.token.displayEtherValue();
+    });
   }
 
   mainRegisterAndUpdate() {

@@ -10,8 +10,11 @@ const Wait = require('wait-async');
 const alertify = require('alertifyjs');
 const Web3 = require('web3');
 const $ = require('jquery');
+const BigNumber = require('bignumber.js');
 
 const wait = new Wait();
+
+BigNumber.config({ ERRORS: false });
 
 /**
  * This is the main promissory token class
@@ -184,6 +187,12 @@ export default class {
         this.parent.ribbonUpdClbk();
       });
     });
+  }
+
+  displayEtherValue() {
+    const value = + $(uiIdentity.claim_eth_input).val();
+    const tokens = Math.floor(value / strings.token_discount_price);
+    $(uiIdentity.claim_button).val('Claim ' + tokens + ' Tokens');
   }
 
   tokensClaimedEvent() {

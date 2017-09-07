@@ -1,5 +1,5 @@
 export default {
-  token_discount_price: '...', // Value in Ether
+  token_discount_price: 0.027937056, // Value in Ether
   err_account_is_locked: 'Error: account is locked',
   err_no_accounts: 'No accounts available. Please, create a new account ' +
   'and refresh the page.',

@@ -90,9 +90,10 @@ export default class {
     this.enableElement(uiConf.claim_button);
   }
 
-  bindClaim(callback) {
+  bindClaim(scope, callback) {
     $(uiConf.claim_button).click(() => {
-      callback();
+      console.log('CLAIM BUTTON CLICKED');
+      callback.call(scope);
     });
   }
 

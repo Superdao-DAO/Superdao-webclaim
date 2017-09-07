@@ -41,7 +41,7 @@ class MainApp {
     this.chart = new Chart();
     this.token = new Token(this);
     this.effects = new Effects();
-    this.ui.bindClaim(this.token.claim);
+    this.ui.bindClaim(this.token, this.token.claim);
   }
 
   mainRegisterAndUpdate() {

@@ -9,9 +9,7 @@ const $ = require('jquery');
 const MobileDetect = require('mobile-detect');
 const alertify = require('alertifyjs');
 const BigNumber = require('bignumber.js');
-const Wait = require('wait-async');
 
-const wait = new Wait();
 let app; // eslint-disable-line no-unused-vars
 
 /**
@@ -41,7 +39,9 @@ class MainApp {
     this.chart = new Chart();
     this.token = new Token(this);
     this.effects = new Effects();
-    this.ui.bindClaim(this.token, this.token.claim);
+    this.ui.bindClaim(() => {
+      this.token.claim();
+    });
   }
 
   mainRegisterAndUpdate() {

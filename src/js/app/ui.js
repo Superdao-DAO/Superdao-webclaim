@@ -104,6 +104,10 @@ export default class {
     });
   }
 
+  logTransaction(output) {
+    $(uiConf.logging_element).append($('<div>').html(output));
+  }
+
   static blink(elemID) {
     this.getElement(elemID).fadeOut(500).fadeIn(500);
   }

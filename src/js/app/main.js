@@ -4,6 +4,7 @@ import Token from './token';
 import strings from './strings';
 import Ui from './ui';
 import mainConf from './config/main';
+import uiConf from './config/ui';
 
 const $ = require('jquery');
 const MobileDetect = require('mobile-detect');
@@ -43,7 +44,7 @@ class MainApp {
       this.token.claim();
     });
     this.ui.bindEtherValue(() => {
-      this.token.displayEtherValue();
+      this.token.displayTokenValue();
     });
   }
 

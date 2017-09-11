@@ -97,6 +97,17 @@ export default class {
     });
   }
 
+  bindEtherValue(callback) {
+    $(uiConf.claim_eth_input).on('input', () => {
+      console.log('INPUT VALUE CHANGES');
+      callback();
+    });
+  }
+
+  logTransaction(output) {
+    $(uiConf.logging_element).append($('<div>').html(output));
+  }
+
   static blink(elemID) {
     this.getElement(elemID).fadeOut(500).fadeIn(500);
   }

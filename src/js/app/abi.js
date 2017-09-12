@@ -1,4 +1,4 @@
-const ABI = [{
+export default [{
   constant: true,
   inputs: [],
   name: 'lastPrice',
@@ -582,7 +582,3 @@ const ABI = [{
   name: 'WithdrawalApproved',
   type: 'event',
 }];
-
-const apikey = 'GKU3FHXM86JQ2TM68P44RUCJS97SSW31X3';
-
-export { apikey, ABI };

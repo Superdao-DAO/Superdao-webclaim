@@ -1,21 +1,14 @@
-import { ABI } from './abi';
+import ABI from './abi';
 import strings from './strings';
 import tokenConfig from './config/token';
 import environment from './config/environment';
 import { SupError } from './error';
-import uiControl from './ui';
-import uiIdentity from './config/ui';
 
 const Wait = require('wait-async');
 const alertify = require('alertifyjs');
 const Web3 = require('web3');
-const $ = require('jquery');
-const BigNumber = require('bignumber.js');
 
 const wait = new Wait();
-
-BigNumber.config({ ERRORS: false });
-
 
 /**
  * This is the main promissory token class
@@ -27,12 +20,6 @@ export default class {
    */
   constructor(parent) {
     this.parent = parent;
-    this.abi = ABI;
-    this.ethAccount = uiIdentity.eth_account;
-    this.claimBtn = uiIdentity.claim_button;
-    this.gasPriceInput = uiIdentity.gas_price_input;
-    this.claimEtherInput = uiIdentity.claim_eth_input;
-    this.loggingElement = uiIdentity.logging_element;
     if (!environment.debug) {
       this.address = tokenConfig.main_token_address;
     } else {
@@ -58,7 +45,7 @@ export default class {
 
   makeContractInst() {
     try {
-      this.tokenInstance = this.web3.eth.contract(this.abi).at(this.address);
+      this.tokenInstance = this.web3.eth.contract(ABI).at(this.address);
     } catch (e) {
       console.log(e);
       this.parent.ui.disableClaimButton();
@@ -99,106 +86,37 @@ export default class {
     if (typeof this.tokenInstance === 'undefined') {
       this.makeContractInst();
     }
-    this.fetchContractDataAndUpdate();
+    this.fetchContractDataAndUpdate(() => {
+      this.parent.ui.displayTokenValue();
+      this.claimCallback();
+    });
+  }
+
+  claimCallback() {
     let transactionId;
-    const gasPrice = $(this.gasPriceInput).val();
-    let value = $(this.claimEtherInput).val();
-    const priceDiscount = this.tokenPriceDisc;
-    const tokenCountCheck = new BigNumber(value % priceDiscount).toPrecision(10);
-    if (tokenCountCheck !== priceDiscount) {
-      value = new BigNumber(value - tokenCountCheck).toPrecision(10);
-      $(this.claimEtherInput).val(value);
-    }
-    if (value === 0) {
-       return;
-    }
     this.parent.ui.disableClaimButton();
     try {
       transactionId = this.tokenInstance.claim({
-        from: $(this.ethAccount).val(),
-        value: this.web3.toWei(value, 'ether'),
-        gas: gasPrice,
+        from: this.parent.ui.getEthAccount(),
+        value: this.web3.toWei(this.parent.ui.getClaimedEther(), 'ether'),
+        gas: this.parent.ui.getGasPriceInput(),
       }, (error, result) => {
         if (!error) {
           console.log(transactionId);
-          value = +$(this.claimEtherInput).val('');
-          this.parent.ui.logTransaction(`Transaction sent: <a href="https://etherscan.io/tx/',
-            ${result},'" target="_blank">', ${result}</a>`);
+          this.parent.ui.logTransaction(result);
         } else {
-          let errorData = error.toString();
-          console.log(errorData);
-          if (Object.keys(error)) {
-            if (error.indexOf('Error: Error:') > -1) {
-              errorData = error.substring(13);
-              if (error.length > 58) {
-                errorData = `${error.substring(0, 58)}, ...`;
-              }
-            }
-            this.parent.ui.logTransaction(`<span style="color:red">, ${error}, </span>`);
-          }
+          console.log(error);
+          this.parent.ui.logTransactionErr(error.toString());
         }
-        this.fetchContractDataAndUpdate();
-        this.parent.ui.enableClaimButton();
       });
     } catch (e) {
       console.log('Excep:', e);
-      this.parent.ui.logTransaction(`<span style="color:red">, ${e.message}, </span>`);
-      this.parent.ui.enableClaimButton();
+      this.parent.ui.logTransactionErr(e.message);
     }
+    this.parent.ui.enableClaimButton();
   }
 
-  /*claim() {
-    if (typeof this.tokenInstance === 'undefined') {
-      this.makeContractInst();
-    }
-    let transactionId;
-    const gasPrice = $(this.gasPriceInput).val();
-    let value = $(this.claimEtherInput).val();
-    const tokenCountCheck = this.constructor.roundPrecise(value
-      % strings.token_discount_price, 11);
-    if (tokenCountCheck !== strings.token_discount_price) {
-      value = this.constructor.roundPrecise(value - tokenCountCheck, 11);
-      $(this.claimEtherInput).val(value);
-    }
-    if (value === 0) {
-      // return;
-    }
-    uiControl.disableElement(this.claimBtn);
-    try {
-      transactionId = this.tokenInstance.claim({
-        from: $(this.ethAccount).val(),
-        value: Web3.toWei(value, 'ether'),
-        gas: gasPrice,
-      }, (error, result) => {
-        if (!error) {
-          console.log(transactionId);
-          value = +$(this.claimEtherInput).val('');
-          uiControl.addToLog(`Transaction sent: <a href="https://etherscan.io/tx/',
-            ${result},'" target="_blank">', ${result}</a>`);
-        } else {
-          let errorData = error.toString();
-          console.log(errorData);
-          if (Object.keys(error)) {
-            if (error.indexOf('Error: Error:') > -1) {
-              errorData = error.substring(13);
-              if (error.length > 58) {
-                errorData = `${error.substring(0, 58)}, ...`;
-              }
-            }
-            uiControl.addToLog(`<span style="color:red">, ${error}, </span>`);
-          }
-        }
-        uiControl.refreshValues();
-        uiControl.enableElement();
-      });
-    } catch (e) {
-      console.log('Excep:', e);
-      uiControl.addToLog(`<span style="color:red">, ${e.message}, </span>`);
-      uiControl.enableElement();
-    }
-  }*/
-
-  fetchContractDataAndUpdate() {
+  fetchContractDataAndUpdate(callback) {
     if (typeof this.tokenInstance === 'undefined') {
       this.makeContractInst();
     }
@@ -236,29 +154,22 @@ export default class {
     }));
     wait.then(() => {
       this.parent.getRemotePrices(() => {
-        this.parent.mainRegisterAndUpdate();
+        this.parent.mainRegisterAndUpdate(callback);
         this.parent.ribbonUpdClbk();
       });
     });
   }
-
-
 
   tokensClaimedEvent() {
     const claimEvent = this.tokenInstance.TokensClaimedEvent();
     claimEvent.watch((err, result) => {
       if (!err) {
         console.log(result);
+        this.fetchContractDataAndUpdate();
       } else {
         throw new SupError(err);
       }
     });
-  }
-
-  displayTokenValue() {
-    const value = + $(uiIdentity.claim_eth_input).val();
-    const tokens = value / this.tokenPriceDisc;
-    $(uiIdentity.claim_button).val('Claim ' + tokens + ' Tokens');
   }
 
   get tokensLeft() {

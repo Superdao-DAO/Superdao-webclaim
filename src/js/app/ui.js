@@ -1,11 +1,13 @@
 import uiConf from './config/ui';
 import strings from './strings';
+import environment from './config/environment';
 import { SupError } from './error';
 
 const $ = require('jquery');
 
 export default class {
-  constructor() {
+  constructor(parent) {
+    this.parent = parent;
     this.elemInsts = {};
   }
 
@@ -31,8 +33,8 @@ export default class {
     if (this.isblinking) {
       clearInterval(this.isblinking);
     }
-    this.isblinking = setInterval(this.constructor.blink, 1000);
-    this.constructor.blink();
+    this.isblinking = setInterval(this.blink, 1000);
+    this.blink();
   }
 
   setTokensLeft(tokensLeft) {
@@ -82,6 +84,18 @@ export default class {
     this.getElement(uiConf.ribbon_ether_btc_price).html(btcPrice);
   }
 
+  getGasPriceInput() {
+    return this.getElement(uiConf.gas_price_input).val();
+  }
+
+  getClaimedEther() {
+    return this.getElement(uiConf.claim_eth_input).val();
+  }
+
+  getEthAccount() {
+    return this.getElement(uiConf.eth_account).val();
+  }
+
   disableClaimButton() {
     this.disableElement(uiConf.claim_button);
   }
@@ -91,24 +105,37 @@ export default class {
   }
 
   bindClaim(callback) {
-    $(uiConf.claim_button).click(() => {
+    this.getElement(uiConf.claim_button).click(() => {
       console.log('CLAIM BUTTON CLICKED');
       callback();
     });
   }
 
   bindEtherValue(callback) {
-    $(uiConf.claim_eth_input).on('input', () => {
+    this.getElement(uiConf.claim_eth_input).on('input', () => {
       console.log('INPUT VALUE CHANGES');
       callback();
     });
   }
 
   logTransaction(output) {
-    $(uiConf.logging_element).append($('<div>').html(output));
+    this.getElement(uiConf.logging_element).append($('<div>').html(
+      `Transaction sent: <a href="https://${environment.debug ? 'ropsten.'
+        : ''}etherscan.io/tx/${output}" target="_blank">${output}</a>`));
   }
 
-  static blink(elemID) {
+  logTransactionErr(output) {
+    this.getElement(uiConf.logging_element).append(
+      $('<div>').html(`<span style="color:red">${output}</span>`));
+  }
+
+  displayTokenValue() {
+    const value = this.getClaimedEther();
+    const tokens = value / this.parent.token.tokenPriceDisc;
+    this.getElement(uiConf.claim_button).val(`Claim ${tokens} Tokens`);
+  }
+
+  blink(elemID) {
     this.getElement(elemID).fadeOut(500).fadeIn(500);
   }
 }

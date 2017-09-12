@@ -4,7 +4,6 @@ import Token from './token';
 import strings from './strings';
 import Ui from './ui';
 import mainConf from './config/main';
-import uiConf from './config/ui';
 
 const $ = require('jquery');
 const MobileDetect = require('mobile-detect');
@@ -36,7 +35,7 @@ class MainApp {
   }
 
   init() {
-    this.ui = new Ui();
+    this.ui = new Ui(this);
     this.chart = new Chart();
     this.token = new Token(this);
     this.effects = new Effects();
@@ -44,11 +43,11 @@ class MainApp {
       this.token.claim();
     });
     this.ui.bindEtherValue(() => {
-      this.token.displayTokenValue();
+      this.ui.displayTokenValue();
     });
   }
 
-  mainRegisterAndUpdate() {
+  mainRegisterAndUpdate(callback) {
     this.chart.updateChart(this.token.tokensLeft,
       this.token.tokensBought);
     this.chart.updateBar(this.token.tokensLeft,
@@ -61,7 +60,11 @@ class MainApp {
         2));
     if (this.presaleStatusCheck()) {
       try {
-        this.ui.setAccountDD(this.token.web3.eth.accounts);
+        if (typeof callback !== 'undefined') {
+          callback();
+        } else {
+          this.ui.setAccountDD(this.token.web3.eth.accounts);
+        }
       } catch (error) {
         this.ui.disableClaimButton();
         console.log(error);
@@ -101,6 +104,6 @@ class MainApp {
 /**
  * Entry Point
  */
-$(document).ready(() => {
+$(window).ready(() => {
   app = new MainApp();
 });

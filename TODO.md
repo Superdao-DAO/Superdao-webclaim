@@ -14,7 +14,7 @@
 - [x] hooking class complete
 - [x] add event listeners etc.
 
-### V2.0.1
+### V2.1.0
 
 - [ ] Integrate static code analysis (esflow?)
 - [ ] Integrate code coverage for javascript (istanbul?)

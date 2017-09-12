@@ -37,7 +37,7 @@ export default class {
       const dataProvider = chartConf.dataProvider;
       dataProvider[0].litres = tokensLeft;
       dataProvider[1].litres = tokensBought;
-      this.chart.animateAgain();
+      this.chart.validateData();
     } else {
       this.registerChart(tokensLeft, tokensBought);
     }

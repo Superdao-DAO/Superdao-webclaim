@@ -111,7 +111,7 @@ export default class {
       });
     } catch (e) {
       console.log('Excep:', e);
-      this.parent.ui.logTransactionErr(e.message.split('\n')[0]);
+      alertify.error(e.message.split('\n')[0]);
     }
     this.parent.ui.enableClaimButton();
   }

@@ -134,15 +134,21 @@ export default class {
   }
 
   displayTokenValue() {
+    const value = this.getClaimedEther();
     if (!this.parent.token.injected) {
       this.disableEtherInput();
       return;
     }
-    const value = this.getClaimedEther();
+    if (value <= 0) {
+      this.disableClaimButton();
+      this.getElement(uiConf.claim_button).val('Claim Tokens');
+      return;
+    }
     const tokens = value / this.parent.token.tokenPriceDisc;
     this.getElement(uiConf.claim_button).val(`Claim ${tokens} Tokens`);
     if (tokens > this.parent.token.tokensLeft) {
       this.disableClaimButton();
+      this.getElement(uiConf.claim_button).val('Insufficient Tokens');
     } else {
       this.enableClaimButton();
     }

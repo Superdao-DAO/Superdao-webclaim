@@ -39,9 +39,9 @@ export default class {
           : tokenConfig.main_http_endpoint // eslint-disable-line comma-dangle
       ));
       this.injected = false;
-      this.parent.ui.disableClaimButton();
       this.parent.ui.disableEtherInput();
     }
+    this.parent.ui.disableClaimButton();
     this.checkNetworkAndInit();
   }
 

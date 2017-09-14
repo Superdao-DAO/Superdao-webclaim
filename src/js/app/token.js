@@ -106,12 +106,12 @@ export default class {
           this.parent.ui.logTransaction(result);
         } else {
           console.log(error);
-          this.parent.ui.logTransactionErr(error.toString());
+          alertify.error(error.message.split('\n')[0]);
         }
       });
     } catch (e) {
       console.log('Excep:', e);
-      this.parent.ui.logTransactionErr(e.message);
+      this.parent.ui.logTransactionErr(e.message.split('\n')[0]);
     }
     this.parent.ui.enableClaimButton();
   }

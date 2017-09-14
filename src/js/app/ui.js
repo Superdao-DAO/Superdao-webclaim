@@ -124,15 +124,15 @@ export default class {
         : ''}etherscan.io/tx/${output}" target="_blank">${output}</a>`));
   }
 
-  logTransactionErr(output) {
-    this.getElement(uiConf.logging_element).append(
-      $('<div>').html(`<span style="color:red">${output}</span>`));
-  }
-
   displayTokenValue() {
     const value = this.getClaimedEther();
     const tokens = value / this.parent.token.tokenPriceDisc;
     this.getElement(uiConf.claim_button).val(`Claim ${tokens} Tokens`);
+    if (tokens > this.parent.token.tokensLeft) {
+      this.disableClaimButton();
+    } else {
+      this.enableClaimButton();
+    }
   }
 
   blink(elemID) {

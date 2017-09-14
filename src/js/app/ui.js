@@ -58,6 +58,9 @@ export default class {
   }
 
   setAccountDD(accounts) {
+    if (!this.parent.token.injected) {
+      return;
+    }
     if (accounts.length === 0) {
       throw new SupError(strings.err_accounts_locked);
     }
@@ -101,7 +104,13 @@ export default class {
   }
 
   enableClaimButton() {
-    this.enableElement(uiConf.claim_button);
+    if (this.parent.token.injected) {
+      this.enableElement(uiConf.claim_button);
+    }
+  }
+
+  disableEtherInput() {
+    this.disableElement(uiConf.claim_eth_input);
   }
 
   bindClaim(callback) {
@@ -125,6 +134,10 @@ export default class {
   }
 
   displayTokenValue() {
+    if (!this.parent.token.injected) {
+      this.disableEtherInput();
+      return;
+    }
     const value = this.getClaimedEther();
     const tokens = value / this.parent.token.tokenPriceDisc;
     this.getElement(uiConf.claim_button).val(`Claim ${tokens} Tokens`);

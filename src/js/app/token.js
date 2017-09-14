@@ -39,6 +39,8 @@ export default class {
           : tokenConfig.main_http_endpoint // eslint-disable-line comma-dangle
       ));
       this.injected = false;
+      this.parent.ui.disableClaimButton();
+      this.parent.ui.disableEtherInput();
     }
     this.checkNetworkAndInit();
   }
@@ -161,13 +163,16 @@ export default class {
   }
 
   tokensClaimedEvent() {
+    if (!this.injected) {
+      return;
+    }
     const claimEvent = this.tokenInstance.TokensClaimedEvent();
     claimEvent.watch((err, result) => {
       if (!err) {
         console.log(result);
         this.fetchContractDataAndUpdate();
       } else {
-        throw new SupError(err);
+        throw new SupError(err.message.split('\n')[0]);
       }
     });
   }

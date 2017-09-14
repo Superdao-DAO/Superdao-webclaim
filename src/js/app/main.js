@@ -63,7 +63,8 @@ class MainApp {
         if (typeof callback !== 'undefined') {
           callback();
         } else {
-          this.ui.setAccountDD(this.token.web3.eth.accounts);
+          this.ui.setAccountDD(this.token.web3.eth.accounts[0]);
+          this.ui.bindAccountChangeEvent();
         }
       } catch (error) {
         this.ui.disableClaimButton();

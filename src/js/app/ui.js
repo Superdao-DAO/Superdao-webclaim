@@ -1,9 +1,9 @@
 import uiConf from './config/ui';
 import strings from './strings';
 import environment from './config/environment';
-import { SupError } from './error';
 
 const $ = require('jquery');
+const alertify = require('alertifyjs');
 
 export default class {
   constructor(parent) {
@@ -57,17 +57,16 @@ export default class {
     this.getElement(uiConf.token_usd_price).html(tokenPrice);
   }
 
-  setAccountDD(accounts) {
+  setAccountDD(account) {
     if (!this.parent.token.injected) {
       return;
     }
-    if (accounts.length === 0) {
-      throw new SupError(strings.err_accounts_locked);
+    if (!account) {
+      this.getElement(uiConf.eth_account).val('');
+      alertify.error(strings.err_accounts_locked);
+      return;
     }
-    for (let i = 0, len = accounts.length; i < len; i += 1) {
-      this.getElement(uiConf.eth_account).append(
-        $('<option></option>').val(accounts[i]).html(accounts[i]));
-    }
+    this.getElement(uiConf.eth_account).val(account);
   }
 
   setRibbonDollarPrice(dollarPrice) {
@@ -127,6 +126,18 @@ export default class {
     });
   }
 
+  bindAccountChangeEvent() {
+    if (this.accountInterval) {
+      return;
+    }
+    this.accountInterval = setInterval(() => {
+      if (this.parent.token.web3.eth.accounts[0] !== this.parent.token.account) {
+        this.parent.token.account = this.parent.token.web3.eth.accounts[0];
+        this.setAccountDD(this.parent.token.web3.eth.accounts[0]);
+      }
+    }, 100);
+  }
+
   logTransaction(output) {
     this.getElement(uiConf.logging_element).append($('<div>').html(
       `Transaction sent: <a href="https://${environment.debug ? 'ropsten.'
@@ -139,7 +150,7 @@ export default class {
       this.disableEtherInput();
       return;
     }
-    if (value <= 0) {
+    if (value <= 0 || this.getElement(uiConf.eth_account).val() === '') {
       this.disableClaimButton();
       this.getElement(uiConf.claim_button).val('Claim Tokens');
       return;

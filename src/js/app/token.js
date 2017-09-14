@@ -106,6 +106,7 @@ export default class {
         if (!error) {
           console.log(transactionId);
           this.parent.ui.logTransaction(result);
+          alertify.success(strings.inf_msg_claim_success);
         } else {
           console.log(error);
           alertify.error(error.message.split('\n')[0]);

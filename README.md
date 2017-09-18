@@ -61,7 +61,7 @@ Additional labels for pre-release and build metadata are available as extensions
 
 ## Authors
 
-* **Panos** - *Superdao Core Team*
+* **Superdao**
 
 See also the list of [contributors](https://github.com/Superdao-DAO/Superdao-webclaim/graphs/contributors) who participated in this project.
 

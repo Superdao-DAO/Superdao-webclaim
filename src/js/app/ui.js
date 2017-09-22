@@ -33,8 +33,10 @@ export default class {
     if (this.isblinking) {
       clearInterval(this.isblinking);
     }
-    this.isblinking = setInterval(this.blink, 1000);
-    this.blink();
+    this.isblinking = setInterval(() => {
+      this.blink(uiConf.presale_over_element);
+    }, 1000);
+    this.blink(uiConf.presale_over_element);
   }
 
   setTokensLeft(tokensLeft) {

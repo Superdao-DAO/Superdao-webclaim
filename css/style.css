@@ -628,13 +628,14 @@ input:focus, textarea:focus, select:focus {
 
 /* Footer */
 .footer {
-  position: fixed;
+  position: fixed !important;
   right: 0;
   bottom: 0;
   left: 0;
-  padding: 1rem;
-  padding-bottom: 30px;
-  height: 20px;
+  padding: 0.9rem;
+  padding-bottom: 2rem;
+  /*height: 20px;
+  max-height: 100px;*/
   background-color: black;
   text-align: center;
   color: white;
@@ -642,6 +643,8 @@ input:focus, textarea:focus, select:focus {
 }
 
 .footer2 {
+  position: relative;
+  top: 0;
   margin: -0.2% auto;
   width: 50%;
   font-size: 18px;
@@ -657,7 +660,8 @@ input:focus, textarea:focus, select:focus {
 
 .footer button{
     border: 0px;
-    font-size: 24px;
+    /*font-size: 24px;*/
+    font-size: 1.3rem;
     display: block;
     min-width: auto;
     min-height: 35px;
@@ -667,10 +671,14 @@ input:focus, textarea:focus, select:focus {
     letter-spacing: 0.1.5em;
 }
 
+.footer .buttom{
+  top: 0.2rem;
+}
+
 .buttom {
   position: absolute;
-  bottom: 0;
-  height: 35px;
+  z-index: 10;
+  /*height: 35px;*/
   margin: 5px 10px;
   padding: 0px 10px;
   color: #fff;

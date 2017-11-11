@@ -27,7 +27,7 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
       window.web3 = new Web3(Web3.givenProvider || web3.currentProvider);
     } else {
       console.log('No web3? You should consider trying MetaMask!');
-      alert(ERR_NO_METAMASK);
+      notify.note(ERR_NO_METAMASK,'warning');
       // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
       window.web3 = new Web3(
         new Web3.providers.HttpProvider("http://localhost:8545"));
@@ -85,8 +85,9 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
         }
         if (netId !== "1") {
           disable_button();
-          alert(
-            "Kindly switch to the Main Ethereum network, then refresh the page to claim Tokens.");
+          notify.note(
+            "Kindly switch to the Main Ethereum network, then refresh the page to claim Tokens.",
+          'warning');
           //return;TODO uncomment for prod
         }
         loadContract(netId)
@@ -124,8 +125,8 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
       accounts_count = typeof web3.eth.accounts == 'object'?web3.eth.accounts.length:0
 
       if (accounts_count === 0) {
-        alert(ERR_NO_ACCOUNTS);
-        add_to_log(ERR_NO_ACCOUNTS);
+        notify.note(ERR_NO_ACCOUNTS,'info');
+        //add_to_log(ERR_NO_ACCOUNTS);
         disable_button();
         return;
       }
@@ -149,9 +150,9 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
     } catch (e) {
       console.log(e);
       disable_button();
-      alert(
+      notify.note(
         'Cannot initiate token contract instance. Please, make sure your node has RPC available.');
-        add_to_log('Error: cannot initiate token contract instance.');
+        //add_to_log('Error: cannot initiate token contract instance.','error');
         return;
     }
     getAddresses();
@@ -288,8 +289,9 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
                 error = error.substring(0, 58) + "...";
               }
             }
-            add_to_log('<span style="color:red">' + error
-              + '</span>');
+            notify.note( error,'error');
+          //  add_to_log('<span style="color:red">' + error
+          //    + '</span>');
           }
         }
         refresh_values();
@@ -297,7 +299,8 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
       })
     } catch (e) {
       console.log("Excep:", e);
-      add_to_log('<span style="color:red">' + e.message + '</span>');
+      notify.note( e.message ,'error');
+      //add_to_log('<span style="color:red">' + e.message + '</span>');
       enable_button();
     }
   }
@@ -381,4 +384,30 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
     $('#tkns_bgh').text(tokensBought);
     $('#tkns_bgh').text(tokensBought);
     $('#tkns_dsc_prc').text(prices.tkn_prc+'ETH [ $'+discPrice+' ]');
+  }
+
+  var notify = {
+    options:{
+        'closeButton': true,
+        'debug': false,
+        'newestOnTop': true,
+        'progressBar': true,
+        'positionClass': 'toast-top-right',
+        'preventDuplicates': false,
+        'hideDuration': '1000',
+        'timeOut': '5000',
+        'extendedTimeOut' : '1000',
+        'showEasing': 'swing',
+        'hideEasing': 'linear',
+        'showMethod': 'fadeIn',
+        'hideMethod': 'fadeOut'
+    },
+    note: function(msg,type){
+      toastr.options = Object.assign({},this.options);
+      toastr[type](null,msg,{timeOut: 0,extendedTimeOut: 0});
+    },
+    show: function(){
+      toastr.options = Object.assign({},this.options);
+      toastr[type](msg);
+    }
   }

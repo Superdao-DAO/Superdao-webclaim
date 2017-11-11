@@ -12,7 +12,7 @@ var TOKEN_ADDRESS = "",
     isblinking;
 
 const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
-      ERR_NO_ACCOUNTS = 'No accounts available. Please, create a new account and refresh the page.',
+      ERR_NO_ACCOUNTS = 'No accounts available. Please, create or unlock your account and refresh the page.',
       ERR_PERSONAL_NOT_AVAILABLE = 'Error: The method personal_unlockAccount does not exist/is not available',
       ERR_NO_METAMASK = 'Metamask is recommened for use. Security!!!',
       ERR_NO_WEB3 = "Web3 not available.";
@@ -110,7 +110,6 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
         tokens = Math.floor(_value / TOKEN_DISCOUNT_PRICE),
         tokenLeft = promissoryUnits-claimedUnits-claimedPrepaidUnits;
 
-        console.log(promissoryUnits,claimedUnits,claimedPrepaidUnits,tokenLeft)
         if(tokens > tokenLeft){
           tokens = tokenLeft;
           var maxeth = tokens*TOKEN_DISCOUNT_PRICE
@@ -136,26 +135,26 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
           web3.eth.accounts[i]).text(web3.eth.accounts[i]);
         $accounts.append($option);
       }
+      getAddressBalance();
   }
 
   var loadContract = function(network){
-  console.log('trying',network)
-
-    //if(network == '1')
+    //if(network == '1')TODO uncomment for prod
     try {
       accounts_count = web3.eth.accounts.length;
       tokenContract = web3.eth.contract(config.abi);
       tokenInstance = tokenContract.at(config.address);
       enable_button();
       log_events(tokenInstance);
-      getAddresses();
     } catch (e) {
       console.log(e);
       disable_button();
       alert(
         'Cannot initiate token contract instance. Please, make sure your node has RPC available.');
         add_to_log('Error: cannot initiate token contract instance.');
+        return;
     }
+    getAddresses();
   }
 
   var roundPrecise = function (number, precision) {
@@ -167,6 +166,41 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
 
   function getFunctionSignature(fnx){
     return web3.sha3(fnx).substring(0,10);
+  }
+
+  function getAddressBalance(){
+    var addressbox = $('#eth_accounts'),
+    address = addressbox.val(),
+    balbox = $('#tokn_bal');
+
+    if(!web3.isAddress(address )){
+      balbox.val(0);
+      return;
+    }
+
+    function fetchNext(){
+      tokenInstance.checkBalance.call(address,index,{from:address},function(e,r){
+        if(e)
+          return alert('Unable to fetch Token balance');
+        if(Number(r[1]) > 0)
+          claimed.push(r[1]);
+        empty = r[4] == false;
+        if(!empty){
+          index++;
+          fetchNext();}
+        else{
+          var total = claimed.reduce(function add(a, b) {
+            return Number(a) + Number(b);
+          },0);
+          balbox.text(total+ ' ['+index+' Txns ]')
+        }
+      });
+    }
+
+    var empty=false,
+    index=0,claimed=[];
+    balbox.text('...');
+    fetchNext();
   }
 
   function fetchContractData(){

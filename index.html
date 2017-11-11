@@ -110,7 +110,7 @@
 
                   <div class="formControl">
                     <!--<input type="number" id="number" value="" onblur="if(this.value=='')this.value=''" onfocus="if(this.value=='')this.value=''">-->
-										<select id="eth_accounts">
+										<select id="eth_accounts" onchange="getAddressBalance()">
 										</select>
                   </div><!-- end of formControl -->
 
@@ -124,6 +124,14 @@
 
 									<button class="btn submitBtn" id="claim_button" disabled="true" onclick="claim()">CLAIM TOKENS</button>
 								</form><!-- end of claimForm -->
+								<div class="text-center clearfix ">
+									<p>
+										<h4 class="">
+											 Owned:
+											<span id="tokn_bal">...</span>
+										</h4>
+									</p>
+								</div>
 							</div><!-- end of col4 -->
 
 							<div class="col-sm-8">

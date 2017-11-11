@@ -203,7 +203,7 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
           var total = claimed.reduce(function add(a, b) {
             return Number(a) + Number(b);
           },0);
-          balbox.text(total.toLocaleString()+ ' ['+index+' Txns ]')
+          balbox.text(total.toLocaleString()+ ' [ '+index+' Txns ]')
         }
       });
     }

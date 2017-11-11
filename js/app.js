@@ -260,7 +260,7 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
     if (_value === 0) {
       return;
     }
-    var gas = new RegExp(/(\d)+/,'i').exec('20 GWEI')[0];
+    var gas = new RegExp(/(\d)+/,'i').exec(_gasPrice)[0];
 
     disable_button();
     var options = {

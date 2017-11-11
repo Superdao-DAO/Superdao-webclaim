@@ -168,6 +168,16 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
     return web3.sha3(fnx).substring(0,10);
   }
 
+  function getGasPrice(){
+    web3.eth.getGasPrice(function(e,r){
+
+      if(e)
+        return false;
+      var gas = web3.fromWei( r , 'gwei');
+      $('#gas_price').val(gas+' GWEI')
+    })
+  }
+
   function getAddressBalance(){
     var addressbox = $('#eth_accounts'),
     address = addressbox.val(),
@@ -192,7 +202,7 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
           var total = claimed.reduce(function add(a, b) {
             return Number(a) + Number(b);
           },0);
-          balbox.text(total+ ' ['+index+' Txns ]')
+          balbox.text(total.toLocaleString()+ ' ['+index+' Txns ]')
         }
       });
     }
@@ -241,6 +251,7 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
       _gasPrice = +$('#gas_price').val(),
       _value = +$('#claim_value').val(),
       tokenCountCheck = roundPrecise(_value % TOKEN_DISCOUNT_PRICE, 11);
+    if(!(_value > 0))return;//Ensure at least one token is bought
     if (tokenCountCheck !== TOKEN_DISCOUNT_PRICE) {
       _value = roundPrecise(_value - tokenCountCheck, 11);
       $('#claim_value').val(_value);
@@ -248,17 +259,25 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
     if (_value === 0) {
       return;
     }
+    var gas = new RegExp(/(\d)+/,'i').exec('20 GWEI')[0];
+
     disable_button();
+    var options = {
+      from: $('#eth_accounts').val(),
+      value: web3.toWei(_value, 'ether')
+    }
+    if(Number(gas) > 0)
+        options.gasPrice = web3.toWei(gas,'GWEI');
+
     try {
-      transactionId = tokenInstance.claim({
-        from: $('#eth_accounts').val(),
-        value: web3.toWei(_value, 'ether'),
-        gas: _gasPrice
-      }, function (error, result) {
+      transactionId = tokenInstance.claim(options,
+       function (error, result) {
         if (!error) {
           _value = +$('#claim_value').val("");
-          add_to_log('Transaction sent: <a href="https://etherscan.io/tx/'
-            + result + '" target="_blank">' + result + '</a>');
+          notify.note('Transaction sent: <a href="https://etherscan.io/tx/'
+            + result + '" target="_blank">' + result + '</a>','success');
+          //add_to_log('Transaction sent: <a href="https://etherscan.io/tx/'
+          //  + result + '" target="_blank">' + result + '</a>');
         } else {
           error = error.toString();
           console.log(error);
@@ -313,6 +332,7 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
     console.log('do enable')
   }
   function refresh_values() {
+      getGasPrice();
       fetchContractData()
       .then(function(a,b){
         //console.log("in then",claimedPrepaidUnits, claimedUnits)

@@ -1,488 +1,897 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+  <html class="no-js IE lt-ie9 lt-ie8 lt-ie7"></html>
+<![endif]-->
+<!--[if IE 7]>
+  <html class="no-js IE lt-ie9 lt-ie8"></html>
+<![endif]-->
+<!--[if IE 8]>
+  <html class="no-js IE lt-ie9"></html>
+<![endif]-->
+<!--[if gt IE 8]>
+  <html class="no-js IE gt-ie8"></html>
+<![endif]-->
+<!--[if !IE]><!-->
+<html class="no-js" lang="zxx">
+<!--<![endif]-->
 
 <head>
-  <title>Efficient, Reputation DAO Governance Framework For Disruptive Dapp Ventures</title>
-  <meta name="description" content="SuperDAO is an Ethereum decentralized autonomous governance system for incentivized collaborative management of disruptive, economical viable dapp ventures.
-    Superdao enables collaboration of innovators and communities into strong thriving forces."/>
-  <meta name="google-site-verification" content="miEZVM7TwTvJJL1aw-UhPpC-_UbO-fxrGwT6bqRGFa4"/>
-  <!-- Standard Meta -->
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <link rel="stylesheet" type="text/css"
-        href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-  <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
-  <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'/>
-  <script type="text/javascript" src="js/lib/jQuery/jquery-3.1.0.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="js/lib/jquery.marquee.min.js"></script>
-  <script src="js/lib/Chart.min.js"></script>
-  <script src="js/lib/progressbar.min.js"></script>
-  <script src="js/abi.js"></script>
-  <script src="js/lib/amcharts.js"></script>
-  <script src="js/lib/pie.js"></script>
-  <!-- Numeric JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
-  <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-104237560-3', 'auto');
-      ga('send', 'pageview');
-  </script>
+	<!-- title -->
+	<title>Landing Page</title>
+	<!-- meta tags -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta content="width=device-width,initial-scale=1,maximum-scale=1" name="viewport">
+	<meta content="HTML Tidy for Linux (vers 25 March 2009), see www.w3.org" name="generator">
+	<meta content="Superdao.io" name="author">
+	<meta content="Super" name="Description">
+	<!-- fav icon -->
+	<link href="" rel="shortcut icon">
+	<!-- css => Ionic icons sheet -->
+	<link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	<!-- css => Vendor sheet -->
+	<link href="css/vendor.min.css" media="screen" rel="stylesheet" type="text/css">
+	<!-- css => style sheet -->
+	<link href="css/style.css" media="screen" rel="stylesheet" type="text/css">
+	<!-- css => Chartist sheet -->
+	<link href="css/chartist.min.css" media="screen" rel="stylesheet" type="text/css">
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+		<script>
+	      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	      ga('create', 'UA-104237560-3', 'auto');
+	      ga('send', 'pageview');
+	  </script>
 </head>
 
-<body>
-<div class="container">
-  <h2 id="toptxt">Superdao : Efficient, tiered & reputation DAO Governance Framework<span
-    id="toptxtspan">|</span>
-  </h2>
-  <div class="wrapper1">
-    <div class="container1">
-      <!-- particles.js container -->
-      <div id="particles-js"></div>
-      <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-      <div class="wrapper">
-        <div class="container">
-          <script type="text/javascript" src="js/lib/web3.min.js"></script>
-          <script type="text/javascript">
-            var
-              TOKEN_ADDRESS = "0x0348B55AbD6E1A99C6EBC972A6A4582Ec0bcEb5c", //Mainnet
-              //TOKEN_ADDRESS = "0xb750C30Fb1FbcdDF980bc4577eb0C37dc43A8DE3",//Ropsten
-              TOKEN_DISCOUNT_PRICE = "...",//Value in Ether
-              ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
-              ERR_NO_ACCOUNTS = 'No accounts available. Please, create a new account and refresh the page.',
-              ERR_PERSONAL_NOT_AVAILABLE = 'Error: The method personal_unlockAccount does not exist/is not available',
-              ERR_NO_METAMASK = 'Metamask is recommened for use. Security!!!',
-              ERR_NO_WEB3 = "Web3 not available.",
-              tokenContract,
-              tokenInstance,
-              claimedUnits,
-              claimedPrepaidUnits,
-              isblinking,
-              bar = null;
-            window.addEventListener('load', function () {
-              // Checking if Web3 has been injected by the browser (Mist/MetaMask)
-              if (typeof web3 !== 'undefined') {
-                // Use Mist/MetaMask's provider
-                window.web3 = new Web3(web3.currentProvider);
-              } else {
-                console.log('No web3? You should consider trying MetaMask!');
-                alert(ERR_NO_METAMASK);
-                // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-                window.web3 = new Web3(
-                  new Web3.providers.HttpProvider("http://localhost:8545"));
-              }
-              // Now you can start your app & access web3 freely:
-              startApp()
-            });
+<body id="top" class="homePage">
 
-            function startApp() {
-              var accounts_count = 0;
-              if (typeof web3 !== "undefined" && web3 instanceof Web3) {
-                //Ensure we are on the right network
-                web3.version.getNetwork(function (err, netId) {
-                  switch (netId) {
-                    case "1":
-                      console.log('This is mainnet');
-                      break;
-                    case "2":
-                      console.log(
-                        'This is the deprecated Morden test network.');
-                      break;
-                    case "3":
-                      console.log('This is the ropsten test network.');
-                      break;
-                    default:
-                      console.log('This is an unknown network.');
-                  }
-                  if (netId !== "1") {
-                    disable_button();
-                    alert(
-                      "Kindly switch to the Main Ethereum network, then refresh the page to claim Tokens.");
-                    return;
-                  }
-                });
-                try {
-                  accounts_count = web3.eth.accounts.length;
-                  tokenContract = web3.eth.contract(ABI);
-                  tokenInstance = tokenContract.at(TOKEN_ADDRESS);
-                  log_events(tokenInstance);
-                } catch (e) {
-                  console.log(e);
-                  disable_button();
-                  alert(
-                    'Cannot initiate token contract instance. Please, make sure your node has RPC available.');
-                  add_to_log('Error: cannot initiate token contract instance.');
-                }
-              } else {
-                disable_button();
-                alert(ERR_NO_WEB3);
-              }
-              refresh_values();
-              amChart();
-              setInterval(
-                function () {
-                  refresh_values();
-                }, 15000);
-              if (accounts_count === 0) {
-                alert(ERR_NO_ACCOUNTS);
-                add_to_log(ERR_NO_ACCOUNTS);
-                disable_button();
-                return;
-              }
-              var $accounts = $('#eth_accounts');
-              for (var i = 0; i < accounts_count; i++) {
-                var $option = $('<option>').attr('value',
-                  web3.eth.accounts[i]).text(web3.eth.accounts[i]);
-                $accounts.append($option);
-              }
-              $('#claim_value').on('input', function () {
-                var
-                  _value = +this.value,
-                  tokens = Math.floor(_value / TOKEN_DISCOUNT_PRICE);
-                $('#claim_button').val('Claim ' + tokens + ' Tokens');
-              });
-            }
+	<div class="allWrapper">
 
-            roundPrecise = function (number, precision) {
-              var factor = Math.pow(10, precision);
-              var tempNumber = number * factor;
-              var roundedTempNumber = Math.round(tempNumber);
-              return roundedTempNumber / factor;
-            };
+		<section class="SuperDAO clearfix" id="SuperDAO">
+			<div class="sectoinBg bgImg_1">
+				<div class="bgoverly"></div>
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="sectionTitle brLineIcon text-center">
+								<h2>
+									<span>SuperDAO</span> : Efficient Multi Dapp, DAO Management Platform</h2>
+								<p>The SuperDAO Pre - ICO has been modified to a “Pre - ICO” Only project.
+									<br> That means that holders will be able to mine the rest of SuperDAO tokens (SUP) based on early stake
+									<br> and also have other rewards and benefits from
+									<samp>Pokereum</samp> (our first dapp) and our media dapp in stealth mode development.
+									<br> Get an Immediate Position with 40% discounted and access to our first DAPP is decentralized Poker Pokereum
+								</p>
+								<a href="#">Learn more about it here</a>
+							</div>
+							<!-- end of sectionTitle -->
+						</div>
+						<!-- end of col12 -->
+					</div>
+					<!-- end of row -->
 
-            function claim() {
-              if (!tokenInstance) {
-                return;
-              }
-              var
-                transactionId,
-                _gasPrice = +$('#gas_price').val(),
-                _value = +$('#claim_value').val(),
-                tokenCountCheck = roundPrecise(_value % TOKEN_DISCOUNT_PRICE, 11);
-              if (tokenCountCheck !== TOKEN_DISCOUNT_PRICE) {
-                _value = roundPrecise(_value - tokenCountCheck, 11);
-                $('#claim_value').val(_value);
-              }
-              if (_value === 0) {
-                return;
-              }
-              disable_button();
-              try {
-                transactionId = tokenInstance.claim({
-                  from: $('#eth_accounts').val(),
-                  value: web3.toWei(_value, 'ether'),
-                  gas: _gasPrice
-                }, function (error, result) {
-                  if (!error) {
-                    _value = +$('#claim_value').val("");
-                    add_to_log('Transaction sent: <a href="https://etherscan.io/tx/'
-                      + result + '" target="_blank">' + result + '</a>');
-                  } else {
-                    error = error.toString();
-                    console.log(error);
-                    if (Object.keys(error)) {
-                      if (error.indexOf('Error: Error:') > -1) {
-                        error = error.substring(13);
-                        if (error.length > 58) {
-                          error = error.substring(0, 58) + "...";
-                        }
-                      }
-                      add_to_log('<span style="color:red">' + error
-                        + '</span>');
-                    }
-                  }
-                  refresh_values();
-                  enable_button();
-                })
-              } catch (e) {
-                console.log("Excep:", e);
-                add_to_log('<span style="color:red">' + e.message + '</span>');
-                enable_button();
-              }
-            }
+					<div class="row">
+						<div class="pieChartsTokens clearfix" id="pieChartsTokens">
+							<div class="col-sm-4">
+								<div class="pieCharts">
+									<!-- <span class="chart">
+										<canvas id="chart" width="230" height="230"/>
+									</span> -->
+									<span class="chart" data-percent="25"></span>
+									<div class="chartLegend">
+										<div class="tokenCount">
+											<span class="tokenLegend">
+												<span class="tokenLegendBox tokenLeft"></span> Token Left</span>
+											<span class="tokenLegend">
+												<span class="tokenLegendBox tokenBought"></span> Token Bought</span>
+										</div><!-- end of tokenCount -->
+									</div><!-- end of chartLegend -->
 
-            function add_to_log(text) {
-              $('#eth_log').append($('<div>').html(text).addClass('log_row'));
-            }
+									<div class="goalProgress clearfix">
+										<span id="fund-goal-label">0%</span>
+										<div class="progress">
+										  <div id="fund-goal" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-step=0.01></div>
+										</div>
+										<small>FUNDING GOAL PROGRESS</small>
+									</div><!-- end of goalProgress -->
+								</div><!-- end of pieCharts -->
 
-            function log_events(contractInstance) {
-              var events = contractInstance.TokensClaimedEvent({
-                fromBlock: 'latest'
-              });
-              events.watch(function (error, event) {
-                if (!error) {
-                  console.log(event);
-                  var
-                    event_name = 'Event ' + event.event,
-                    event_args = [];
-                  if (event.args.length !== 0) {
-                    for (var arg_name in event.args) {
-                      event_args.push(arg_name + ':' + event.args[arg_name]);
-                    }
-                  }
-                  console.log(event_name + '(' + event_args.join(',') + ')');
-                }
-              });
-            }
+								<form onsubmit="return false;" class="claimForm clearfix">
 
-            function disable_button() {
-              $("#claim_button").prop('disabled', true);
-              console.log('do disable')
-            }
+                  <div class="formControl">
+                    <!--<input type="number" id="number" value="" onblur="if(this.value=='')this.value=''" onfocus="if(this.value=='')this.value=''">-->
+										<select id="eth_accounts">
+										</select>
+                  </div><!-- end of formControl -->
 
-            function enable_button() {
-              $("#claim_button").prop('disabled', false);
-              console.log('do enable')
-            }
+                  <div class="formControl">
+                    <input type="text" id="claim_value" value="ETH AMOUNT" onblur="if(this.value=='')this.value='ETH AMOUNT'" onfocus="if(this.value=='ETH AMOUNT')this.value=''"  required="">
+                  </div><!-- end of formControl -->
 
-            function refresh_values() {
-                fetchContractData()
-                .then(function(a,b){
-                  console.log("in then",claimedPrepaidUnits, claimedUnits)
-                  var values = refresh_chart(claimedPrepaidUnits, claimedUnits);
-                  amChart(values[1], values[0]);
-                });
-            }
+                  <div class="formControl">
+                    <input type="text" id="gas_price" value="4 GWEI" onblur="if(this.value=='')this.value='GAS PRICE [GWEI]'" onfocus="if(this.value=='GAS PRICE [GWEI]')this.value=''"  required="">
+                  </div><!-- end of formControl -->
 
-            function amChart(_tokenLeft, _tokenBought) {
+									<button class="btn submitBtn" id="claim_button" disabled="true" onclick="claim()">CLAIM TOKENS</button>
+								</form><!-- end of claimForm -->
+							</div><!-- end of col4 -->
 
-              var chart = AmCharts.makeChart("chartdiv", {
-                "type": "pie",
-                "theme": "light",
-                "addClassNames": true,
-                "outlineColor": "#FFFFFF",
-                "color": "#FFFFFF",
-                "startDuration": 0,
-                "fontSize": "10px",
-                "minRadius": "50",
-                "pulledField": "pulled",
-                "legend": {
-                  "position": "bottom",
-                  "align": "center",
-                  "color": "#FFFFFF",
-                  "autoMargins": false,
-                  'markerType': 'circle',
-                  'verticalGap': 8,
-                  'spacing': 10
-                },
-                "dataProvider": [{
-                  "country": "tokenLeft",
-                  "litres": _tokenLeft,
-                  "color": "#9ACD32"
-                }, {
-                  "country": "tokenBought",
-                  "litres": _tokenBought,
-                  "color": "red",
-                  "pulled": true
+							<div class="col-sm-8">
+								<div class="tokens_info">
+									<div class="tokenBox tokenSpecs clearfix">
+										<h3>Tokens specs</h3>
+										<ul class="list">
+											<li>- total tokens :
+												<span id='prom_tkns'>0</span>
+											</li>
+											<li>- Total Available this round :
+												<span id='ths_rnd'>0</span>
+											</li>
+											<li>- Tokens left :
+												<span id='tkns_lft'>0</span>
+											</li>
+											<li>- Tokens bought :
+												<span  id='tkns_bgh'>0</span>
+											</li>
+											<li>- Discount :
+												<span >40%</span>
+											</li>
+											<li>- Price at discount :
+												<span  id='tkns_dsc_prc'>0 ETH</span>
+											</li>
+										</ul>
+									</div>
+									<!-- end of tokenSpecs -->
 
-                }],
-                "valueField": "litres",
-                "titleField": "country",
-                "colorField": "color",
-                "balloon": {
-                  "fixedPosition": true
-                },
-                "export": {
-                  "enabled": false
-                }
-              });
-            }
+									<div class="tokenBox tutorialInfo clearfix">
+										<h3>Tutorial & info</h3>
+										<ul class="list">
+											<li>- Download metamask</li>
+											<li>- Create an account</li>
+											<li>- Fund an address in your metamask wallet, select account.</li>
+											<li>- Invest in SuperDAO superneums buy filling out form and clicking “claim tokens”</li>
+											<li>- For more information on the tokens
+												<a href="#">click here</a> to view other tutorials
+												<a href="#">click here</a>
+											</li>
+										</ul>
+									</div>
+									<!-- end of tutorialInfo -->
 
-            function blink() {
-              $("#presale-over").fadeOut(500);
-              $("#presale-over").fadeIn(500);
-            }
+									<div class="ASSEEN clearfix">
+										<ul class="logoList">
+											<li>
+												<span>AS SEEN IN :</span>
+											</li>
+											<li>
+												<a href="#">
+													<img src="images/logo/01.png" alt="logo">
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<img src="images/logo/02.png" alt="logo">
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<img src="images/logo/03.png" alt="logo">
+												</a>
+											</li>
+										</ul>
+									</div><!-- end of ASSEEN -->
+								</div><!-- end of tokens_info -->
+							</div><!-- end of col8 -->
+						</div><!-- end of pieChartsTokens -->
+					</div><!-- end of row -->
+				</div><!-- end of container -->
+			</div><!-- end of sectoinBg-->
+		</section><!-- end of SuperDAO -->
 
-            function refresh_chart(claimedPrepaidUnits, claimedUnits) {
-              var promissoryUnits = 3000000;
-              this.tokenBought = claimedUnits + claimedPrepaidUnits;
-              this.tokenLeft = promissoryUnits - this.tokenBought;
-              if (tokensLeft === 0) {
-                $("#tokensLeft").html("Pre-Sale Over");
-                $("#presale-over").html("<h2>Pre-Sale Over</h2>");
-                if(isblinking)clearInterval(isblinking);
-                isblinking = setInterval(blink, 1000);
-                blink();
-              }
+		<section class="pokereum clearfix" id="pokereum">
+			<div class="sectionBg cinderBg">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="featureBox brLineIcon">
+								<h2>Pokereum Dapp
+									<br> and Media torrent DAPP</h2>
+								<p>SuperDAO tokens play a crucial role in our dapps especially Pokereum our decentralized poker project. Pokereum poker
+									is the first decentralized poker project, that uses an EVM based smart contract, decentralized blockchain and real
+									time communication (RTC) peer to peer framework to solve the mental poker problem. The solution to the mental poker
+									problem leveraging smart contracts and RTC had been documented in a published draft paper prior (2014) to the completion
+									of the platform (Ethereum blockchain) on which it is built . The user experience demo was released
+									<a href="#">here</a>
+									<br>
+									<br>and the team will be releasing an integrated mental poker solution to the Ethereum testnet in a few weeks after
+									the user experience feedback. Also in stealth development is a special media dapp that will leverage torrents enabling
+									users to earn passive income based on participation and staking of SUP.</p>
+							</div>
+							<!-- end of featureBox -->
+						</div>
+						<!-- end of col6 -->
 
-              if (tokensLeft) {
-                $("#tokensLeft").html(tokenLeft);
-              }
-              if (tokenBought) {
-                $("#tokensBought").html(tokenBought);
-              }
-              var chartData = {
-                labels: [
-                  "Tokens Left",
-                  "Token Bought"
-                ],
-                datasets: [{
-                  data: [tokenLeft, tokenBought],
-                  backgroundColor: ["#9ACD32", "red"]
-                }]
-              };
+						<div class="featureMedia">
+							<img src="images/feature_img_01.png" alt="Image">
+						</div>
+						<!-- end of featureMedia -->
+					</div>
+					<!-- end of row -->
+				</div>
+				<!-- end of container -->
+			</div>
+			<!-- end o sectionBg -->
+		</section>
+		<!-- end of pokereum -->
 
-              if (!bar) {
-                bar = new ProgressBar.Line('.progressbar-container', {
-                  strokeWidth: 4,
-                  easing: 'easeInOut',
-                  duration: 1400,
-                  color: '#9ACD32',
-                  trailColor: '#9ACD32',
-                  trailWidth: 1,
-                  svgStyle: {
-                    width: '80%',
-                    height: '100%'
-                  },
-                  text: {
-                    style: {
-                      // Text color.
-                      // Default: same as stroke color (options.color)
-                      color: 'white',
-                      position: 'absolute',
-                      right: '20%',
-                      top: '10px',
-                      padding: 0,
-                      margin: 0,
-                      transform: null
-                    },
-                    autoStyleContainer: false
-                  },
-                  from: {
-                    color: '#9ACD32'
-                  },
-                  to: {
-                    color: '#ED6A5A'
-                  },
-                  step: function (state, bar) {
-                    bar.setText(parseFloat(bar.value() * 100).toFixed(2)
-                      + ' %');
-                  }
-                });
-              }
-              if (bar) {
-                bar.animate(tokenBought / (tokenLeft + tokenBought));
-              } // Number from 0.0 to 1.0
-              // Return values to be used in the Amchart
-              return [tokenBought, tokenLeft];
-            }
-          </script>
+		<section class="supTokens clearfix" id="supTokens">
+			<div class="sectionBg mirageBg">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="featureMedia">
+								<img src="images/feature_img_02.png" alt="Image">
+							</div>
+							<!-- end of featureMedia -->
+						</div>
+						<!-- end of col6 -->
 
-          <div class="panelbox claim-container">
-            <div class="topline">
-              <br/><br/>
-              <div class="nothing-fancy">
-                <h1>Claim</h1>
-              </div>
-              <div id="presale-over" style="color:white;">
+						<div class="col-sm-6">
+							<div class="featureBox brLineIcon">
+								<h2>Superdao [SUP tokens]</h2>
+								<p>SuperDAO is an ethereum, reputation based, decentralized autonomous organization governance system for management
+									of viable dapp ventures. In simple terms, a crowd managed organization developing profitable disruptive dapps. Some
+									of our dapps in development are Pokereum decentralized poker and other entralized media sed dapp. SuperDAO Tokens
+									“Superneum” ( Sup ), are the means to aboratively vote on ogistical tions for organizational direction. SUP tokens
+									are used for staking to earn more of the izational tokens and as staking mechanism to earn network rewards within
+									our dapps Pokereum and other dapps in ealth development. At the initial and current state of SuperDAO, SUP are called
+									promissory tokens.</p>
+							</div>
+							<!-- end of featureBox -->
+						</div>
+						<!-- end of col6 -->
 
-              </div>
-            </div>
-            <style>
-              * {
-                margin: 0;
-                padding: 0;
-              }
-            </style>
-            <div class="centerblock">
-              <div class="container custom-text-style">
-                <div class="row" style="text-align: left">
-                  <div class="col-xs-5">
-                    <div class="row">
-                      <div id="chartdiv"></div>
-                    </div>
+					</div>
+					<!-- end of row -->
+				</div>
+				<!-- end of container -->
+			</div>
+			<!-- end o sectionBg -->
+		</section>
+		<!-- end of pokereum -->
 
-                    <div class="row">
-                      <div class="progressbar-container"></div>
-                    </div>
-                    <div class="row" style="text-align: center">
-                      <span>Funding Goal Progress</span>
-                    </div>
-                  </div>
-                  <div class="col-xs-5 col-xs-offset-1">
+		<section class="ourTeam clearfix gradientBg" id="ourTeam">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="sectionTitle text-center">
+							<h2>Our
+								<strong>Team</strong>
+							</h2>
+						</div>
+						<!-- end of sectionTitle -->
+					</div>
+					<!-- end of col12 -->
+				</div>
+				<!-- end of row -->
 
+				<div class="row">
+					<div class="col-sm-3">
+						<div class="singleMember text-center twline">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/01.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Oladapo Ajayi</h4>
+							<p>Founder / Solidity Expert / Strategy development and Operations</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
 
-                    <span>Total tokens Used  for bootstrap activities   &nbsp:</span><span
-                    class="value-style">   &nbsp3,000,000</span>
-                    <br><br>
-                    <span>Total avail this round   &nbsp:</span><span
-                    class="value-style">   &nbsp845,430</span>
-                    <br><br>
-                    <span>Tokens left    &nbsp:   &nbsp<span class="value-style"
-                                                             id="tokensLeft"></span>
-                                            <br><br>
-                                            <span>Tokens Bought     &nbsp:   &nbsp</span><span
-                        class="value-style"
-                        id="tokensBought"></span>
-                                            <br><br>
-                                            <span>Discount    &nbsp:</span><span
-                        class="value-style">   &nbsp40% </span>
-                                            <br><br>
-                                            <span> At 40% discount 1 SUP = </span><span
-                        class="value-style"><strong
-                        class="tkn_prc"> 0.002793705576</strong> ETH </span>
-                  </div>
-                </div>
-                <br>
-                <div class="row">
-                  <div class="col-xs-5">
-                    <select class="eth-inputs" id="eth_accounts"></select>
-                  </div>
-                  <div class="col-xs-5 col-xs-offset-1  caption-left">
-                    <span class="v-span">Account</span>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-xs-5 eth-inputs">
-                    <input class="eth-inputs" type="text" id="claim_value"
-                           placeholder="ETH amount">
-                  </div>
-                  <div class="col-xs-5 col-xs-offset-1 caption-left">
-                    <span class="v-span">ETH amount</span>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-xs-5 eth-inputs">
-                    <input class="eth-inputs" type="text" id="gas_price"
-                           value="200405"/>
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/02.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Patrick Mazotta</h4>
+							<p>Risk analysis mathematical models</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
 
-                  </div>
-                  <div class="col-xs-5 col-xs-offset-1 caption-left">
-                    <span class="v-span"> Gas Price in WEI</span>
-                  </div>
-                </div>
-                <div class="row" style="text-align: left">
-                  <div class="col-xs-5 caption-left">
-                    <input class="btn" type="button" id="claim_button"
-                           onclick="claim();"
-                           value="Claim Tokens"/>
-                  </div>
-                </div>
-                <br/>
-                <span style="font-size:100%">To learn more about the funding round promissory token please </span>
-                <a style="color:azure"
-                   href="https://blog.superdao.io/a-deeper-look-into-the-promissory-token-of-superdao-88db0860f562#.v5rz315n4">visit
-                  our blog</a>
-                <br/>
-                <span style="font-size:100%">Check out the contract on </span> <a
-                style="color:azure"
-                href="https://etherscan.io/address/0x0348b55abd6e1a99c6ebc972a6a4582ec0bceb5c">etherscan.io</a>
-                <br/>
-                <div id='eth_log' style="height:100%; overflow-y: scroll"></div>
-              </div>
-              <div style="text-align: center;">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="footer">
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/03.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Jermaine Encarnacion</h4>
+							<p>Marketing specialist</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/04.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Panos Papantoniou</h4>
+							<p>Security specialist | DevOPS | Solidity</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/05.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Archil Phanchulidze</h4>
+							<p>Software Engineer | Solidity Expert</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/06.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Anthony Adegbemi</h4>
+							<p>Software Engineer | Solidity Expert</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/07.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Babayemi Olulana</h4>
+							<p>Software Engineer | Solidity Expert</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/08.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Mikhail Slabodzich</h4>
+							<p>Software Engineer | Solidity Expert</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/09.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Esco Obong</h4>
+							<p>Software Engineer | DevOPS</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/10.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Aaron Vasquez</h4>
+							<p>Software Engineer | DevOPS</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/11.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Cristian</h4>
+							<p>Software Engineer | DevOPS</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/12.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Edmund Mai</h4>
+							<p>Software Engineer | DevOPS</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/13.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Sheraz Arshad</h4>
+							<p>Software Engineer | Solidity Expert</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/14.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Hatim Khomsi</h4>
+							<p>Software Engineer | Solidity Expert</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/15.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Olufunso Ekundayo</h4>
+							<p>Software Engineer | Solidity Expert</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/16.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Ayeni</h4>
+							<p>Software Engineer | Solidity Expert</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/17.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Ugo Ifezue</h4>
+							<p>Designer</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/18.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Ifeoluwa King</h4>
+							<p>Software developer</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/19.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Seun lanlege</h4>
+							<p>Software Engineer | Solidity Expert</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/20.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Samuel Omidiora</h4>
+							<p>Software Engineer | Solidity Expert</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/21.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Charles Okarformbah</h4>
+							<p>Marketing Specialist | Solidity</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/22.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Olawunmi George</h4>
+							<p>Solidity Dev</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/23.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Tosin Akinbobola</h4>
+							<p>Solidity Dev</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/24.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Emmanuel Nwamaife</h4>
+							<p>Solidity Dev</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/25.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Michael edobor</h4>
+							<p>Solidity Dev</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a href="#">
+								<div class="avater">
+									<img src="images/member/26.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Promise Udenkwor</h4>
+							<p>Solidity Dev</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+				</div><!-- end of row -->
+
+			</div><!-- end of container -->
+		</section><!-- end of ourTeam -->
+
+	</div><!-- end of allWrapper -->
+
+	<div class="footer"><!-- Footer Wrapper -->
   <div id="footer-social" class="buttom left">
     <a href="https://twitter.com/SuperDAOHQ" title="twitter" target="_blank"><i
       class="ion-social-twitter"></i></a>
@@ -500,7 +909,7 @@
   </div>
   <div class="footer2">
     <div class="marquee">
-      <img src="assets/images/SuperdaoLogo.png" height="20px" width="15px" alt=""> &nbsp;SUPERNEUM
+      <img src="images/footer/SuperdaoLogo.png" height="20px" width="15px" alt=""> &nbsp;SUPERNEUM
       &nbsp;Market
       Cap: &nbsp; $
       <strong id="mkt_cap" style="color:green"> ...</strong>&nbsp; <strong
@@ -514,11 +923,11 @@
       ETH &nbsp;<strong style="color: blue"> |</strong> &nbsp; SUPERNEUM PRICE: &nbsp; <strong
       style="color: green;" class="btc_sup">0.000551 </strong>&nbsp;BTC/SUP &nbsp;
       <strong style="color: blue">|</strong> &nbsp; DAPPS: &nbsp; <img
-      src="assets/images/pokereum-icon.png"
+      src="images/footer/pokereum-icon.png"
       height="22px" width="20px"> POKEREUM &nbsp;<img
-      src="assets/images/dappserysymbolmedium.png" height="20px" width="20px">&nbsp;DAPPSERY
+      src="images/footer/dappserysymbolmedium.png" height="20px" width="20px">&nbsp;DAPPSERY
       &nbsp; <strong style="color: blue">|</strong>&nbsp;
-      <img src="assets/images/eth-logo.png" height="20px" width="25px" alt=""> ETH: &nbsp;
+      <img src="images/footer/eth-logo.png" height="20px" width="25px" alt=""> ETH: &nbsp;
       <strong style="color: green;" class="btc_eth"> 0.00013000</strong> BTC &nbsp; <strong
       style="color: blue">|</strong>&nbsp;&nbsp; © 2016 SuperDAO. &nbsp;All rights reserved
       &nbsp; <strong
@@ -530,155 +939,19 @@
       Crowdfunding: Enter Here...
     </button>
   </a>
-</div>
-<script>
-  $(function () {
-    $('.marquee').marquee({
-      //If you wish to always animate using jQuery
-      allowCss3Support: true,
-      //works when allowCss3Support is set to true - for full list see http://www.w3.org/TR/2013/WD-css3-transitions-20131119/#transition-timing-function
-      css3easing: 'linear',
-      //requires jQuery easing plugin. Default is 'linear'
-      easing: 'linear',
-      //pause time before the next animation turn in milliseconds
-      delayBeforeStart: 0,
-      //'left', 'right', 'up' or 'down'
-      direction: 'left',
-      //true or false - should the marquee be duplicated to show an effect of continues flow
-      duplicated: true,
-      //speed in milliseconds of the marquee in milliseconds
-      duration: 10000,
-      //gap in pixels between the tickers
-      gap: 20,
-      //on cycle pause the marquee
-      pauseOnCycle: false,
-      //on hover pause the marquee - using jQuery plugin https://github.com/tobia/Pause
-      pauseOnHover: true,
-      //the marquee is visible initially positioned next to the border towards it will be moving
-      startVisible: false
-    });
-  });
-</script>
-<script>
-  //RPC api access
-  var apiaddress = "https://api.etherscan.io/api",
-  //var apiaddress = "https://ropsten.etherscan.io/api",//ropsten api
-  calls = {
-    claimedUnits : "claimedUnits()",
-    claimedPrepaidUnits: "claimedPrepaidUnits()"
-  }
-
-  function fetchContractData(){
-    claimedPrepaidUnits = claimedUnits = 0;
-    return $.post(apiaddress,{
-      action:"eth_call",
-      apikey:apikey,
-      module:"proxy",
-      to:TOKEN_ADDRESS,
-      data:getFunctionSignature(calls["claimedPrepaidUnits"]),
-      })
-          .then(function(d,e){
-              claimedPrepaidUnits = web3.toDecimal(d.result);
-              console.log("claimed prepaid",claimedPrepaidUnits);
-          })
-          .then(function(){
-            return $.post(apiaddress,{
-              action:"eth_call",
-              apikey:apikey,
-              module:"proxy",
-              to:TOKEN_ADDRESS,
-              data:getFunctionSignature(calls["claimedUnits"]),
-            })
-            .then(function(d,e){
-                claimedUnits = web3.toDecimal(d.result);
-                console.log("claimed",claimedUnits);
-            })
-          })
-  }
-
-  function getFunctionSignature(fnx){
-    return web3.sha3(fnx).substring(0,10);
-  }
+</div><!-- end of FooterWrapper -->
 
 
-</script>
+	<!-- SCRIPTS ========================================== -->
+	<script type="text/javascript" src="js/lib/web3.min.js"></script>
+	<script type="text/javascript" src="js/lib/vendor.min.js"></script>
+	<script type="text/javascript" src="js/lib/chartist.min.js"></script>
+	<script type="text/javascript" src="js/lib/jquery.marquee.min.js"></script>
+	<script type="text/javascript" src="js/lib/scripts.js"></script>
+	<script type="text/javascript" src="js/config.js"></script>
+	<script type="text/javascript" src="js/prices.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
 
-<script>
-  //Prices feed
-  prices = {
-    btc_sup: 0.000551,
-    usd_sup: '',
-    sup_eth: '',
-    eth_sup: '',
-    btc_eth: 0.01432806,
-    usd_btc: 682.9,
-    mkt_cap: '',
-    tkn_prc: ''
-  };
-  price_api = 'https://min-api.cryptocompare.com/data/price';
-  //price_api = 'https://www.cryptocompare.com/api/data/price';
-
-  function updatePrices() {
-    var base_price = 0.0465617596; //Promissory token rate
-    var newprices = {};
-    newprices.btc_eth = prices.btc_eth;
-    newprices.sup_eth = base_price;//Implement promissory token rate
-    newprices.btc_sup = prices.btc_sup = newprices.sup_eth * newprices.btc_eth;
-    newprices.usd_btc = prices.usd_btc;
-    newprices.eth_sup = parseFloat((prices.btc_eth / prices.btc_sup).toFixed(6));
-    newprices.usd_sup = parseFloat((prices.usd_btc * prices.btc_sup).toFixed(4));
-    newprices.mkt_cap = parseInt((100000000 * newprices.usd_sup).toFixed(0));
-    newprices.tkn_prc = TOKEN_DISCOUNT_PRICE = (newprices.sup_eth * 0.6).toFixed(9);
-    prices = newprices;
-    var pairs = Object.keys(newprices);
-
-    for (i in pairs) {
-      //remove mkt Cap for now
-      if (pairs[i] === 'mkt_cap') {
-        continue;
-      }
-      var spans = document.getElementsByClassName(pairs[i]);
-      for (s = 0; s < spans.length; s++) {
-        spans[s].innerText = ' ' + prices[pairs[i]];
-      }
-    }
-  }
-
-  function getPrices() {
-    var err = 0;
-    $.get(price_api+'?fsym=ETH&tsyms=BTC')
-    .then(
-      function (d) {
-        if (Object.keys(d).length < 1) {
-          err++;
-          return;
-        }
-        prices.btc_eth = parseFloat(d['BTC']).toFixed(6);
-        $.get(price_api+'?fsym=BTC&tsyms=USD')
-        .then(
-          function (d) {
-            if (Object.keys(d).length < 1) {
-              err++;
-              return;
-            }
-            prices.usd_btc = parseFloat(d['USD']).toFixed(2);
-            updatePrices();
-          },
-          function () {
-          });
-      },
-      function (e) {
-      });
-  }
-
-  $(function () {
-    updatePrices();
-    getPrices();
-    setInterval(
-      function () {
-        getPrices();
-      }, 30000);
-  });
-</script>
 </body>
+
 </html>

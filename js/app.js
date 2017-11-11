@@ -243,7 +243,6 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
   }
 
   function claim() {
-    console.log('Claim')
     if (!tokenInstance) {
       return;
     }
@@ -260,7 +259,8 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
     if (_value === 0) {
       return;
     }
-    var gas = new RegExp(/(\d)+/,'i').exec(_gasPrice)[0];
+    var found = new RegExp(/(\d)+/,'i').exec(_gasPrice),
+    gas = found&& found.length>0?found[0]:0;
 
     disable_button();
     var options = {

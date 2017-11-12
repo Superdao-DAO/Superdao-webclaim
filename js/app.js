@@ -367,7 +367,7 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
 
   function updateTexts(tokensLeft,tokensBought,prepaid){
     thisRound = promissoryUnits - prepaid,
-    discPrice = (prices.tkn_prc*prices.usd_btc*prices.btc_eth).toFixed(2);
+    discPrice = (prices.tkn_prc*prices.usd_btc*prices.btc_eth).toLocaleString([],{style:'currency',currency:'USD',maximumFractionDigits:2});
 
     //Update Texts
     $('#prom_tkns').text(promissoryUnits);
@@ -376,7 +376,7 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
     $('#tkns_bgh').text(tokensBought);
     $('#tkns_bgh').text(tokensBought);
     $('#tkns_bgh').text(tokensBought);
-    $('#tkns_dsc_prc').text(prices.tkn_prc+'ETH [ $'+discPrice+' ]');
+    $('#tkns_dsc_prc').text(prices.tkn_prc+'ETH [ '+discPrice+' ]');
   }
 
   var notify = {

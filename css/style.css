@@ -430,6 +430,13 @@ input:focus, textarea:focus, select:focus {
 .claimForm button:after {left: -10px;background-image: url(../images/icons/bt_l_borderLine.png);}
 .claimForm button:before{right: -10px;background-image: url(../images/icons/bt_r_borderLine.png);}
 
+.tokenBal{
+  color:#00fcff;
+}
+.tokenBal span{
+  color:#fff;
+}
+
 .pieCharts{margin-top: 56px;}
 .pieChartsTokens{margin-top: 35px;}
 .tokenBox{position: relative;}

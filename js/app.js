@@ -203,7 +203,9 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
           var total = claimed.reduce(function add(a, b) {
             return Number(a) + Number(b);
           },0);
-          balbox.text(total.toLocaleString()+ ' [ '+index+' Txns ]')
+          var discPrice = (prices.tkn_prc*prices.usd_btc*prices.btc_eth),
+          usd = (total*discPrice);
+          balbox.text(total.toLocaleString()+ ' SUP [ '+usd.toLocaleString([],{style:'currency',currency:'USD',maximumFractionDigits:2})+' ]')
         }
       });
     }

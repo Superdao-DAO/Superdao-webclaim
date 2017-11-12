@@ -363,15 +363,6 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
       isblinking = setInterval(blink, 1000);
       blink();
     }
-    if (tokensLeft) {
-      $("#tokensLeft").html(tokenLeft);
-    }
-    if (tokenBought) {
-      $("#tokensBought").html(tokenBought);
-    }
-
-    // Return values to be used in the Amchart
-    return [tokenBought, tokenLeft];
   }
 
   function updateTexts(tokensLeft,tokensBought,prepaid){

@@ -258,6 +258,9 @@ a,
 a:visited{outline: 0px;}
 a:hover {color: inherit;}
 /* --- clearing --------------------- */
+.unset{
+  all:unset !important;
+}
 .clearfix:before,
 .clearfix:after {
   display: table;

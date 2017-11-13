@@ -11,7 +11,6 @@
   };
 
   price_api = 'https://min-api.cryptocompare.com/data/price';
-  //price_api = 'https://www.cryptocompare.com/api/data/price';
 
   function updatePrices() {
     var base_price = 0.0465617596; //Promissory token rate
@@ -69,5 +68,5 @@
     setInterval(
       function () {
         getPrices();
-      }, 30000);
+      }, 5000);
   });

@@ -359,6 +359,7 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
 
     if (tokensLeft === 0) {
       //$("#tokensLeft").html("Pre-Sale Over");
+      disable_button();
       $("#claim_button").text("Pre-Sale Over");
       if(isblinking)clearInterval(isblinking);
       isblinking = setInterval(blink, 1000);

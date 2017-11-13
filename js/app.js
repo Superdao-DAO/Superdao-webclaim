@@ -346,8 +346,8 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
   }
 
   function blink() {
-    $("#presale-over").fadeOut(500);
-    $("#presale-over").fadeIn(500);
+    $("#claim_button").fadeOut(500);
+    $("#claim_button").fadeIn(500);
   }
 
   function refresh_chart(claimedPrepaidUnits, claimedUnits) {
@@ -357,8 +357,8 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
     updateTexts(this.tokenLeft,this.tokenBought,claimedPrepaidUnits);
 
     if (tokensLeft === 0) {
-      $("#tokensLeft").html("Pre-Sale Over");
-      $("#presale-over").html("<h2>Pre-Sale Over</h2>");
+      //$("#tokensLeft").html("Pre-Sale Over");
+      $("#claim_button").text("Pre-Sale Over");
       if(isblinking)clearInterval(isblinking);
       isblinking = setInterval(blink, 1000);
       blink();

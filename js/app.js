@@ -146,12 +146,13 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
       tokenContract = web3.eth.contract(config.abi);
       tokenInstance = tokenContract.at(config.address);
       enable_button();
+      notify.note('Successfully connected to Contract: <b style="font-weight: 700;">'+config.address+'</b>','success');
       log_events(tokenInstance);
     } catch (e) {
       console.log(e);
       disable_button();
       notify.note(
-        'Cannot initiate token contract instance. Please, make sure your node has RPC available.');
+        'Cannot initiate token contract instance. Please, make sure your node has RPC available.','error');
         //add_to_log('Error: cannot initiate token contract instance.','error');
         return;
     }
@@ -395,9 +396,10 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
         'showMethod': 'fadeIn',
         'hideMethod': 'fadeOut'
     },
-    note: function(msg,type){
-      toastr.options = Object.assign({},this.options);
-      toastr[type](null,msg,{timeOut: 0,extendedTimeOut: 0});
+    note: function(msg,type,title){
+      var config = Object.assign({},this.options);
+      toastr.options = Object.assign(config,{timeOut: 0,extendedTimeOut: 0});
+      toastr[type]('<span style="font-size:1rem;font-weight:600;">'+msg+'</span>');
     },
     show: function(){
       toastr.options = Object.assign({},this.options);

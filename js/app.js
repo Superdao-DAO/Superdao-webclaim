@@ -88,7 +88,7 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
           notify.note(
             "Kindly switch to the Main Ethereum network, then refresh the page to claim Tokens.",
           'warning');
-          //return;TODO uncomment for prod
+          return;
         }
         loadContract(netId)
       });
@@ -140,7 +140,7 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
   }
 
   var loadContract = function(network){
-    //if(network == '1')TODO uncomment for prod
+    if(network == '1')
     try {
       accounts_count = web3.eth.accounts.length;
       tokenContract = web3.eth.contract(config.abi);

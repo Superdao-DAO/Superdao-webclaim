@@ -795,5 +795,8 @@ button.buttom.right:hover {
 .list li{font-size: 13px;}
 .ourTeam .sectionTitle h2 {font-size: 50px;}
 .ourTeam .sectionTitle h2:after, .ourTeam .sectionTitle h2:before{top: -30px;}
+#footer-social{
+  position: static;
+}
 
 }

@@ -134,9 +134,6 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
 
       var $accounts = $('#eth_accounts');
       for (var i = 0; i < accounts_count; i++) {
-        //var $option = $('<option>').attr('value',
-        //  web3.eth.accounts[i]).text(web3.eth.accounts[i]);
-        //$accounts.append($option);
         accounts.push(web3.eth.accounts[i]);
       }
 

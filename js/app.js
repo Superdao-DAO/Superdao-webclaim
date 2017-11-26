@@ -186,7 +186,7 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
     balbox = $('#tokn_bal');
 
     if(!web3.isAddress(address )){
-      balbox.val(0);
+      balbox.text('...');
       return;
     }
 

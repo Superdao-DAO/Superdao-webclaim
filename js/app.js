@@ -1,6 +1,7 @@
 var TOKEN_ADDRESS = "",
     TOKEN_DISCOUNT_PRICE = "...",//Value in Ether
     accounts = [],
+    ethinterface,
     tokenContract,
     tokenInstance,
     claimedUnits,
@@ -66,10 +67,15 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
   }
 
   function startApp() {
+
+    ethinterface = new ethers.Interface( config.abi );
+
+    if(!web3.isConnected())
+      notify.show('Fetching data from Etherscan API','info');
+
     if (typeof web3 !== "undefined" && web3 instanceof Web3) {
       //Ensure we are on the right network
       web3.version.getNetwork(function (err, netId) {
-        network = netId;
         switch (netId) {
           case "1":
             console.log('This is mainnet');
@@ -221,10 +227,59 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
       });
     }
 
+    function fetchNextApi(){
+      var parameterTypes = abiData.checkBalance.input,
+      parameterValues = [address,index],
+      checkBalanceInfo = ethinterface.functions.checkBalance(address,index),
+      cBdata = checkBalanceInfo.data;
+
+      $.post(config.apiaddress,{
+        action:"eth_call",
+        apikey:config.apikey,
+        module:"proxy",
+        to:config.address,
+        data:cBdata,//ensure values treated as strings
+        })
+        .then(function(d,e){
+          if(e !== 'success')
+            return;
+
+          d = d.result;
+
+          if(d !=='0x'){
+            var r = checkBalanceInfo.parse(d),
+            found = r[1].toString(10);
+
+            if(Number(found) > 0)
+              claimed.push(found);
+            empty = r[4] == false;
+          }
+          else
+            empty = true;
+
+          if(!empty){
+            index++;
+            fetchNextApi();}
+          else{
+            console.log(claimed)
+
+            var total = claimed.reduce(function add(a, b) {
+              return Number(a) + Number(b);
+            },0);
+            var discPrice = (prices.tkn_prc*prices.usd_btc*prices.btc_eth),
+            usd = (total*discPrice);
+            balbox.text(total.toLocaleString()+ ' SUP [ '+usd.toLocaleString([],{style:'currency',currency:'USD',maximumFractionDigits:2})+' ]')
+          }
+        })
+    }
+
     var empty=false,
     index=0,claimed=[];
     balbox.text('...');
-    fetchNext();
+    if(typeof tokenInstance != 'undefined')
+      fetchNext();
+    else
+      fetchNextApi();
   }
 
   function fetchContractData(){

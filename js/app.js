@@ -102,7 +102,8 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
 
     } else {
       disable_button();
-      alert(ERR_NO_WEB3);
+      notify.note(ERR_NO_WEB3,'error');
+      //alert(ERR_NO_WEB3);
     }
 
 

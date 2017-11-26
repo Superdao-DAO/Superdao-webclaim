@@ -284,27 +284,30 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
   }
 
   function fetchContractData(){
+    var claimedPrepaidUnitsInfo = ethinterface.functions.claimedPrepaidUnits();
     claimedPrepaidUnits = claimedUnits = 0;
     return $.post(config.apiaddress,{
       action:"eth_call",
       apikey:config.apikey,
       module:"proxy",
       to:config.address,
-      data:getFunctionSignature(calls.claimedPrepaidUnits),
+      data:claimedPrepaidUnitsInfo.data,
       })
           .then(function(d,e){
               if(e != 'success')
                 return;
+
               claimedPrepaidUnits = web3.toDecimal(d.result);
               //console.log("claimed prepaid",claimedPrepaidUnits);
           })
           .then(function(){
+            var claimedUnitsInfo = ethinterface.functions.claimedUnits();
             return $.post(config.apiaddress,{
               action:"eth_call",
               apikey:config.apikey,
               module:"proxy",
               to:config.address,
-              data:getFunctionSignature(calls.claimedUnits),
+              data:claimedUnitsInfo.data,
             })
             .then(function(d,e){
                 if(e != 'success')

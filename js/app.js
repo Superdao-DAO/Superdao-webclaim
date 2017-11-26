@@ -416,8 +416,8 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
       toastr.options = Object.assign(config,{timeOut: 0,extendedTimeOut: 0});
       toastr[type]('<span style="font-size:1rem;font-weight:600;">'+msg+'</span>');
     },
-    show: function(){
-      toastr.options = Object.assign({},this.options);
-      toastr[type](msg);
+    show: function(msg,type,title){
+      toastr.options = Object.assign({"showDuration": "1000"},this.options);
+      toastr[type]('<span style="font-size:1rem;font-weight:600;">'+msg+'</span>');
     }
   }

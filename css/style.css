@@ -490,6 +490,47 @@ input:focus, textarea:focus, select:focus {
 .list li a{color: #00fcff;border:1px solid #00fcff;padding: 0 11px;}
 .tutorialInfo {margin-left: 43px;border-bottom: 1px solid #ffffff;padding-bottom: 23px;}
 
+.ui-widget.ui-widget-content {
+    border: 1px solid #c5c5c5;
+}
+
+.ui-widget-content {
+    border: 1px solid #dddddd;
+    background: #ffffff;
+    color: #333333;
+}
+.ui-widget {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 1em;
+}
+.ui-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    outline: 0;
+}
+.ui-autocomplete {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: default;
+    padding: 4px 10px;
+    font-size: 16px;
+    background-color:#26a5f0;
+}
+.ui-autocomplete .ui-menu-item{
+  cursor: pointer;
+  background-color:transparent !important;
+}
+.ui-autocomplete .ui-menu-item *{
+    background-color:transparent !important;
+    color:#fff !important;
+}
+.ui-front {
+    z-index: 100;
+}
+
 /*Token & TutorialInfo End*/
 
 .pokereum {padding: 80px 0 210px;margin-bottom: 120px;overflow: hidden;}

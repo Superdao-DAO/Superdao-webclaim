@@ -234,9 +234,11 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
       apikey:config.apikey,
       module:"proxy",
       to:config.address,
-      data:getFunctionSignature(calls["claimedPrepaidUnits"]),
+      data:getFunctionSignature(calls.claimedPrepaidUnits),
       })
           .then(function(d,e){
+              if(e != 'success')
+                return;
               claimedPrepaidUnits = web3.toDecimal(d.result);
               //console.log("claimed prepaid",claimedPrepaidUnits);
           })
@@ -246,9 +248,11 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
               apikey:config.apikey,
               module:"proxy",
               to:config.address,
-              data:getFunctionSignature(calls["claimedUnits"]),
+              data:getFunctionSignature(calls.claimedUnits),
             })
             .then(function(d,e){
+                if(e != 'success')
+                  return;
                 claimedUnits = web3.toDecimal(d.result);
                 //console.log("claimed",claimedUnits);
             })

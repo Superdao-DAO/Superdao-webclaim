@@ -7,10 +7,6 @@ var TOKEN_ADDRESS = "",
     claimedUnits,
     claimedPrepaidUnits,
     promissoryUnits = 3000000,
-    calls = {
-      claimedUnits : "claimedUnits()",
-      claimedPrepaidUnits: "claimedPrepaidUnits()"
-    },
     isblinking;
 
 const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
@@ -34,6 +30,7 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
       window.web3 = new Web3(
         new Web3.providers.HttpProvider("http://localhost:8545"));
     }
+    //console.log(web3.version)
     // Now you can start your app & access web3 freely:
     startApp();
     loadMarquee();
@@ -105,7 +102,6 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
       notify.note(ERR_NO_WEB3,'error');
       //alert(ERR_NO_WEB3);
     }
-
 
     refresh_values();
     setInterval(
@@ -229,8 +225,7 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
     }
 
     function fetchNextApi(){
-      var parameterTypes = abiData.checkBalance.input,
-      parameterValues = [address,index],
+      var
       checkBalanceInfo = ethinterface.functions.checkBalance(address,index),
       cBdata = checkBalanceInfo.data;
 
@@ -262,7 +257,6 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
             index++;
             fetchNextApi();}
           else{
-            console.log(claimed)
 
             var total = claimed.reduce(function add(a, b) {
               return Number(a) + Number(b);

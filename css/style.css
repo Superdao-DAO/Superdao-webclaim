@@ -433,6 +433,28 @@ input:focus, textarea:focus, select:focus {
 .claimForm button:after {left: -10px;background-image: url(../images/icons/bt_l_borderLine.png);}
 .claimForm button:before{right: -10px;background-image: url(../images/icons/bt_r_borderLine.png);}
 
+.dropdown-toggle::after {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: .255em;
+    vertical-align: .255em;
+    content: "";
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+}
+
+.claimForm #eth_accounts_container::after{
+	position: absolute;
+  top: 410px;
+  margin-top: 14px;
+  right: 27px;
+	height: 20px;
+  color:#fff;
+}
+
 .tokenBal{
   color:#00fcff;
 }
@@ -749,6 +771,10 @@ button.buttom.right:hover {
 .mirageBg:before{top: -98%;}
 .sectionTitle h2{font-size: 22px;}
 .sectionTitle p br{display: none;}
+.claimForm #eth_accounts_container::after{
+    top: 433px;
+    right: 25px;
+  }
 
 }
 
@@ -767,6 +793,10 @@ button.buttom.right:hover {
 .supTokens .sectionBg {padding: 50px 0;}
 .ourTeam .col-sm-3{width: 50%;}
 .singleMember {margin-bottom: 50px;min-height:345px;}
+.claimForm #eth_accounts_container::after{
+    top: 411px;
+    right: 34px;
+  }
 
 }
 
@@ -779,6 +809,9 @@ button.buttom.right:hover {
 .ourTeam .col-sm-3 {width: 100%;}
 .tokenSpecs:before{display: none;}
 .tokenSpecs{border:1px solid #00fcff;}
+.claimForm #eth_accounts_container::after{
+    top: 354px;
+  }
 
 }
 
@@ -798,5 +831,9 @@ button.buttom.right:hover {
 #footer-social{
   position: static;
 }
+.claimForm #eth_accounts_container::after{
+    top: 354px;
+    right: 30px;
+  }
 
 }

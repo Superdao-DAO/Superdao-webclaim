@@ -1,5 +1,6 @@
 var TOKEN_ADDRESS = "",
     TOKEN_DISCOUNT_PRICE = "...",//Value in Ether
+    accounts = [],
     tokenContract,
     tokenInstance,
     claimedUnits,
@@ -130,12 +131,24 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
         disable_button();
         return;
       }
+
       var $accounts = $('#eth_accounts');
       for (var i = 0; i < accounts_count; i++) {
-        var $option = $('<option>').attr('value',
-          web3.eth.accounts[i]).text(web3.eth.accounts[i]);
-        $accounts.append($option);
+        //var $option = $('<option>').attr('value',
+        //  web3.eth.accounts[i]).text(web3.eth.accounts[i]);
+        //$accounts.append($option);
+        accounts.push(web3.eth.accounts[i]);
       }
+
+      $accounts.val(accounts[0]);
+      $accounts.autocomplete({
+          source: accounts,
+          minLength: 0,
+          scroll: true
+      }).focus(function() {
+          $(this).autocomplete("search", "");
+      });
+
       getAddressBalance();
   }
 

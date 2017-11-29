@@ -1,14 +1,12 @@
 var TOKEN_ADDRESS = "",
     TOKEN_DISCOUNT_PRICE = "...",//Value in Ether
+    accounts = [],
+    ethinterface,
     tokenContract,
     tokenInstance,
     claimedUnits,
     claimedPrepaidUnits,
     promissoryUnits = 3000000,
-    calls = {
-      claimedUnits : "claimedUnits()",
-      claimedPrepaidUnits: "claimedPrepaidUnits()"
-    },
     isblinking;
 
 const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
@@ -32,6 +30,7 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
       window.web3 = new Web3(
         new Web3.providers.HttpProvider("http://localhost:8545"));
     }
+    //console.log(web3.version)
     // Now you can start your app & access web3 freely:
     startApp();
     loadMarquee();
@@ -65,10 +64,15 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
   }
 
   function startApp() {
+
+    ethinterface = new ethers.Interface( config.abi );
+
+    if(!web3.isConnected())
+      notify.show('Fetching data from Etherscan API','info');
+
     if (typeof web3 !== "undefined" && web3 instanceof Web3) {
       //Ensure we are on the right network
       web3.version.getNetwork(function (err, netId) {
-        network = netId;
         switch (netId) {
           case "1":
             console.log('This is mainnet');
@@ -95,9 +99,9 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
 
     } else {
       disable_button();
-      alert(ERR_NO_WEB3);
+      notify.note(ERR_NO_WEB3,'error');
+      //alert(ERR_NO_WEB3);
     }
-
 
     refresh_values();
     setInterval(
@@ -130,12 +134,21 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
         disable_button();
         return;
       }
+
       var $accounts = $('#eth_accounts');
       for (var i = 0; i < accounts_count; i++) {
-        var $option = $('<option>').attr('value',
-          web3.eth.accounts[i]).text(web3.eth.accounts[i]);
-        $accounts.append($option);
+        accounts.push(web3.eth.accounts[i]);
       }
+
+      $accounts.val(accounts[0]);
+      $accounts.autocomplete({
+          source: accounts,
+          minLength: 0,
+          scroll: true
+      }).focus(function() {
+          $(this).autocomplete("search", "");
+      });
+
       getAddressBalance();
   }
 
@@ -186,7 +199,7 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
     balbox = $('#tokn_bal');
 
     if(!web3.isAddress(address )){
-      balbox.val(0);
+      balbox.text('...');
       return;
     }
 
@@ -211,34 +224,88 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
       });
     }
 
+    function fetchNextApi(){
+      var
+      checkBalanceInfo = ethinterface.functions.checkBalance(address,index),
+      cBdata = checkBalanceInfo.data;
+
+      $.post(config.apiaddress,{
+        action:"eth_call",
+        apikey:config.apikey,
+        module:"proxy",
+        to:config.address,
+        data:cBdata,//ensure values treated as strings
+        })
+        .then(function(d,e){
+          if(e !== 'success')
+            return;
+
+          d = d.result;
+
+          if(d !=='0x'){
+            var r = checkBalanceInfo.parse(d),
+            found = r[1].toString(10);
+
+            if(Number(found) > 0)
+              claimed.push(found);
+            empty = r[4] == false;
+          }
+          else
+            empty = true;
+
+          if(!empty){
+            index++;
+            fetchNextApi();}
+          else{
+
+            var total = claimed.reduce(function add(a, b) {
+              return Number(a) + Number(b);
+            },0);
+            var discPrice = (prices.tkn_prc*prices.usd_btc*prices.btc_eth),
+            usd = (total*discPrice);
+            balbox.text(total.toLocaleString()+ ' SUP [ '+usd.toLocaleString([],{style:'currency',currency:'USD',maximumFractionDigits:2})+' ]')
+          }
+        })
+    }
+
     var empty=false,
     index=0,claimed=[];
     balbox.text('...');
-    fetchNext();
+    if(typeof tokenInstance != 'undefined')
+      fetchNext();
+    else
+      fetchNextApi();
   }
 
   function fetchContractData(){
+    var claimedPrepaidUnitsInfo = ethinterface.functions.claimedPrepaidUnits();
     claimedPrepaidUnits = claimedUnits = 0;
     return $.post(config.apiaddress,{
       action:"eth_call",
       apikey:config.apikey,
       module:"proxy",
       to:config.address,
-      data:getFunctionSignature(calls["claimedPrepaidUnits"]),
+      data:claimedPrepaidUnitsInfo.data,
       })
           .then(function(d,e){
+              if(e != 'success')
+                return;
+
               claimedPrepaidUnits = web3.toDecimal(d.result);
               //console.log("claimed prepaid",claimedPrepaidUnits);
           })
           .then(function(){
+            var claimedUnitsInfo = ethinterface.functions.claimedUnits();
             return $.post(config.apiaddress,{
               action:"eth_call",
               apikey:config.apikey,
               module:"proxy",
               to:config.address,
-              data:getFunctionSignature(calls["claimedUnits"]),
+              data:claimedUnitsInfo.data,
             })
             .then(function(d,e){
+                if(e != 'success')
+                  return;
                 claimedUnits = web3.toDecimal(d.result);
                 //console.log("claimed",claimedUnits);
             })
@@ -402,8 +469,8 @@ const ERR_ACCOUNT_IS_LOCKED = 'Error: account is locked',
       toastr.options = Object.assign(config,{timeOut: 0,extendedTimeOut: 0});
       toastr[type]('<span style="font-size:1rem;font-weight:600;">'+msg+'</span>');
     },
-    show: function(){
-      toastr.options = Object.assign({},this.options);
-      toastr[type](msg);
+    show: function(msg,type,title){
+      toastr.options = Object.assign({"showDuration": "1000"},this.options);
+      toastr[type]('<span style="font-size:1rem;font-weight:600;">'+msg+'</span>');
     }
   }

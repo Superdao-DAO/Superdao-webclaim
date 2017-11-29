@@ -433,6 +433,28 @@ input:focus, textarea:focus, select:focus {
 .claimForm button:after {left: -10px;background-image: url(../images/icons/bt_l_borderLine.png);}
 .claimForm button:before{right: -10px;background-image: url(../images/icons/bt_r_borderLine.png);}
 
+.dropdown-toggle::after {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: .255em;
+    vertical-align: .255em;
+    content: "";
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+}
+
+.claimForm #eth_accounts_container::after{
+	position: absolute;
+  top: 410px;
+  margin-top: 14px;
+  right: 27px;
+	height: 20px;
+  color:#fff;
+}
+
 .tokenBal{
   color:#00fcff;
 }
@@ -450,7 +472,7 @@ input:focus, textarea:focus, select:focus {
   top: 0;
   left: 0;
   width: 760px;
-  height: 340px;
+  height: 390px;
   background-image: url('../images/bg/border_line.png');
   background-repeat: no-repeat;
   background-position: center center;
@@ -467,6 +489,47 @@ input:focus, textarea:focus, select:focus {
 .list li span{color: #ff005a;}
 .list li a{color: #00fcff;border:1px solid #00fcff;padding: 0 11px;}
 .tutorialInfo {margin-left: 43px;border-bottom: 1px solid #ffffff;padding-bottom: 23px;}
+
+.ui-widget.ui-widget-content {
+    border: 1px solid #c5c5c5;
+}
+
+.ui-widget-content {
+    border: 1px solid #dddddd;
+    background: #ffffff;
+    color: #333333;
+}
+.ui-widget {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 1em;
+}
+.ui-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    outline: 0;
+}
+.ui-autocomplete {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: default;
+    padding: 4px 10px;
+    font-size: 16px;
+    background-color:#26a5f0;
+}
+.ui-autocomplete .ui-menu-item{
+  cursor: pointer;
+  background-color:transparent !important;
+}
+.ui-autocomplete .ui-menu-item *{
+    background-color:transparent !important;
+    color:#fff !important;
+}
+.ui-front {
+    z-index: 100;
+}
 
 /*Token & TutorialInfo End*/
 
@@ -749,6 +812,10 @@ button.buttom.right:hover {
 .mirageBg:before{top: -98%;}
 .sectionTitle h2{font-size: 22px;}
 .sectionTitle p br{display: none;}
+.claimForm #eth_accounts_container::after{
+    top: 433px;
+    right: 25px;
+  }
 
 }
 
@@ -767,6 +834,10 @@ button.buttom.right:hover {
 .supTokens .sectionBg {padding: 50px 0;}
 .ourTeam .col-sm-3{width: 50%;}
 .singleMember {margin-bottom: 50px;min-height:345px;}
+.claimForm #eth_accounts_container::after{
+    top: 411px;
+    right: 34px;
+  }
 
 }
 
@@ -779,6 +850,9 @@ button.buttom.right:hover {
 .ourTeam .col-sm-3 {width: 100%;}
 .tokenSpecs:before{display: none;}
 .tokenSpecs{border:1px solid #00fcff;}
+.claimForm #eth_accounts_container::after{
+    top: 354px;
+  }
 
 }
 
@@ -795,5 +869,12 @@ button.buttom.right:hover {
 .list li{font-size: 13px;}
 .ourTeam .sectionTitle h2 {font-size: 50px;}
 .ourTeam .sectionTitle h2:after, .ourTeam .sectionTitle h2:before{top: -30px;}
+#footer-social{
+  position: static;
+}
+.claimForm #eth_accounts_container::after{
+    top: 354px;
+    right: 30px;
+  }
 
 }
